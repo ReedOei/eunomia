@@ -29,7 +29,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Util {
     public static <K, T> Map<K, List<T>> groupBy(final List<T> list, final Function<T, K> f) {
