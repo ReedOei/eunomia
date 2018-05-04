@@ -48,4 +48,12 @@ public class NOptional<K, V> {
             f.accept(values);
         }
     }
+
+    public <T> T fromOptional(final T def, final Function<Map<K,V>, T> f) {
+        if (allPresent) {
+            return f.apply(values);
+        } else {
+            return def;
+        }
+    }
 }

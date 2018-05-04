@@ -2,12 +2,8 @@ package com.reedoei.eunomia.ast;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.expr.MethodCallExpr;
-import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 
-import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,6 +21,13 @@ public class ChangedFile {
         this.oldFile = oldContent;
         this.newFile = newContent;
         this.project = project;
+    }
+
+    private Set<MethodDeclaration> getTestMethods(CompilationUnit newFile) {
+        return newFile.findAll(MethodDeclaration.class).stream()
+                .filter(m -> m.isAnnotationPresent("Test") ||
+                             m.getNameAsString().startsWith("test"))
+                .collect(Collectors.toSet());
     }
 
     private Stream<MethodDeclaration> getAddedTests() {
@@ -70,34 +73,6 @@ public class ChangedFile {
             default:
                 return Stream.empty();
         }
-    }
-
-    private Predicate<MethodCallExpr> methodCallsSame(final MethodCallExpr a) {
-        try {
-            final ResolvedMethodDeclaration aMethod = a.resolveInvokedMethod();
-
-            return b -> {
-                try {
-                    final ResolvedMethodDeclaration bMethod = b.resolveInvokedMethod();
-
-                    return aMethod.getQualifiedSignature().equals(bMethod.getQualifiedSignature());
-                } catch (Exception e) {
-//                    System.out.println("Failed to resolve: " + b.getNameAsString());
-//                    e.printStackTrace();
-                    return false;
-                }
-            };
-        } catch (Exception e) {
-//            System.out.println("Failed to resolve: " + a.getNameAsString());
-//            e.printStackTrace();
-            return b -> false;
-        }
-    }
-
-    private Stream<MethodDeclaration> getTestMethodsThatCall(MethodCallExpr mCall) {
-        return getTestMethods()
-                .filter(testMethod -> testMethod.findAll(MethodCallExpr.class).stream()
-                        .anyMatch(methodCallsSame(mCall)));
     }
 
     public int getNumTests(final String type, final boolean print) {
