@@ -25,7 +25,6 @@ import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
-import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
@@ -55,17 +54,19 @@ public class JavaProject {
     private final String repoPath;
     private final String path;
     private final String ref;
-    private final Repository repository;
+    private final Git git;
+
     private final Set<ClassOrInterfaceDeclaration> classes = new HashSet<>();
     private final Set<ResolvedClass> resolvedClasses = new HashSet<>();
     private final Set<CompilationUnit> files;
 
-    public JavaProject(final String repoPath, final String ref) throws IOException {
+    public JavaProject(final String repoPath, final String ref)
+            throws IOException, GitAPIException {
         this.repoPath = repoPath;
         this.path = Paths.get(repoPath).getParent().toString();
         this.ref = ref;
 
-        this.repository = new FileRepository(repoPath);
+        this.git = new Git(new FileRepository(repoPath));
 
         files = parseJavaFiles(ref, "");
 
@@ -78,7 +79,7 @@ public class JavaProject {
         }
     }
 
-    private void setupSolver(final String commitId) {
+    private void setupSolver(final String commitId) throws GitAPIException {
         CombinedTypeSolver solver = createSolver(commitId);
 
         ParserConfiguration parserConfiguration = new ParserConfiguration();
@@ -86,14 +87,15 @@ public class JavaProject {
         JavaParser.setStaticConfiguration(parserConfiguration);
     }
 
-    private Set<CompilationUnit> parseJavaFiles(final String commitId, final String filter) {
+    private Set<CompilationUnit> parseJavaFiles(final String commitId, final String filter)
+            throws GitAPIException {
         setupSolver(commitId);
 
         return getAllFileContent(filter);
     }
 
     public List<ChangedFile> getChangedFileContent(final String newCommitId) {
-        final Set<String> changedFileNames = getChangedFilesInCommit(newCommitId);
+        final Set<String> changedFileNames = changedFiles(newCommitId);
 
         final List<ChangedFile> fileContent = new ArrayList<>();
 
@@ -130,9 +132,9 @@ public class JavaProject {
         }
     }
 
-    public String getCommitIdFromTimestamp(final String timestamp) throws GitAPIException {
-        return new Git(repository).log()
-                .setRevFilter(CommitTimeRevFilter.before(new Date(timestamp)))
+    public String commitBefore(final Date date) throws GitAPIException {
+        return git.log()
+                .setRevFilter(CommitTimeRevFilter.before(date))
                 .setMaxCount(1)
                 .call().iterator().next().getName();
     }
@@ -140,7 +142,7 @@ public class JavaProject {
     private void gitSetProjectCommit(final String ref, boolean recompile)
             throws GitAPIException {
         // Reset the repository to the desired version.
-        new Git(repository).reset().setMode(ResetCommand.ResetType.HARD).setRef(ref).call();
+        git.reset().setMode(ResetCommand.ResetType.HARD).setRef(ref).call();
 
         // Call maven, if necessary to compile
 
@@ -180,12 +182,8 @@ public class JavaProject {
         return new ArrayList<>();
     }
 
-    private CombinedTypeSolver createSolver(final String ref) {
-        try {
-            gitSetProjectCommit(ref, true);
-        } catch (GitAPIException e) {
-            e.printStackTrace();
-        }
+    private CombinedTypeSolver createSolver(final String ref) throws GitAPIException {
+        gitSetProjectCommit(ref, true);
 
         // Add basic reflection solver.
         final CombinedTypeSolver solver = new CombinedTypeSolver();
@@ -358,16 +356,16 @@ public class JavaProject {
     private Optional<CompilationUnit> getFileContent(final String ref, final String filePath) {
         try {
             // From: https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadFileFromCommit.java
-            ObjectId lastCommitId = repository.resolve(ref);
+            ObjectId lastCommitId = git.getRepository().resolve(ref);
 
             // a RevWalk allows to walk over commits based on some filtering that is defined
-            try (RevWalk revWalk = new RevWalk(repository)) {
+            try (RevWalk revWalk = new RevWalk(git.getRepository())) {
                 RevCommit commit = revWalk.parseCommit(lastCommitId);
                 // and using commit's tree find the path
                 RevTree tree = commit.getTree();
 
                 // now try to find a specific file
-                try (TreeWalk treeWalk = new TreeWalk(repository)) {
+                try (TreeWalk treeWalk = new TreeWalk(git.getRepository())) {
                     treeWalk.addTree(tree);
                     treeWalk.setRecursive(true);
                     treeWalk.setFilter(PathFilter.create(filePath));
@@ -377,7 +375,7 @@ public class JavaProject {
                             ObjectId objectId = treeWalk.getObjectId(0);
 
                             revWalk.dispose();
-                            return tryParse(repository.open(objectId).openStream());
+                            return tryParse(git.getRepository().open(objectId).openStream());
                         }
                     }
 
@@ -391,14 +389,14 @@ public class JavaProject {
         return Optional.empty();
     }
 
-    private Set<String> getChangedFilesInCommit(final String commitId) {
+    private Set<String> changedFiles(final String commitId) {
         final Set<String> pathList = new HashSet<>();
 
         try {
-            final ObjectId commit = repository.resolve(commitId + "^{tree}");
-            final ObjectId prevCommit = repository.resolve(commitId + "~1^{tree}");
+            final ObjectId commit = git.getRepository().resolve(commitId + "^{tree}");
+            final ObjectId prevCommit = git.getRepository().resolve(commitId + "~1^{tree}");
 
-            try (final ObjectReader reader = repository.newObjectReader()) {
+            try (final ObjectReader reader = git.getRepository().newObjectReader()) {
                 final CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();
                 oldTreeIter.reset(reader, prevCommit);
 
@@ -406,8 +404,8 @@ public class JavaProject {
                 newTreeIter.reset(reader, commit);
 
                 // finally get the list of changed files
-                try (final Git git = new Git(repository)) {
-                    List<DiffEntry> diffs= git.diff()
+                try {
+                    final List<DiffEntry> diffs = git.diff()
                             .setNewTree(newTreeIter)
                             .setOldTree(oldTreeIter)
                             .call();
@@ -415,7 +413,7 @@ public class JavaProject {
                     for (final DiffEntry entry : diffs) {
                         pathList.add(entry.getNewPath());
                     }
-                } catch (final GitAPIException e) {
+                } catch (GitAPIException e) {
                     e.printStackTrace();
                 }
             }
@@ -430,7 +428,12 @@ public class JavaProject {
         return resolvedClasses;
     }
 
-    public Repository getRepository() {
-        return repository;
+    public Git getGit() {
+        return git;
+    }
+
+    public void close() {
+        git.getRepository().close();
+        git.close();
     }
 }
