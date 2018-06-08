@@ -144,8 +144,7 @@ public class JavaProject {
         // Reset the repository to the desired version.
         git.reset().setMode(ResetCommand.ResetType.HARD).setRef(ref).call();
 
-        // Call maven, if necessary to compile
-
+        // Call maven, if we want to compile
         if (recompile) {
             MavenCli maven = new MavenCli();
             maven.doMain(new String[]{"clean", "install", "dependency:copy-dependencies"}, path, System.out, System.out);

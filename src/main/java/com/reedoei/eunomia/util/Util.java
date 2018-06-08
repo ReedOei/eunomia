@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,11 +25,66 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Util {
+    public static <T> List<T> takeWhileInc(final Predicate<T> f, final List<T> ts) {
+        final List<T> result = new ArrayList<>();
+
+        for (final T t : ts) {
+            result.add(t);
+            if (!f.test(t)) {
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    public static <T> List<T> beforeInc(final List<T> ts, final T t) {
+        final int i = ts.indexOf(t);
+
+        if (i != -1) {
+            return new ArrayList<>(ts);
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public static <T> Function<List<T>, List<T>> modify(final Consumer<List<T>> f) {
+        return base -> {
+            f.accept(base);
+            return base;
+        };
+    }
+
+    public static <T> Function<List<T>, List<T>> prependAll(final List<T> toAdd) {
+        return modify(base -> base.addAll(0, toAdd));
+    }
+
+    public static <T> List<T> prependAll(final List<T> toAdd, final List<T> ts) {
+        return prependAll(toAdd).apply(ts);
+    }
+
+    public static <T> Function<List<T>, List<T>> appendAll(final List<T> toAdd) {
+        return modify(base -> base.addAll(toAdd));
+    }
+
+    public static <T> List<T> appendAll(final List<T> toAdd, final List<T> ts) {
+        return appendAll(toAdd).apply(ts);
+    }
+
+    public static <T> List<T> topHalf(final List<T> ts) {
+        return new ArrayList<>(ts.subList(0, ts.size() / 2));
+    }
+
+    public static <T> List<T> botHalf(final List<T> ts) {
+        return new ArrayList<>(ts.subList(ts.size() / 2, ts.size()));
+    }
+
     public static <K, T> Map<K, List<T>> groupBy(final List<T> list, final Function<T, K> f) {
         final Map<K, List<T>> result = new HashMap<>();
 
@@ -183,22 +237,8 @@ public class Util {
         return result;
     }
 
-    public static <K> Set<K> findInAll(final Set<K>... sets) {
-        final Set<K> result = new HashSet<>();
-
-        for (final Set<K> set : sets) {
-            for (final K k : set) {
-                if (Arrays.stream(sets).allMatch(s -> s.contains(k))) {
-                    result.add(k);
-                }
-            }
-        }
-
-        return result;
-    }
-
     public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
-        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        final Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
     }
 
@@ -227,5 +267,36 @@ public class Util {
             vs.add(v);
             return vs;
         };
+    }
+
+    public static <T> Set<T> common(final Set<T>... sets) {
+        if (sets.length == 0) {
+            return new HashSet<>();
+        }
+
+        final Set<T> result = new HashSet<>();
+
+        // We only have to loop through the first set, because values in all sets must be in the
+        // first set
+        for (final T t : sets[0]) {
+            if (result.contains(t)) {
+                continue;
+            }
+
+            boolean allContain = true;
+
+            for (final Set<T> set : sets) {
+                if (!set.contains(t)) {
+                    allContain = false;
+                    break;
+                }
+            }
+
+            if (allContain) {
+                result.add(t);
+            }
+        }
+
+        return result;
     }
 }
