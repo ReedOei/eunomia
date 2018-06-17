@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 public class LatexTable {
-    public class Cell {
+    public static class Cell {
         public int value;
         public int total;
         public CellType cellType;
