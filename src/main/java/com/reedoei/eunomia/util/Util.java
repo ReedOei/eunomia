@@ -7,6 +7,7 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +32,40 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Util {
+    public static boolean inRange(final int v, final int min, final int max) {
+        return v >= min && v < max;
+    }
+
+    @NotNull
+    public static <T> Optional<T> getNext(@NotNull final List<T> ts, final T t) {
+        return getOffset(ts, t, 1);
+    }
+
+    @NotNull
+    public static <T> Optional<T> getPrevious(@NotNull final List<T> ts, final T t) {
+        return getOffset(ts, t, -1);
+    }
+
+    @NotNull
+    public static <T> Optional<T> getOffset(@NotNull final List<T> ts, final T t, final int offset) {
+        final int index = ts.indexOf(t);
+
+        if (inRange(index, 0, ts.size())) {
+            return Optional.ofNullable(ts.get(index + offset));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    @NotNull
+    public static <T> Optional<T> tryNext(@NotNull final Optional<T> a, @NotNull final Optional<T> b) {
+        if (a.isPresent()) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
     public static <T> List<T> takeWhileInc(final Predicate<T> f, final List<T> ts) {
         final List<T> result = new ArrayList<>();
 
@@ -242,17 +277,7 @@ public class Util {
         return t -> seen.add(keyExtractor.apply(t));
     }
 
-    public static <K> Map<K, Integer> initFreqMap(final Iterable<K> keys) {
-        final Map<K, Integer> result = new HashMap<>();
-
-        for (final K k : keys) {
-            result.put(k, 0);
-        }
-
-        return result;
-    }
-
-    public static <K> Optional<K> maxKey(final Map<K, Integer> map) {
+    public static <K, V extends Comparable<? super V>> Optional<K> maxKey(final Map<K, V> map) {
         return map.entrySet().stream()
                 .max(Comparator.comparing(Map.Entry::getValue))
                 .map(Map.Entry::getKey);

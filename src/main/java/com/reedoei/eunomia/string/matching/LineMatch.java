@@ -11,12 +11,6 @@ public class LineMatch extends Match {
 
     private final Match match;
 
-    /* TODO: Added matching and nonmatching part.
-     This is often useful for files that have things like:
-     "Value: x"
-    So if we search for "Value:" can we eliminate the nonmatching part and just get "x"
-    */
-
     public LineMatch(final Match match, final List<String> lines, final int lineNum) {
         super(lines.get(lineNum));
 
