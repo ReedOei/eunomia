@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b6c9c52-3c20-447d-af0c-e875c9671498" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StandardMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/TestUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/UtilTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/LineMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/LineMatch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/reedoei/eunomia/latex/CellPos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/reedoei/eunomia/latex/CellType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/reedoei/eunomia/latex/LatexTable$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/reedoei/eunomia/latex/LatexTable$Cell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/reedoei/eunomia/latex/LatexTable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/reedoei/eunomia/util/Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/reedoei/eunomia/util/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/reedoei/eunomia/util/Util.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,22 +19,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Util.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4410">
-              <caret line="278" selection-start-line="278" selection-end-line="278" />
+            <state relative-caret-position="162">
+              <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Frequency.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/data/Frequency.java">
+      <file leaf-file-name="UtilTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/UtilTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+            <state relative-caret-position="360">
+              <caret line="65" column="57" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#154#155#0" expanded="true" />
+                <element signature="e#182#183#0" expanded="true" />
+                <element signature="e#256#257#0" expanded="true" />
+                <element signature="e#285#286#0" expanded="true" />
+                <element signature="e#363#364#0" expanded="true" />
+                <element signature="e#391#392#0" expanded="true" />
+                <element signature="e#467#468#0" expanded="true" />
+                <element signature="e#495#496#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,8 +65,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/ChangedFile.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/resolved/ResolvedClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/DateUtil.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/ast/JavaProjectTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/Frequency.java" />
@@ -114,6 +114,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/LineMatch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StandardMain.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/TestUtil.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/UtilTest.java" />
       </list>
     </option>
   </component>
@@ -300,11 +302,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.reedoei.eunomia.util" />
       <recent name="com.reedoei.eunomia.string.searching" />
       <recent name="com.reedoei.eunomia.string" />
       <recent name="com.reedoei.eunomia.io" />
       <recent name="com.reedoei.eunomia.functional" />
-      <recent name="com.reedoei.eunomia.util" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.reedoei.eunomia.string" />
@@ -331,58 +333,12 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.StringSearchTest">
+  <component name="RunManager" selected="JUnit.UtilTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
-    <configuration name="CaptureErrStreamTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="eunomia" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.reedoei.eunomia.io.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.io" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.io.CaptureErrStreamTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="CaptureOutStreamTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="eunomia" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.reedoei.eunomia.io.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.io" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.io.CaptureOutStreamTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
     </configuration>
     <configuration name="StringSearchTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="eunomia" />
@@ -407,19 +363,42 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="StringSearchTest.testSearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UtilTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="eunomia" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.reedoei.eunomia.string.matching.*" />
+          <option name="PATTERN" value="com.reedoei.eunomia.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.string" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.string.StringSearchTest" />
-      <option name="METHOD_NAME" value="testSearch" />
+      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.UtilTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="UtilTest.getNext" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eunomia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.reedoei.eunomia.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.UtilTest" />
+      <option name="METHOD_NAME" value="getNext" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -430,20 +409,43 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="TriConsumerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UtilTest.inRangeFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="eunomia" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.reedoei.eunomia.functional.*" />
+          <option name="PATTERN" value="com.reedoei.eunomia.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.functional" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.functional.TriConsumerTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.UtilTest" />
+      <option name="METHOD_NAME" value="inRangeFalse" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="UtilTest.inRangeTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eunomia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.reedoei.eunomia.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.UtilTest" />
+      <option name="METHOD_NAME" value="inRangeTrue" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -505,19 +507,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.TriConsumerTest" />
-      <item itemvalue="JUnit.CaptureOutStreamTest" />
-      <item itemvalue="JUnit.CaptureErrStreamTest" />
-      <item itemvalue="JUnit.StringSearchTest.testSearch" />
       <item itemvalue="JUnit.StringSearchTest" />
+      <item itemvalue="JUnit.UtilTest.inRangeTrue" />
+      <item itemvalue="JUnit.UtilTest.inRangeFalse" />
+      <item itemvalue="JUnit.UtilTest" />
+      <item itemvalue="JUnit.UtilTest.getNext" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UtilTest" />
+        <item itemvalue="JUnit.UtilTest.getNext" />
+        <item itemvalue="JUnit.UtilTest.inRangeFalse" />
+        <item itemvalue="JUnit.UtilTest.inRangeTrue" />
         <item itemvalue="JUnit.StringSearchTest" />
-        <item itemvalue="JUnit.StringSearchTest.testSearch" />
-        <item itemvalue="JUnit.CaptureErrStreamTest" />
-        <item itemvalue="JUnit.CaptureOutStreamTest" />
-        <item itemvalue="JUnit.TriConsumerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -546,7 +548,7 @@
       <workItem from="1528917114586" duration="2567000" />
       <workItem from="1528919727501" duration="5305000" />
       <workItem from="1529013588171" duration="1424000" />
-      <workItem from="1529249807397" duration="3475000" />
+      <workItem from="1529249807397" duration="4038000" />
     </task>
     <task id="LOCAL-00001" summary="Added ast tools.">
       <created>1525386358496</created>
@@ -583,28 +585,17 @@
       <option name="project" value="LOCAL" />
       <updated>1529252122404</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added StandardMain and some minor improvements.">
+      <created>1529253316738</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1529253316738</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="StringSearchTest_testSearch - 2018.06.13 at 16h 58m 23s.xml">
-      <configuration name="StringSearchTest.testSearch" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="StringSearchTest_testSearch - 2018.06.13 at 16h 58m 41s.xml">
-      <configuration name="StringSearchTest.testSearch" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TriConsumerTest - 2018.06.08 at 13h 05m 50s.xml">
-      <configuration name="TriConsumerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="StringSearchTest_testSearch - 2018.06.17 at 11h 12m 50s.xml">
-      <configuration name="StringSearchTest.testSearch" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="StringSearchTest_testSearch - 2018.06.17 at 11h 13m 08s.xml">
-      <configuration name="StringSearchTest.testSearch" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="StringSearchTest_testSearch - 2018.06.17 at 11h 13m 37s.xml">
-      <configuration name="StringSearchTest.testSearch" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="StringSearchTest_testSearch - 2018.06.17 at 11h 14m 10s.xml">
       <configuration name="StringSearchTest.testSearch" configurationId="JUnit" />
     </history-entry>
@@ -617,9 +608,27 @@
     <history-entry file="StringSearchTest - 2018.06.17 at 11h 14m 47s.xml">
       <configuration name="StringSearchTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="UtilTest_inRangeTrue - 2018.06.17 at 11h 38m 04s.xml">
+      <configuration name="UtilTest.inRangeTrue" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UtilTest_inRangeFalse - 2018.06.17 at 11h 38m 08s.xml">
+      <configuration name="UtilTest.inRangeFalse" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UtilTest - 2018.06.17 at 11h 38m 51s.xml">
+      <configuration name="UtilTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UtilTest_getNext - 2018.06.17 at 11h 41m 14s.xml">
+      <configuration name="UtilTest.getNext" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UtilTest - 2018.06.17 at 11h 41m 55s.xml">
+      <configuration name="UtilTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="UtilTest - 2018.06.17 at 11h 42m 04s.xml">
+      <configuration name="UtilTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50845000" />
+    <option name="totallyTimeSpent" value="51408000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="32" y="-4" width="1889" height="1085" extended-state="6" />
@@ -627,7 +636,7 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32924336" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32889345" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Java Enterprise" order="8" />
@@ -637,11 +646,11 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="right" id="CDI" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33811477" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33811477" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
       <window_info anchor="right" id="Database" order="5" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -669,28 +678,15 @@
     <MESSAGE value="Fixed JavaProject, added DateUtil" />
     <MESSAGE value="Added PairStream and some more utility methods." />
     <MESSAGE value="Added String matching utilties." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added String matching utilties." />
+    <MESSAGE value="Added StandardMain and some minor improvements." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added StandardMain and some minor improvements." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="24" />
+      <option name="time" value="26" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/BlockJUnit4ClassRunner.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/maven/maven-embedder/3.2.6-SNAPSHOT/maven-embedder-3.2.6-SNAPSHOT.jar!/org/apache/maven/cli/MavenCli.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="146" selection-start-line="146" selection-end-line="146" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/model/FrameworkMethod.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -1068,7 +1064,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/data/Frequency.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
+        <state relative-caret-position="180">
           <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1078,8 +1074,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4410">
-          <caret line="278" selection-start-line="278" selection-end-line="278" />
+        <state relative-caret-position="162">
+          <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/TestUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/UtilTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="65" column="57" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
+          <folding>
+            <element signature="e#154#155#0" expanded="true" />
+            <element signature="e#182#183#0" expanded="true" />
+            <element signature="e#256#257#0" expanded="true" />
+            <element signature="e#285#286#0" expanded="true" />
+            <element signature="e#363#364#0" expanded="true" />
+            <element signature="e#391#392#0" expanded="true" />
+            <element signature="e#467#468#0" expanded="true" />
+            <element signature="e#495#496#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

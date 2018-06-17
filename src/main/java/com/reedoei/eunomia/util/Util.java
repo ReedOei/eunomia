@@ -32,8 +32,11 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Util {
-    public static boolean inRange(final int v, final int min, final int max) {
-        return v >= min && v < max;
+    public static <T extends Comparable<? super T>> boolean inRange(@NotNull final T t,
+                                                                    @NotNull final T min,
+                                                                    @NotNull final T max) {
+        return t.compareTo(min) >= 0 &&
+                t.compareTo(max) <= -1;
     }
 
     @NotNull
