@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
@@ -32,6 +33,16 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Util {
+    public static <T, U> void forEachPair(@NotNull final List<T> ts,
+                                          @NotNull final List<U> us,
+                                          @NotNull final BiConsumer<T, U> consumer) {
+        for (final T t : ts) {
+            for (final U u : us) {
+                consumer.accept(t, u);
+            }
+        }
+    }
+
     public static <T extends Comparable<? super T>> boolean inRange(@NotNull final T t,
                                                                     @NotNull final T min,
                                                                     @NotNull final T max) {
@@ -92,7 +103,7 @@ public class Util {
         }
     }
 
-    public static <T> Function<List<T>, List<T>> modify(final Consumer<List<T>> f) {
+    public static <T> Function<T, T> modify(final Consumer<T> f) {
         return base -> {
             f.accept(base);
             return base;
@@ -219,7 +230,7 @@ public class Util {
                 .orElse(new HashSet<>());
     }
 
-    private static Document readXmlDoc(final File xmlFile)
+    public static Document readXmlDoc(final File xmlFile)
             throws MalformedURLException, DocumentException {
         SAXReader reader = new SAXReader();
         return reader.read(xmlFile.toURI().toURL());

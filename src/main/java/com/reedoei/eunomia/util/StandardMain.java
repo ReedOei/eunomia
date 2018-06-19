@@ -32,4 +32,17 @@ public abstract class StandardMain {
     protected Optional<String> getArgValue(@NotNull final String argName) {
         return Util.tryNext(Util.getNext(cleanArgs, cleanArg(argName)), Util.getNext(argList, argName));
     }
+
+    @NotNull
+    protected String getRequiredArg(@NotNull final String argName) throws IllegalArgumentException {
+        final Optional<String> value = getArgValue(argName);
+
+        if (!value.isPresent()) {
+            throw new IllegalArgumentException("Argument '" + argName + "' must be provided with a value, but was not.");
+        }
+
+        return value.get();
+    }
+
+    protected abstract void run() throws Exception;
 }

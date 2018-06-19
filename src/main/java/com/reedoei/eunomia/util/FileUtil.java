@@ -1,5 +1,8 @@
 package com.reedoei.eunomia.util;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -16,5 +19,9 @@ public class FileUtil {
         }
 
         return found;
+    }
+
+    public static String readFile(final Path path) throws IOException {
+        return new String(Files.readAllBytes(path), Charset.defaultCharset());
     }
 }
