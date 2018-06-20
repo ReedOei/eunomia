@@ -2,7 +2,7 @@ package com.reedoei.eunomia.string.searching;
 
 import com.reedoei.eunomia.string.matching.IndexMatch;
 import com.reedoei.eunomia.string.matching.Match;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -15,7 +15,7 @@ public class RegexSearcher extends Searcher {
         this.pattern = pattern;
     }
 
-    @NotNull
+    @NonNull
     @Override
     public Optional<Match> test(final String s) {
         final Matcher matcher = pattern.matcher(s);

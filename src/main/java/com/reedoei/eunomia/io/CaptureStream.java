@@ -1,6 +1,6 @@
 package com.reedoei.eunomia.io;
 
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -35,7 +35,7 @@ public abstract class CaptureStream {
 
     protected abstract void setStream(final PrintStream stream);
 
-    @NotNull
+    @NonNull
     protected abstract PrintStream getStream();
 
 }

@@ -4,8 +4,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Streams;
 import com.reedoei.eunomia.string.matching.LineMatch;
 import com.reedoei.eunomia.string.matching.Match;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -14,13 +14,13 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class StringSearch {
-    @NotNull
+    @NonNull
     private final String base;
 
-    @NotNull
+    @NonNull
     private final List<String> lines;
 
-    public StringSearch(@NotNull final String base) {
+    public StringSearch(@NonNull final String base) {
         this.base = base;
 
         final String[] split = base.split(System.lineSeparator());
@@ -28,7 +28,7 @@ public class StringSearch {
         this.lines = Arrays.asList(split);
     }
 
-    @NotNull
+    @NonNull
     public Stream<LineMatch> search(final Searcher searcher) {
         // Create an iterator so that we can create a stream so that it will be lazily evaluated.
         final Iterator<LineMatch> iterator = new Iterator<LineMatch>() {
@@ -37,6 +37,7 @@ public class StringSearch {
             @Nullable
             private LineMatch next = null;
 
+            @Nullable
             private LineMatch findNext() {
                 for (; i < lines.size(); i++) {
                     final String line = lines.get(i);
@@ -65,7 +66,12 @@ public class StringSearch {
             public LineMatch next() {
                 final LineMatch temp = next;
                 next = null;
-                return temp;
+
+                if (temp != null) {
+                    return temp;
+                } else {
+                    throw new IllegalStateException("next() was called when there are no more elements!");
+                }
             }
         };
 

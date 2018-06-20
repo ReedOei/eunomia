@@ -1,13 +1,13 @@
 package com.reedoei.eunomia.util;
 
 import org.apache.commons.io.FilenameUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,9 +33,9 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Util {
-    public static <T, U> void forEachPair(@NotNull final List<T> ts,
-                                          @NotNull final List<U> us,
-                                          @NotNull final BiConsumer<T, U> consumer) {
+    public static <T, U> void forEachPair(final List<T> ts,
+                                          final List<U> us,
+                                          final BiConsumer<T, U> consumer) {
         for (final T t : ts) {
             for (final U u : us) {
                 consumer.accept(t, u);
@@ -43,25 +43,42 @@ public class Util {
         }
     }
 
-    public static <T extends Comparable<? super T>> boolean inRange(@NotNull final T t,
-                                                                    @NotNull final T min,
-                                                                    @NotNull final T max) {
+
+    public static <T, U, V> List<V> zipWith( final List<T> ts,
+                                             final List<U> us,
+                                             final BiFunction<T, U, V> f) {
+        final List<V> result = new ArrayList<>();
+
+        for (int i = 0; i < ts.size(); i++) {
+            if (i >= us.size()) {
+                break;
+            }
+
+            result.add(f.apply(ts.get(i), us.get(i)));
+        }
+
+        return result;
+    }
+
+    public static <T extends Comparable<? super T>> boolean inRange( final T t,
+                                                                     final T min,
+                                                                     final T max) {
         return t.compareTo(min) >= 0 &&
                 t.compareTo(max) <= -1;
     }
 
-    @NotNull
-    public static <T> Optional<T> getNext(@NotNull final List<T> ts, final T t) {
+
+    public static <T> Optional<T> getNext( final List<T> ts, final @NonNull T t) {
         return getOffset(ts, t, 1);
     }
 
-    @NotNull
-    public static <T> Optional<T> getPrevious(@NotNull final List<T> ts, final T t) {
+
+    public static <T> Optional<T> getPrevious( final List<T> ts, final @NonNull T t) {
         return getOffset(ts, t, -1);
     }
 
-    @NotNull
-    public static <T> Optional<T> getOffset(@NotNull final List<T> ts, final T t, final int offset) {
+
+    public static <T> Optional<T> getOffset(final List<T> ts, final @NonNull T t, final int offset) {
         final int index = ts.indexOf(t);
 
         if (inRange(index, 0, ts.size())) {
@@ -71,8 +88,8 @@ public class Util {
         }
     }
 
-    @NotNull
-    public static <T> Optional<T> tryNext(@NotNull final Optional<T> a, @NotNull final Optional<T> b) {
+
+    public static <T> Optional<T> tryNext( final Optional<T> a,  final Optional<T> b) {
         if (a.isPresent()) {
             return a;
         } else {
@@ -93,7 +110,7 @@ public class Util {
         return result;
     }
 
-    public static <T> List<T> beforeInc(final List<T> ts, final T t) {
+    public static <T> List<T> beforeInc(final List<T> ts, final @NonNull T t) {
         final int i = ts.indexOf(t);
 
         if (i != -1) {
@@ -103,6 +120,7 @@ public class Util {
         }
     }
 
+
     public static <T> Function<T, T> modify(final Consumer<T> f) {
         return base -> {
             f.accept(base);
@@ -110,25 +128,31 @@ public class Util {
         };
     }
 
-    public static <T> Function<List<T>, List<T>> prependAll(final List<T> toAdd) {
+
+    public static <T> Function<List<T>, List<T>> prependAll( final List<T> toAdd) {
         return modify(base -> base.addAll(0, toAdd));
     }
 
-    public static <T> List<T> prependAll(final List<T> toAdd, final List<T> ts) {
+
+    public static <T> List<T> prependAll( final List<T> toAdd,  final List<T> ts) {
         return prependAll(toAdd).apply(ts);
     }
+
 
     public static <T> Function<List<T>, List<T>> appendAll(final List<T> toAdd) {
         return modify(base -> base.addAll(toAdd));
     }
 
+
     public static <T> List<T> appendAll(final List<T> toAdd, final List<T> ts) {
         return appendAll(toAdd).apply(ts);
     }
 
+
     public static <T> List<T> topHalf(final List<T> ts) {
         return new ArrayList<>(ts.subList(0, ts.size() / 2));
     }
+
 
     public static <T> List<T> botHalf(final List<T> ts) {
         return new ArrayList<>(ts.subList(ts.size() / 2, ts.size()));
@@ -286,7 +310,7 @@ public class Util {
         return result;
     }
 
-    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+    public static <T> Predicate<@NonNull T> distinctByKey(final Function<? super T, @NonNull ?> keyExtractor) {
         final Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
     }
@@ -308,23 +332,23 @@ public class Util {
         };
     }
 
-    public static <T> Set<T> common(final Set<T>... sets) {
+    public static <T> Set<@NonNull T> common(final Set<@NonNull T>... sets) {
         if (sets.length == 0) {
             return new HashSet<>();
         }
 
-        final Set<T> result = new HashSet<>();
+        final Set<@NonNull T> result = new HashSet<>();
 
         // We only have to loop through the first set, because values in all sets must be in the
         // first set
-        for (final T t : sets[0]) {
+        for (final @NonNull T t : sets[0]) {
             if (result.contains(t)) {
                 continue;
             }
 
             boolean allContain = true;
 
-            for (final Set<T> set : sets) {
+            for (final Set<@NonNull T> set : sets) {
                 if (!set.contains(t)) {
                     allContain = false;
                     break;

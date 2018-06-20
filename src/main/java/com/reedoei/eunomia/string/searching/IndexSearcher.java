@@ -2,7 +2,7 @@ package com.reedoei.eunomia.string.searching;
 
 import com.reedoei.eunomia.string.matching.IndexMatch;
 import com.reedoei.eunomia.string.matching.Match;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Optional;
 import java.util.function.BiPredicate;
@@ -16,7 +16,7 @@ public class IndexSearcher extends Searcher {
         this.pred = pred;
     }
 
-    @NotNull
+    @NonNull
     @Override
     public Optional<Match> test(final String s) {
         for (int i = 0; i < s.length(); i++) {

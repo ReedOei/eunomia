@@ -1,5 +1,7 @@
 package com.reedoei.eunomia.util;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -7,7 +9,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class NOptional<K, V> {
-    private final Map<K, V> values = new HashMap<>();
+    private final Map<@NonNull K, @NonNull V> values = new HashMap<>();
     private final boolean allPresent;
 
     NOptional(final Map<K, V> values, final boolean allPresent) {
@@ -19,9 +21,7 @@ public class NOptional<K, V> {
         if (allPresent) {
             final Map<K, B> newValues = new HashMap<>();
 
-            for (final K k : values.keySet()) {
-                newValues.put(k, f.apply(values.get(k)));
-            }
+            values.forEach((k, v) -> newValues.put(k, f.apply(v)));
 
             return new NOptional<>(newValues, true);
         } else {
@@ -33,9 +33,7 @@ public class NOptional<K, V> {
         if (allPresent) {
             final NOptionalBuilder<K, B> builder = new NOptionalBuilder<>();
 
-            for (final K k : values.keySet()) {
-                builder.add(k, f.apply(values.get(k)));
-            }
+            values.forEach((k, v) -> builder.add(k, f.apply(v)));
 
             return builder.build();
         } else {
@@ -43,13 +41,13 @@ public class NOptional<K, V> {
         }
     }
 
-    public void ifPresent(final Consumer<Map<K,V>> f) {
+    public void ifPresent(final Consumer<Map<@NonNull K, @NonNull V>> f) {
         if (allPresent) {
             f.accept(values);
         }
     }
 
-    public <T> T fromOptional(final T def, final Function<Map<K,V>, T> f) {
+    public <T> T fromOptional(final T def, final Function<Map<@NonNull K, @NonNull V>, T> f) {
         if (allPresent) {
             return f.apply(values);
         } else {

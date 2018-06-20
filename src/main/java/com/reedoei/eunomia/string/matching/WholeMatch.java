@@ -1,19 +1,19 @@
 package com.reedoei.eunomia.string.matching;
 
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class WholeMatch extends Match {
-    public WholeMatch(@NotNull String base) {
+    public WholeMatch(@NonNull String base) {
         super(base);
     }
 
-    @NotNull
+    @NonNull
     @Override
     public String matching() {
         return base;
     }
 
-    @NotNull
+    @NonNull
     @Override
     public String nonmatching() {
         return "";

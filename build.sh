@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-mvn com.github.spotbugs:spotbugs-maven-plugin:check compile package
+mvn clean compile test spotbugs:check -DwithHistory org.pitest:pitest-maven:mutationCoverage
 

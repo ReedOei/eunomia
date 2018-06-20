@@ -1,6 +1,9 @@
 package com.reedoei.eunomia.ast;
 
 import com.reedoei.eunomia.util.DateUtil;
+import org.checkerframework.checker.initialization.qual.Initialized;
+import org.checkerframework.checker.initialization.qual.UnknownInitialization;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.junit.After;
 import org.junit.Before;
@@ -11,15 +14,18 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 public class JavaProjectTest {
-    private JavaProject project;
+    // This object is set up by the @Before method so won't actually ever be null
+    // But the checkers framework doesn't seem to be able to detect that, so just suppress warnings on this.
+    @SuppressWarnings("nullness")
+    private JavaProject project = null;
 
     @Before
     public void setUp() throws Exception {
-        project = new JavaProject("src/test/resources/eunomia-test-project/.git", "HEAD");
+        project = new JavaProjectBuilder("src/test/resources/eunomia-test-project/.git", "HEAD").build();
     }
 
     @After
-    public void tearDown() throws IOException, GitAPIException {
+    public void tearDown() throws GitAPIException {
         // Make sure any changes to the project version get undone
         project.getGit().checkout().setName("master").call();
         project.close();

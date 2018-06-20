@@ -2,7 +2,7 @@ package com.reedoei.eunomia.string.searching;
 
 import com.reedoei.eunomia.string.matching.Match;
 import com.reedoei.eunomia.string.matching.SubstringMatch;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Optional;
 
@@ -13,7 +13,7 @@ public class SubstringSearcher extends Searcher {
         this.searchString = searchString;
     }
 
-    @NotNull
+    @NonNull
     @Override
     public Optional<Match> test(final String s) {
         if (s.contains(searchString)) {

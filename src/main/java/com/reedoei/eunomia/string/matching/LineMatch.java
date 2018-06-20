@@ -1,7 +1,7 @@
 package com.reedoei.eunomia.string.matching;
 
 import com.reedoei.eunomia.string.Context;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.List;
 
@@ -53,13 +53,13 @@ public class LineMatch extends Match {
         return get();
     }
 
-    @NotNull
+    @NonNull
     @Override
     public String matching() {
         return base;
     }
 
-    @NotNull
+    @NonNull
     @Override
     public String nonmatching() {
         return match.nonmatching();

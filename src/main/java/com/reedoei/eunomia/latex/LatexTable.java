@@ -1,6 +1,8 @@
 package com.reedoei.eunomia.latex;
 
 import com.reedoei.eunomia.util.Util;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class LatexTable {
         public int total;
         public CellType cellType;
         public boolean isHidden = false;
-        public String showOverride = null;
+        public @Nullable String showOverride = null;
 
         public Cell(int value, int total, CellType type) {
             this.value = value;
@@ -40,14 +42,17 @@ public class LatexTable {
             return LatexTable.justRatio(value, total, false);
         }
 
-        public String percent(int longestN, int longestD, String showDenominator) {
+        @NonNull
+        public String percent(int longestN, int longestD, @Nullable final String showDenominator) {
             return LatexTable.percent(value, total, longestN, longestD, showDenominator, showOverride);
         }
 
-        public String ratio(int longestN, int longestD, int minLength, String showDenominator) {
+        @NonNull
+        public String ratio(int longestN, int longestD, int minLength, final @Nullable String showDenominator) {
             return LatexTable.ratio(value, total, longestN, longestD, minLength, showDenominator);
         }
 
+        @NonNull
         public String showAs(int longestN, int longestD, int minLength, int longestVal, CellType cellType) {
             if (isHidden) {
                 if (cellType == CellType.VALUE_SINGLE_COL) {
@@ -89,7 +94,7 @@ public class LatexTable {
         }
     }
 
-    public static <T> String latexPad(T value, int i) {
+    public static <T> String latexPad(final @NonNull T value, int i) {
         return latexPad(value.toString(), i);
     }
 
@@ -105,6 +110,7 @@ public class LatexTable {
         return res.toString();
     }
 
+    @NonNull
     public static String justPercent(int val, int total, boolean showEquals) {
         final NumberFormat percent = NumberFormat.getPercentInstance();
         percent.setMinimumFractionDigits(1);
@@ -117,7 +123,9 @@ public class LatexTable {
         }
     }
 
-    public static String percent(int val, int total, int longestN, int longestD, String showDenominator, String showOverride) {
+    @NonNull
+    public static String percent(int val, int total, int longestN, int longestD,
+                                 final @Nullable String showDenominator, final @Nullable String showOverride) {
         final NumberFormat percent = NumberFormat.getPercentInstance();
         percent.setMinimumFractionDigits(1);
         percent.setMaximumFractionDigits(1);
@@ -143,6 +151,7 @@ public class LatexTable {
         return String.format("%s & %s", percentString, toShow);
     }
 
+    @NonNull
     public static String justRatio(int val, int total, boolean showEquals) {
         final NumberFormat ratio = NumberFormat.getNumberInstance();
         ratio.setMinimumFractionDigits(1);
@@ -155,7 +164,8 @@ public class LatexTable {
         }
     }
 
-    public static String ratio(int val, int total, int longestN, int longestD, int minLength, String showDenominator) {
+    public static String ratio(int val, int total, int longestN, int longestD, int minLength,
+                               final @Nullable String showDenominator) {
         final NumberFormat ratio = NumberFormat.getNumberInstance();
         ratio.setMinimumFractionDigits(1);
         ratio.setMaximumFractionDigits(1);
@@ -166,10 +176,6 @@ public class LatexTable {
         final String denominator = showDenominator == null ? latexPad(total, longestD) : showDenominator;
 
         return String.format("%s & (%s/%s)", ratioString, numerator, denominator);
-    }
-
-    public static <T> int getLongestString(Stream<T> stream) {
-        return stream.map(Object::toString).map(String::length).max(Integer::compareTo).orElse(0);
     }
 
     private final List<List<Cell>> cells = new ArrayList<>();
@@ -278,7 +284,9 @@ public class LatexTable {
         return this;
     }
 
-    private Optional<Cell> makeCell(final Integer value, final Integer total, final CellType display) {
+    private Optional<Cell> makeCell(final @Nullable Integer value,
+                                    final @Nullable Integer total,
+                                    final CellType display) {
         if (value == null || total == null) {
             if (ignoreMissing) {
                 return Optional.empty();

@@ -1,6 +1,6 @@
 package com.reedoei.eunomia.io;
 
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.PrintStream;
 
@@ -14,7 +14,7 @@ public class CaptureErrStream extends CaptureStream {
         System.setErr(stream);
     }
 
-    @NotNull
+    @NonNull
     @Override
     protected PrintStream getStream() {
         return System.err;

@@ -11,7 +11,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class Frequency<K, V> implements Iterable<K> {
     public static <K, V> Frequency<K, V> initWith(final Iterable<K> col, final Supplier<V> defaultValue) {
@@ -61,7 +61,7 @@ public class Frequency<K, V> implements Iterable<K> {
         return this;
     }
 
-    public Optional<V> get(final K k) {
+    public Optional<V> get(final @NonNull K k) {
         if (frequency.containsKey(k)) {
             return Optional.ofNullable(frequency.get(k));
         } else {
@@ -106,7 +106,7 @@ public class Frequency<K, V> implements Iterable<K> {
     }
 
     @Override
-    @NotNull
+    @NonNull
     public Iterator<K> iterator() {
         return frequency.keySet().iterator();
     }

@@ -1,18 +1,18 @@
 package com.reedoei.eunomia.string.matching;
 
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public abstract class Match {
-    @NotNull
+    @NonNull
     protected final String base;
 
-    public Match(@NotNull final String base) {
+    public Match(@NonNull final String base) {
         this.base = base;
     }
 
-    @NotNull
+    @NonNull
     public abstract String matching();
 
-    @NotNull
+    @NonNull
     public abstract String nonmatching();
 }

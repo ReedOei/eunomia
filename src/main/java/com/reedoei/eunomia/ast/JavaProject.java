@@ -1,28 +1,17 @@
 package com.reedoei.eunomia.ast;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseProblemException;
-import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.resolution.MethodUsage;
-import com.github.javaparser.symbolsolver.JavaSymbolSolver;
-import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
-import com.github.javaparser.symbolsolver.resolution.typesolvers.JarTypeSolver;
-import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver;
-import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.reedoei.eunomia.ast.resolved.ResolvedClass;
-import com.reedoei.eunomia.util.FileUtil;
 import com.reedoei.eunomia.util.NOptionalBuilder;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.maven.cli.MavenCli;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.ResetCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.diff.DiffEntry;
-import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -36,23 +25,21 @@ import org.eclipse.jgit.treewalk.filter.PathFilter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class JavaProject {
     private final String repoPath;
-    private final String path;
+    private final Path path;
     private final String ref;
     private final Git git;
 
@@ -60,15 +47,18 @@ public class JavaProject {
     private final Set<ResolvedClass> resolvedClasses = new HashSet<>();
     private final Set<CompilationUnit> files;
 
-    public JavaProject(final String repoPath, final String ref)
-            throws IOException, GitAPIException {
+    public JavaProject(final String repoPath,
+                       final Path path,
+                       final String ref,
+                       final Set<CompilationUnit> files,
+                       final Git git) {
         this.repoPath = repoPath;
-        this.path = Paths.get(repoPath).getParent().toString();
+        this.path = path;
         this.ref = ref;
 
-        this.git = new Git(new FileRepository(repoPath));
+        this.git = git;
 
-        files = parseJavaFiles(ref, "");
+        this.files = files;
 
         for (final CompilationUnit file : files) {
             classes.addAll(file.findAll(ClassOrInterfaceDeclaration.class));
@@ -77,21 +67,6 @@ public class JavaProject {
         for (final ClassOrInterfaceDeclaration c : classes) {
             resolvedClasses.add(new ResolvedClass(c));
         }
-    }
-
-    private void setupSolver(final String commitId) throws GitAPIException {
-        CombinedTypeSolver solver = createSolver(commitId);
-
-        ParserConfiguration parserConfiguration = new ParserConfiguration();
-        parserConfiguration.setSymbolResolver(new JavaSymbolSolver(solver));
-        JavaParser.setStaticConfiguration(parserConfiguration);
-    }
-
-    private Set<CompilationUnit> parseJavaFiles(final String commitId, final String filter)
-            throws GitAPIException {
-        setupSolver(commitId);
-
-        return getAllFileContent(filter);
     }
 
     public List<ChangedFile> getChangedFileContent(final String newCommitId) {
@@ -124,93 +99,11 @@ public class JavaProject {
         return temp[temp.length - 1];
     }
 
-    private static Optional<CompilationUnit> tryParse(final InputStream code) {
-        try {
-            return Optional.ofNullable(JavaParser.parse(code));
-        } catch (ParseProblemException ignored) {
-            return Optional.empty();
-        }
-    }
-
     public String commitBefore(final Date date) throws GitAPIException {
         return git.log()
                 .setRevFilter(CommitTimeRevFilter.before(date))
                 .setMaxCount(1)
                 .call().iterator().next().getName();
-    }
-
-    private void gitSetProjectCommit(final String ref, boolean recompile)
-            throws GitAPIException {
-        // Reset the repository to the desired version.
-        git.reset().setMode(ResetCommand.ResetType.HARD).setRef(ref).call();
-
-        // Call maven, if we want to compile
-        if (recompile) {
-            MavenCli maven = new MavenCli();
-            maven.doMain(new String[]{"clean", "install", "dependency:copy-dependencies"}, path, System.out, System.out);
-        }
-    }
-
-    private List<File> getSourceDirectories(final File dir) {
-        try {
-            if (dir.isDirectory()) {
-                // Don't look at these.
-                if (FileUtil.inParent(dir.getCanonicalPath(), "target")) {
-                    return new ArrayList<>();
-                }
-
-                if (dir.getCanonicalPath().endsWith("src/main/java") ||
-                        dir.getCanonicalPath().endsWith("src/test/java") ||
-                        dir.getCanonicalPath().endsWith("src/experimental")) {
-                    return Collections.singletonList(dir);
-                }
-
-                final File[] files = dir.listFiles();
-                if (files != null) {
-                    return Arrays.stream(files)
-                            .flatMap(d -> getSourceDirectories(d).stream())
-                            .collect(Collectors.toList());
-                }
-
-                return new ArrayList<>();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList<>();
-    }
-
-    private CombinedTypeSolver createSolver(final String ref) throws GitAPIException {
-        gitSetProjectCommit(ref, true);
-
-        // Add basic reflection solver.
-        final CombinedTypeSolver solver = new CombinedTypeSolver();
-        solver.add(new ReflectionTypeSolver());
-
-        // Add source solvers.
-        for (final File sourceDir : getSourceDirectories(new File(path))) {
-            solver.add(new JavaParserTypeSolver(sourceDir));
-        }
-
-        // Add all jars.
-        final Set<String> addedJars = new HashSet<>();
-        File[] files =
-                FileUtils.convertFileCollectionToFileArray(
-                        FileUtils.listFiles(new File(path), new String[] {"jar"}, true));
-        for (final File file : files) {
-            try {
-                new JarFile(file.getCanonicalPath());
-
-                // Don't add jars more than once if they appear multiple times in modules.
-                if (!addedJars.contains(file.getName())) {
-                    solver.add(new JarTypeSolver(file.getCanonicalPath()));
-                    addedJars.add(file.getName());
-                }
-            } catch (IOException ignored) {}
-        }
-
-        return solver;
     }
 
     private Set<String> getInheritedCandidates(final CompilationUnit cu,
@@ -239,9 +132,9 @@ public class JavaProject {
         final Set<String> newToFind = new HashSet<>(testMethodNames);
         final List<MethodDeclaration> result = new ArrayList<>();
 
-        File[] files =
+        final File[] files =
                 FileUtils.convertFileCollectionToFileArray(
-                        FileUtils.listFiles(new File(path), new String[] {"java"}, true));
+                        FileUtils.listFiles(path.toFile(), new String[] {"java"}, true));
         // Add all inherited methods that match one of the test names we're looking for.
 //        TODO: get guessed paths
 //                filter by that
@@ -256,7 +149,7 @@ public class JavaProject {
                         final String guessedPath = AstUtil.qualifiedToPath(name);
                         if (file.getCanonicalPath().contains(guessedPath)) {
                             try (final FileInputStream input = new FileInputStream(file)) {
-                                tryParse(input)
+                                AstUtil.tryParse(input)
                                         .map(cu -> getInheritedCandidates(cu, testMethodNames))
                                         .ifPresent(newToFind::addAll);
 
@@ -281,7 +174,7 @@ public class JavaProject {
 //                        final String methodName = temp[temp.length - 1];
                         if (file.getCanonicalPath().contains(guessedPath)) {
                             try (final FileInputStream input = new FileInputStream(file)) {
-                                tryParse(input)
+                                AstUtil.tryParse(input)
                                         .ifPresent(cu ->
                                                 cu.findAll(MethodDeclaration.class)
                                                         .forEach(method -> {
@@ -312,7 +205,7 @@ public class JavaProject {
             }
             if (file.isFile()) {
                 try (final FileInputStream input = new FileInputStream(file)) {
-                    tryParse(input)
+                    AstUtil.tryParse(input)
                             .ifPresent(cu -> cu.findAll(MethodDeclaration.class)
                                     .forEach(method -> {
                                         if (newToFind.stream().anyMatch(m -> m.endsWith(method.getNameAsString()))) {
@@ -335,46 +228,32 @@ public class JavaProject {
         return result;
     }
 
-    private Set<CompilationUnit> getAllFileContent(String filter) {
-        final Set<CompilationUnit> result = new HashSet<>();
-        File[] files =
-                FileUtils.convertFileCollectionToFileArray(
-                        FileUtils.listFiles(new File(path), new String[] {"java"}, true));
-        for (final File file : files) {
-            if (file.isFile() && (filter == null || file.getName().contains(filter) || filter.isEmpty())) {
-                try (final FileInputStream input = new FileInputStream(file)) {
-                    tryParse(input)
-                            .ifPresent(result::add);
-                } catch (IOException ignored) {}
-            }
-        }
-
-        return result;
-    }
-
     private Optional<CompilationUnit> getFileContent(final String ref, final String filePath) {
         try {
             // From: https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadFileFromCommit.java
-            ObjectId lastCommitId = git.getRepository().resolve(ref);
+            final ObjectId lastCommitId = git.getRepository().resolve(ref);
+            if (lastCommitId == null) {
+                return Optional.empty();
+            }
 
             // a RevWalk allows to walk over commits based on some filtering that is defined
-            try (RevWalk revWalk = new RevWalk(git.getRepository())) {
-                RevCommit commit = revWalk.parseCommit(lastCommitId);
+            try (final RevWalk revWalk = new RevWalk(git.getRepository())) {
+                final RevCommit commit = revWalk.parseCommit(lastCommitId);
                 // and using commit's tree find the path
-                RevTree tree = commit.getTree();
+                final RevTree tree = commit.getTree();
 
                 // now try to find a specific file
-                try (TreeWalk treeWalk = new TreeWalk(git.getRepository())) {
+                try (final TreeWalk treeWalk = new TreeWalk(git.getRepository())) {
                     treeWalk.addTree(tree);
                     treeWalk.setRecursive(true);
                     treeWalk.setFilter(PathFilter.create(filePath));
 
                     if (treeWalk.next()) {
                         if (FilenameUtils.isExtension(treeWalk.getPathString(), "java")) {
-                            ObjectId objectId = treeWalk.getObjectId(0);
+                            final ObjectId objectId = treeWalk.getObjectId(0);
 
                             revWalk.dispose();
-                            return tryParse(git.getRepository().open(objectId).openStream());
+                            return AstUtil.tryParse(git.getRepository().open(objectId).openStream());
                         }
                     }
 
@@ -394,6 +273,10 @@ public class JavaProject {
         try {
             final ObjectId commit = git.getRepository().resolve(commitId + "^{tree}");
             final ObjectId prevCommit = git.getRepository().resolve(commitId + "~1^{tree}");
+
+            if (commit == null || prevCommit == null) {
+                return new HashSet<>();
+            }
 
             try (final ObjectReader reader = git.getRepository().newObjectReader()) {
                 final CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();

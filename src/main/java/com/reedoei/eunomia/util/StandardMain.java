@@ -1,6 +1,6 @@
 package com.reedoei.eunomia.util;
 
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class StandardMain {
-    private static String cleanArg(@NotNull final String arg) {
+    private static String cleanArg(@NonNull final String arg) {
         String result = arg;
         while (result.startsWith("-")) {
             result = result.replaceFirst("-", "");
@@ -28,13 +28,13 @@ public abstract class StandardMain {
         }
     }
 
-    @NotNull
-    protected Optional<String> getArgValue(@NotNull final String argName) {
+    @NonNull
+    protected Optional<String> getArgValue(@NonNull final String argName) {
         return Util.tryNext(Util.getNext(cleanArgs, cleanArg(argName)), Util.getNext(argList, argName));
     }
 
-    @NotNull
-    protected String getRequiredArg(@NotNull final String argName) throws IllegalArgumentException {
+    @NonNull
+    protected String getRequiredArg(@NonNull final String argName) throws IllegalArgumentException {
         final Optional<String> value = getArgValue(argName);
 
         if (!value.isPresent()) {

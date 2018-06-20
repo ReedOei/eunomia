@@ -1,10 +1,11 @@
 package com.reedoei.eunomia.util;
 
 import com.google.common.collect.Streams;
+import com.reedoei.eunomia.functional.PredUtil;
 import com.reedoei.eunomia.functional.TriConsumer;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,6 +17,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -28,8 +30,8 @@ public class PairStream<T, U> {
         return new PairStream<>(ts, us);
     }
 
-    public static <K, V> PairStream<K, V> fromMap(final Map<K, V> m) {
-        final List<K> ks = new ArrayList<>(m.keySet());
+    public static <K, V> PairStream<@NonNull K, V> fromMap(final Map<@NonNull K, V> m) {
+        final List<@NonNull K> ks = new ArrayList<>(m.keySet());
         final List<V> vs = ks.stream().map(m::get).collect(Collectors.toList());
 
         return PairStream.zip(ks, vs);
@@ -77,13 +79,13 @@ public class PairStream<T, U> {
     }
 
     public PairStream<T, U> distinctFirst() {
-        stream = stream.filter(Util.distinctByKey(Pair::getLeft));
+        stream = stream.filter(PredUtil.nullSafe(Util.distinctByKey(Pair::getLeft)));
 
         return this;
     }
 
     public PairStream<T, U> distinctSecond() {
-        stream = stream.filter(Util.distinctByKey(Pair::getRight));
+        stream = stream.filter(PredUtil.nullSafe(Util.distinctByKey(Pair::getRight)));
 
         return this;
     }
@@ -178,7 +180,7 @@ public class PairStream<T, U> {
         return stream.findAny();
     }
 
-    @NotNull
+    @NonNull
     public Iterator<Pair<T, U>> iterator() {
         return stream.iterator();
     }
