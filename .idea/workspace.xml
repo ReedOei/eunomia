@@ -2,40 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b6c9c52-3c20-447d-af0c-e875c9671498" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_2_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_jdk8_2_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProjectBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/PredUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_intellij_annotations_12_0.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eunomia.iml" beforeDir="false" afterPath="$PROJECT_DIR$/eunomia.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/AstUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/AstUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/ChangedFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/ChangedFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/data/Frequency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/data/Frequency.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/io/CaptureErrStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/io/CaptureErrStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/io/CaptureOutStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/io/CaptureOutStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/io/CaptureStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/io/CaptureStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/latex/LatexTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/latex/LatexTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/IndexMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/IndexMatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/LineMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/LineMatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/SubstringMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/SubstringMatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/WholeMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/WholeMatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/IndexSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/IndexSearcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/RegexSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/RegexSearcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/Searcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/StringSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/StringSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/SubstringSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/SubstringSearcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptionalBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptionalBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/resolved/ResolvedMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/resolved/ResolvedMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/PredUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Pred.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StandardMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StandardMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/ast/JavaProjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/ast/JavaProjectTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -48,35 +22,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java">
+      <file leaf-file-name="ResolvedMethod.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/resolved/ResolvedMethod.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-108">
-              <caret line="312" selection-start-line="312" selection-end-line="312" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="213">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JavaProjectTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/ast/JavaProjectTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="17" column="107" selection-start-line="17" selection-start-column="107" selection-end-line="17" selection-end-column="107" />
-              <folding>
-                <element signature="e#508#537#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PairStream.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PairStream.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+            <state relative-caret-position="216">
+              <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -84,13 +43,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PredUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/PredUtil.java">
+      <file leaf-file-name="MapUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+            <state>
+              <caret column="26" selection-start-column="26" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Pred.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Pred.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#364#365#0" expanded="true" />
+                <element signature="e#399#400#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -114,10 +87,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/io/CaptureOutStreamTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/io/CaptureErrStreamTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/io/StringSearch.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Searcher.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/Match.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/IndexMatch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/SubstringMatch.java" />
@@ -141,7 +110,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/latex/LatexTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/AstUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProjectBuilder.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/IndexSearcher.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/Searcher.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/Match.java" />
@@ -160,11 +128,16 @@
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptionalBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/StringSearch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptional.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProject.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/PredUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/ast/JavaProjectTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/ChangedFile.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/resolved/ResolvedMethod.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/PredUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Pred.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java" />
       </list>
     </option>
   </component>
@@ -237,6 +210,16 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="eunomia" type="462c0819:PsiDirectoryNode" />
               <item name="ast" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eunomia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eunomia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="eunomia" type="462c0819:PsiDirectoryNode" />
+              <item name="ast" type="462c0819:PsiDirectoryNode" />
+              <item name="resolved" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="eunomia" type="b2602c69:ProjectViewProjectNode" />
@@ -630,7 +613,7 @@
       <workItem from="1529357796149" duration="26000" />
       <workItem from="1529421942999" duration="1686000" />
       <workItem from="1529441083488" duration="5511000" />
-      <workItem from="1529462927216" duration="4182000" />
+      <workItem from="1529462927216" duration="5374000" />
     </task>
     <task id="LOCAL-00001" summary="Added ast tools.">
       <created>1525386358496</created>
@@ -695,13 +678,17 @@
       <option name="project" value="LOCAL" />
       <updated>1529462015252</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added checkers framework.">
+      <created>1529467133327</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1529467133327</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="StringSearchTest_testSearch - 2018.06.17 at 11h 14m 25s.xml">
-      <configuration name="StringSearchTest.testSearch" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="StringSearchTest_testSearch - 2018.06.17 at 11h 14m 32s.xml">
       <configuration name="StringSearchTest.testSearch" configurationId="JUnit" />
     </history-entry>
@@ -729,9 +716,12 @@
     <history-entry file="UtilTest - 2018.06.17 at 11h 44m 10s.xml">
       <configuration name="UtilTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="JavaProjectTest - 2018.06.19 at 22h 57m 57s.xml">
+      <configuration name="JavaProjectTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64682000" />
+    <option name="totallyTimeSpent" value="65874000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="32" y="-11" width="1889" height="1092" extended-state="6" />
@@ -785,7 +775,8 @@
     <MESSAGE value="More tests." />
     <MESSAGE value="Fixes." />
     <MESSAGE value="Update version for next release." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update version for next release." />
+    <MESSAGE value="Added checkers framework." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added checkers framework." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -793,41 +784,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../dt-impact-winglam/dt-impact-tracer/src/main/java/edu/washington/cs/dt/impact/util/Instrumenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/nio/file/NotDirectoryException.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../dt-impact-winglam/dt-impact-tracer/src/main/java/edu/washington/cs/dt/impact/runner/Runner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="108" column="17" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/functional/TriConsumerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/DateUtilTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/io/CaptureOutErrStream.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/io/CaptureErrStreamTest.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -967,13 +923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="199" selection-start-line="199" selection-end-line="199" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/IndexSearcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1098,37 +1047,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptionalBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="15" column="70" lean-forward="true" selection-start-line="15" selection-start-column="70" selection-end-line="15" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptional.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="49" column="81" selection-start-line="49" selection-start-column="81" selection-end-line="49" selection-end-column="81" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/SubstringSearcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="276" column="33" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1157,26 +1079,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/PredUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-108">
@@ -1193,6 +1095,108 @@
           <caret line="17" column="107" selection-start-line="17" selection-start-column="107" selection-end-line="17" selection-end-column="107" />
           <folding>
             <element signature="e#508#537#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="78" column="45" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/util/Map.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptionalBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/ChangedFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+          <folding>
+            <element signature="e#3464#3465#0" expanded="true" />
+            <element signature="e#3495#3496#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="84" column="63" selection-start-line="84" selection-start-column="63" selection-end-line="84" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13365#13366#0" expanded="true" />
+            <element signature="e#13403#13404#0" expanded="true" />
+            <element signature="e#13430#13431#0" expanded="true" />
+            <element signature="e#13456#13457#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/resolved/ResolvedClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/NOptional.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/resolved/ResolvedMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Pred.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#364#365#0" expanded="true" />
+            <element signature="e#399#400#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

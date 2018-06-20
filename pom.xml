@@ -91,6 +91,7 @@
                         <arg>-AprintErrorStack</arg>
                         <!-- location of the annotated JDK, which comes from a Maven dependency -->
                         <arg>-Xbootclasspath/p:${annotatedJdk}</arg>
+                        <arg>-Xlint:unchecked</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>

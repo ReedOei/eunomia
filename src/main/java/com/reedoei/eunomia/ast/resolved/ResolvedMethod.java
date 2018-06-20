@@ -5,6 +5,8 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 import com.reedoei.eunomia.util.NOptionalBuilder;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +33,21 @@ public class ResolvedMethod {
                     .add("b", b.base.getRange())
                     .build()
                     .fromOptional(0, m -> {
-                        if (m.get("a").begin.line < m.get("b").begin.line ||
-                                m.get("a").begin.column < m.get("b").begin.column) {
-                            return -1;
-                        } else if (m.get("a").begin.line == m.get("b").begin.line &&
-                                   m.get("a").begin.column == m.get("b").begin.column){
-                            return 0;
+                        final @Nullable Range aRange = m.get("a");
+                        final @Nullable Range bRange = m.get("b");
+
+                        if (aRange != null && bRange != null) {
+                            if (aRange.begin.line < bRange.begin.line ||
+                                    (aRange.begin.line == bRange.begin.line && aRange.begin.column < bRange.begin.column)) {
+                                return -1;
+                            } else if (aRange.begin.line == bRange.begin.line &&
+                                    aRange.begin.column == bRange.begin.column){
+                                return 0;
+                            } else {
+                                return 1;
+                            }
                         } else {
-                            return 1;
+                            return 0;
                         }
                     }));
     }

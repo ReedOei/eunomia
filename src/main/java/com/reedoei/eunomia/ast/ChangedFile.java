@@ -2,7 +2,9 @@ package com.reedoei.eunomia.ast;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,6 +14,17 @@ public class ChangedFile {
     private final CompilationUnit newFile;
     private final String filename;
     private final JavaProject project;
+
+    public static Optional<ChangedFile> create(final @Nullable CompilationUnit oldContent,
+                                               final @Nullable CompilationUnit newContent,
+                                               final String path,
+                                               final JavaProject project) {
+        if (oldContent != null && newContent != null) {
+            return Optional.of(new ChangedFile(oldContent, newContent, path, project));
+        } else {
+            return Optional.empty();
+        }
+    }
 
     public ChangedFile(final CompilationUnit oldContent,
                        final CompilationUnit newContent,

@@ -8,6 +8,7 @@ import com.reedoei.eunomia.ast.resolved.ResolvedClass;
 import com.reedoei.eunomia.util.NOptionalBuilder;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -80,7 +81,9 @@ public class JavaProject {
                         .add("old", getFileContent(ref, path))
                         .add("new", getFileContent(newCommitId, path))
                         .build().ifPresent(m ->
-                        fileContent.add(new ChangedFile(m.get("old"), m.get("new"), path, this)));
+                            ChangedFile.create(m.get("old"), m.get("new"), path, this)
+                                    .ifPresent(fileContent::add)
+                        );
             }
         }
 
