@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+// TODO: Redesign so it only works with integers probably.
 public class Frequency<K, V> implements Iterable<K> {
     public static <K, V> Frequency<K, V> initWith(final Iterable<K> col, final Supplier<V> defaultValue) {
         final Map<K, V> m = new HashMap<>();
@@ -100,6 +101,15 @@ public class Frequency<K, V> implements Iterable<K> {
     public void forEach(final BiConsumer<K, V> f) {
         frequency.forEach(f);
     }
+
+    // TODO: Implement.
+//    public K max() {
+//
+//    }
+//
+//    public K min() {
+//
+//    }
 
     public Map<K, V> getMap() {
         return frequency;

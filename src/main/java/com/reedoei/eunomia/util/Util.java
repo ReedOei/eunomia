@@ -43,10 +43,13 @@ public class Util {
         }
     }
 
+    public static <T, U, V> BiFunction<List<T>, List<U>, List<V>> zipWith(final BiFunction<T, U, V> f) {
+        return (ts, us) -> zipWith(f, ts, us);
+    }
 
-    public static <T, U, V> List<V> zipWith( final List<T> ts,
-                                             final List<U> us,
-                                             final BiFunction<T, U, V> f) {
+    public static <T, U, V> List<V> zipWith(final BiFunction<T, U, V> f,
+                                            final List<T> ts,
+                                            final List<U> us) {
         final List<V> result = new ArrayList<>();
 
         for (int i = 0; i < ts.size(); i++) {
@@ -95,19 +98,6 @@ public class Util {
         } else {
             return b;
         }
-    }
-
-    public static <T> List<T> takeWhileInc(final Predicate<T> f, final List<T> ts) {
-        final List<T> result = new ArrayList<>();
-
-        for (final T t : ts) {
-            result.add(t);
-            if (!f.test(t)) {
-                break;
-            }
-        }
-
-        return result;
     }
 
     public static <T> List<T> beforeInc(final List<T> ts, final @NonNull T t) {
@@ -212,7 +202,7 @@ public class Util {
                 .count());
     }
 
-    public static BiFunction<String, Integer, Integer> incrementBy(final int amount) {
+    public static <T> BiFunction<T, Integer, Integer> incrementBy(final int amount) {
         return (ignored, count) -> count == null ? amount : count + amount;
     }
 
@@ -332,6 +322,7 @@ public class Util {
         };
     }
 
+    @SafeVarargs
     public static <T> Set<@NonNull T> common(final Set<@NonNull T>... sets) {
         if (sets.length == 0) {
             return new HashSet<>();

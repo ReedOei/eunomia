@@ -29,6 +29,11 @@ public class StringSearch {
     }
 
     @NonNull
+    public Optional<LineMatch> searchFirst(final Searcher searcher) {
+        return search(searcher).findFirst();
+    }
+
+    @NonNull
     public Stream<LineMatch> search(final Searcher searcher) {
         // Create an iterator so that we can create a stream so that it will be lazily evaluated.
         final Iterator<LineMatch> iterator = new Iterator<LineMatch>() {

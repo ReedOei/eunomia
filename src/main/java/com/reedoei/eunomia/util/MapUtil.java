@@ -7,7 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class MapUtil {
-    public static <K, V> Function<K, Stream<@NonNull V>> getSafe(final Map<K, V> m) {
+    public static <K, V> Function<@NonNull K, Stream<@NonNull V>> getSafe(final Map<K, V> m) {
         return k -> {
             final V v = m.get(k);
 

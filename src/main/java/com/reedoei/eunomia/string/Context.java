@@ -72,6 +72,10 @@ public class Context {
         return lines.stream().map(LineMatch::get);
     }
 
+    public List<LineMatch> getLines() {
+        return lines;
+    }
+
     public <T> T map(final Function<String, T> f) {
         return f.apply(toString());
     }
