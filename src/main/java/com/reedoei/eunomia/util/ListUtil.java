@@ -1,6 +1,7 @@
 package com.reedoei.eunomia.util;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,24 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ListUtil {
+    public static List<Integer> range(final int end) {
+        return range(0, end);
+    }
+
+    public static List<Integer> range(final int start, final int end) {
+        return range(start, end, 1);
+    }
+
+    public static List<Integer> range(final int start, final int end, final int step) {
+        final List<Integer> result = new ArrayList<>();
+
+        for (int i = start; i < end; i += step) {
+            result.add(i);
+        }
+
+        return result;
+    }
+
     @NonNull
     public static <T> List<T> concat(final List<T> a, final List<T> b) {
         if (a == null || b == null) {
@@ -96,9 +115,9 @@ public class ListUtil {
     public static <T> List<T> dropWhile(final Predicate<T> pred, final List<T> ts) {
         final List<T> result = new ArrayList<>(ts);
 
-        while (!ts.isEmpty()) {
-            if (pred.test(ts.get(0))) {
-                ts.remove(0);
+        while (!result.isEmpty()) {
+            if (pred.test(result.get(0))) {
+                result.remove(0);
             } else {
                 break;
             }
@@ -116,7 +135,7 @@ public class ListUtil {
             return new ArrayList<>();
         }
 
-        return new ArrayList<>(ts.subList(Math.max(n, ts.size()), ts.size()));
+        return new ArrayList<>(ts.subList(Math.min(n, ts.size()), ts.size()));
     }
 
     public static List<Double> fromArray(final double[] doubles) {
@@ -132,8 +151,8 @@ public class ListUtil {
     }
 
     @SafeVarargs
-    public static <T> List<T> fromArray(final T... ts) {
-        final List<T> result = new ArrayList<>();
+    public static <T> List<@NonNull T> fromArray(final T... ts) {
+        final List<@NonNull T> result = new ArrayList<>();
 
         for (final T t : ts) {
             if (t != null) {
@@ -145,7 +164,7 @@ public class ListUtil {
     }
 
     @SafeVarargs
-    public static <T> List<T> fromArrayUnsafe(final T... ts) {
+    public static <T> List<@Nullable T> fromArrayUnsafe(final T... ts) {
         return new ArrayList<>(Arrays.asList(ts));
     }
 }

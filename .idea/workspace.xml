@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b6c9c52-3c20-447d-af0c-e875c9671498" name="Default" comment="Minor improvements, fix potential nullness bugs.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Cons.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Func.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/math/Averager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/math/MathUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/OptUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StreamUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StringUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/string/matching/LineMatchTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/PairStreamTest.java" afterDir="false" />
+    <list default="true" id="7b6c9c52-3c20-447d-af0c-e875c9671498" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/ListUtilTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/JavaProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/resolved/ResolvedMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/resolved/ResolvedMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/data/Frequency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/data/Frequency.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Pred.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Pred.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/Context.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/LineMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/LineMatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/StringSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/searching/StringSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -47,16 +29,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ListUtil.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ListUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="197">
+              <caret line="75" column="49" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
               <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#358#359#0" expanded="true" />
+                <element signature="e#394#395#0" expanded="true" />
                 <element signature="e#1379#1380#0" expanded="true" />
                 <element signature="e#1419#1420#0" expanded="true" />
                 <element signature="e#2574#2575#0" expanded="true" />
                 <element signature="e#2614#2615#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListUtilTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/ListUtilTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="80" column="57" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -81,8 +78,8 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
-        <option value="JUnit4 Test Class" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -97,7 +94,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/string/matching/RegexMatch.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/string/searching/SearcherTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/string/StringSearchTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/TestUtil.java" />
@@ -148,6 +144,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/data/Frequency.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/ListUtilTest.java" />
       </list>
     </option>
   </component>
@@ -353,8 +350,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="com.reedoei.eunomia.string.matching" />
       <recent name="com.reedoei.eunomia.util" />
+      <recent name="com.reedoei.eunomia.string.matching" />
       <recent name="com.reedoei.eunomia.string.searching" />
       <recent name="com.reedoei.eunomia.string" />
       <recent name="com.reedoei.eunomia.io" />
@@ -385,106 +382,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.LineMatchTest">
+  <component name="RunManager" selected="JUnit.ListUtilTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
-    <configuration name="JavaProjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="eunomia" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.reedoei.eunomia.ast.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.ast" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.ast.JavaProjectTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="LineMatchTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="eunomia" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.reedoei.eunomia.string.matching.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.string.matching" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.string.matching.LineMatchTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="LineMatchTest.testInsertAfter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="eunomia" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.reedoei.eunomia.string.matching.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.string.matching" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.string.matching.LineMatchTest" />
-      <option name="METHOD_NAME" value="testInsertAfter" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="LineMatchTest.testNextLine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="eunomia" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.reedoei.eunomia.string.matching.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.string.matching" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.string.matching.LineMatchTest" />
-      <option name="METHOD_NAME" value="testNextLine" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="PairStreamTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ListUtilTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="eunomia" />
       <extension name="coverage">
         <pattern>
@@ -495,9 +400,101 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.PairStreamTest" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.ListUtilTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ListUtilTest.dropWhile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eunomia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.reedoei.eunomia.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.ListUtilTest" />
+      <option name="METHOD_NAME" value="dropWhile" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ListUtilTest.dropWhileCurried" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eunomia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.reedoei.eunomia.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.ListUtilTest" />
+      <option name="METHOD_NAME" value="dropWhileCurried" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ListUtilTest.takeWhileCurried" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eunomia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.reedoei.eunomia.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.ListUtilTest" />
+      <option name="METHOD_NAME" value="takeWhileCurried" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ListUtilTest.takeWhileIncCurried" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eunomia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.reedoei.eunomia.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.ListUtilTest" />
+      <option name="METHOD_NAME" value="takeWhileIncCurried" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -559,19 +556,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.JavaProjectTest" />
-      <item itemvalue="JUnit.PairStreamTest" />
-      <item itemvalue="JUnit.LineMatchTest.testNextLine" />
-      <item itemvalue="JUnit.LineMatchTest.testInsertAfter" />
-      <item itemvalue="JUnit.LineMatchTest" />
+      <item itemvalue="JUnit.ListUtilTest" />
+      <item itemvalue="JUnit.ListUtilTest.takeWhileIncCurried" />
+      <item itemvalue="JUnit.ListUtilTest.takeWhileCurried" />
+      <item itemvalue="JUnit.ListUtilTest.dropWhileCurried" />
+      <item itemvalue="JUnit.ListUtilTest.dropWhile" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LineMatchTest" />
-        <item itemvalue="JUnit.LineMatchTest.testNextLine" />
-        <item itemvalue="JUnit.LineMatchTest.testInsertAfter" />
-        <item itemvalue="JUnit.PairStreamTest" />
-        <item itemvalue="JUnit.JavaProjectTest" />
+        <item itemvalue="JUnit.ListUtilTest" />
+        <item itemvalue="JUnit.ListUtilTest.dropWhileCurried" />
+        <item itemvalue="JUnit.ListUtilTest.dropWhile" />
+        <item itemvalue="JUnit.ListUtilTest.takeWhileCurried" />
+        <item itemvalue="JUnit.ListUtilTest.takeWhileIncCurried" />
       </list>
     </recent_temporary>
   </component>
@@ -606,7 +603,7 @@
       <workItem from="1529357796149" duration="26000" />
       <workItem from="1529421942999" duration="1686000" />
       <workItem from="1529441083488" duration="5511000" />
-      <workItem from="1529462927216" duration="23649000" />
+      <workItem from="1529462927216" duration="24518000" />
     </task>
     <task id="LOCAL-00001" summary="Added ast tools.">
       <created>1525386358496</created>
@@ -685,43 +682,50 @@
       <option name="project" value="LOCAL" />
       <updated>1529468323225</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added many new methods, minor fixes and improvements.">
+      <created>1529550995936</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1529550995936</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="JavaProjectTest - 2018.06.19 at 22h 57m 57s.xml">
-      <configuration name="JavaProjectTest" configurationId="JUnit" />
+    <history-entry file="ListUtilTest_fromArrayUnsafe - 2018.06.20 at 22h 25m 55s.xml">
+      <configuration name="ListUtilTest.fromArrayUnsafe" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PairStreamTest - 2018.06.20 at 10h 19m 02s.xml">
-      <configuration name="PairStreamTest" configurationId="JUnit" />
+    <history-entry file="ListUtilTest_fromArrayUnsafe - 2018.06.20 at 22h 26m 15s.xml">
+      <configuration name="ListUtilTest.fromArrayUnsafe" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PairStreamTest - 2018.06.20 at 10h 19m 42s.xml">
-      <configuration name="PairStreamTest" configurationId="JUnit" />
+    <history-entry file="ListUtilTest_fromArrayUnsafe - 2018.06.20 at 22h 26m 17s.xml">
+      <configuration name="ListUtilTest.fromArrayUnsafe" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PairStreamTest - 2018.06.20 at 10h 20m 01s.xml">
-      <configuration name="PairStreamTest" configurationId="JUnit" />
+    <history-entry file="ListUtilTest_fromArray - 2018.06.20 at 22h 26m 21s.xml">
+      <configuration name="ListUtilTest.fromArray" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PairStreamTest - 2018.06.20 at 10h 20m 21s.xml">
-      <configuration name="PairStreamTest" configurationId="JUnit" />
+    <history-entry file="ListUtilTest_fromArray - 2018.06.20 at 22h 26m 32s.xml">
+      <configuration name="ListUtilTest.fromArray" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LineMatchTest_testNextLine - 2018.06.20 at 11h 33m 10s.xml">
-      <configuration name="LineMatchTest.testNextLine" configurationId="JUnit" />
+    <history-entry file="ListUtilTest_fromArray - 2018.06.20 at 22h 26m 36s.xml">
+      <configuration name="ListUtilTest.fromArray" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LineMatchTest_testNextLine - 2018.06.20 at 11h 34m 07s.xml">
-      <configuration name="LineMatchTest.testNextLine" configurationId="JUnit" />
+    <history-entry file="ListUtilTest_fromArray - 2018.06.20 at 22h 26m 49s.xml">
+      <configuration name="ListUtilTest.fromArray" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LineMatchTest_testInsertAfter - 2018.06.20 at 11h 51m 38s.xml">
-      <configuration name="LineMatchTest.testInsertAfter" configurationId="JUnit" />
+    <history-entry file="ListUtilTest_takeWhileIncCurried - 2018.06.20 at 22h 28m 19s.xml">
+      <configuration name="ListUtilTest.takeWhileIncCurried" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LineMatchTest_testNextLine - 2018.06.20 at 11h 51m 42s.xml">
-      <configuration name="LineMatchTest.testNextLine" configurationId="JUnit" />
+    <history-entry file="ListUtilTest_takeWhileCurried - 2018.06.20 at 22h 28m 56s.xml">
+      <configuration name="ListUtilTest.takeWhileCurried" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LineMatchTest - 2018.06.20 at 11h 51m 47s.xml">
-      <configuration name="LineMatchTest" configurationId="JUnit" />
+    <history-entry file="ListUtilTest - 2018.06.20 at 22h 29m 00s.xml">
+      <configuration name="ListUtilTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84149000" />
+    <option name="totallyTimeSpent" value="85018000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="32" y="-4" width="1889" height="1085" extended-state="6" />
@@ -745,10 +749,10 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Java Enterprise" order="8" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33811477" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33811477" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="5" side_tool="true" />
@@ -777,7 +781,8 @@
     <MESSAGE value="Update version for next release." />
     <MESSAGE value="Added checkers framework." />
     <MESSAGE value="Minor improvements, fix potential nullness bugs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor improvements, fix potential nullness bugs." />
+    <MESSAGE value="Added many new methods, minor fixes and improvements." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added many new methods, minor fixes and improvements." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -785,16 +790,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/latex/LatexTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="77" column="38" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/ast/AstUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -1303,13 +1298,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="197">
+          <caret line="75" column="49" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#358#359#0" expanded="true" />
+            <element signature="e#394#395#0" expanded="true" />
             <element signature="e#1379#1380#0" expanded="true" />
             <element signature="e#1419#1420#0" expanded="true" />
             <element signature="e#2574#2575#0" expanded="true" />
             <element signature="e#2614#2615#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/ListUtilTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="80" column="57" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
