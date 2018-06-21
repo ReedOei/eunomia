@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b6c9c52-3c20-447d-af0c-e875c9671498" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/ListUtilTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java" afterDir="false" />
-    </list>
+    <list default="true" id="7b6c9c52-3c20-447d-af0c-e875c9671498" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,8 +28,8 @@
       <file leaf-file-name="ListUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="75" column="49" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
+            <state relative-caret-position="-111">
+              <caret line="137" column="49" selection-start-line="137" selection-start-column="49" selection-end-line="137" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#358#359#0" expanded="true" />
@@ -47,14 +43,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ListUtilTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ListUtilTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/ListUtilTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="80" column="57" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="57" />
+            <state relative-caret-position="89">
+              <caret line="85" selection-start-line="85" selection-end-line="85" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3169#3170#0" expanded="true" />
+                <element signature="e#3195#3196#0" expanded="true" />
+                <element signature="e#3293#3294#0" expanded="true" />
+                <element signature="e#3369#3370#0" expanded="true" />
+                <element signature="e#3406#3407#0" expanded="true" />
+                <element signature="e#3482#3483#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="580">
+              <caret line="94" column="35" selection-start-line="94" selection-start-column="35" selection-end-line="94" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -143,8 +154,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Func.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/data/Frequency.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/ListUtilTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java" />
       </list>
     </option>
   </component>
@@ -603,7 +614,7 @@
       <workItem from="1529357796149" duration="26000" />
       <workItem from="1529421942999" duration="1686000" />
       <workItem from="1529441083488" duration="5511000" />
-      <workItem from="1529462927216" duration="24518000" />
+      <workItem from="1529462927216" duration="24776000" />
     </task>
     <task id="LOCAL-00001" summary="Added ast tools.">
       <created>1525386358496</created>
@@ -689,43 +700,50 @@
       <option name="project" value="LOCAL" />
       <updated>1529550995936</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added more tests and fixed bugs.">
+      <created>1529552005441</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1529552005441</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ListUtilTest_fromArrayUnsafe - 2018.06.20 at 22h 25m 55s.xml">
-      <configuration name="ListUtilTest.fromArrayUnsafe" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ListUtilTest_fromArrayUnsafe - 2018.06.20 at 22h 26m 15s.xml">
-      <configuration name="ListUtilTest.fromArrayUnsafe" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ListUtilTest_fromArrayUnsafe - 2018.06.20 at 22h 26m 17s.xml">
-      <configuration name="ListUtilTest.fromArrayUnsafe" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ListUtilTest_fromArray - 2018.06.20 at 22h 26m 21s.xml">
-      <configuration name="ListUtilTest.fromArray" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ListUtilTest_fromArray - 2018.06.20 at 22h 26m 32s.xml">
-      <configuration name="ListUtilTest.fromArray" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ListUtilTest_fromArray - 2018.06.20 at 22h 26m 36s.xml">
-      <configuration name="ListUtilTest.fromArray" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ListUtilTest_fromArray - 2018.06.20 at 22h 26m 49s.xml">
-      <configuration name="ListUtilTest.fromArray" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ListUtilTest_takeWhileIncCurried - 2018.06.20 at 22h 28m 19s.xml">
-      <configuration name="ListUtilTest.takeWhileIncCurried" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ListUtilTest_takeWhileCurried - 2018.06.20 at 22h 28m 56s.xml">
       <configuration name="ListUtilTest.takeWhileCurried" configurationId="JUnit" />
     </history-entry>
     <history-entry file="ListUtilTest - 2018.06.20 at 22h 29m 00s.xml">
       <configuration name="ListUtilTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ListUtilTest_dropWhileCurried - 2018.06.20 at 22h 30m 41s.xml">
+      <configuration name="ListUtilTest.dropWhileCurried" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ListUtilTest_dropWhile - 2018.06.20 at 22h 30m 44s.xml">
+      <configuration name="ListUtilTest.dropWhile" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ListUtilTest_dropWhile - 2018.06.20 at 22h 30m 56s.xml">
+      <configuration name="ListUtilTest.dropWhile" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ListUtilTest_dropWhile - 2018.06.20 at 22h 31m 12s.xml">
+      <configuration name="ListUtilTest.dropWhile" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ListUtilTest_dropWhile - 2018.06.20 at 22h 31m 14s.xml">
+      <configuration name="ListUtilTest.dropWhile" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ListUtilTest_dropWhileCurried - 2018.06.20 at 22h 31m 16s.xml">
+      <configuration name="ListUtilTest.dropWhileCurried" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ListUtilTest - 2018.06.20 at 22h 32m 37s.xml">
+      <configuration name="ListUtilTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ListUtilTest - 2018.06.20 at 22h 33m 11s.xml">
+      <configuration name="ListUtilTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85018000" />
+    <option name="totallyTimeSpent" value="85276000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="32" y="-4" width="1889" height="1085" extended-state="6" />
@@ -749,10 +767,10 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Java Enterprise" order="8" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33811477" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33811477" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="5" side_tool="true" />
@@ -782,7 +800,8 @@
     <MESSAGE value="Added checkers framework." />
     <MESSAGE value="Minor improvements, fix potential nullness bugs." />
     <MESSAGE value="Added many new methods, minor fixes and improvements." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added many new methods, minor fixes and improvements." />
+    <MESSAGE value="Added more tests and fixed bugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added more tests and fixed bugs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1044,13 +1063,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1692">
-          <caret line="94" column="35" selection-start-line="94" selection-start-column="35" selection-end-line="94" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Cons.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1296,10 +1308,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/ListUtilTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3169#3170#0" expanded="true" />
+            <element signature="e#3195#3196#0" expanded="true" />
+            <element signature="e#3293#3294#0" expanded="true" />
+            <element signature="e#3369#3370#0" expanded="true" />
+            <element signature="e#3406#3407#0" expanded="true" />
+            <element signature="e#3482#3483#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="75" column="49" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
+        <state relative-caret-position="-111">
+          <caret line="137" column="49" selection-start-line="137" selection-start-column="49" selection-end-line="137" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#358#359#0" expanded="true" />
@@ -1312,13 +1340,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/ListUtilTest.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="80" column="57" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="580">
+          <caret line="94" column="35" selection-start-line="94" selection-start-column="35" selection-end-line="94" selection-end-column="35" />
         </state>
       </provider>
     </entry>
