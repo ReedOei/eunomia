@@ -1,0 +1,3 @@
+[submodule "src/test/resources/eunomia-test-project"]
+	path = src/test/resources/eunomia-test-project
+	url = https://github.com/ReedOei/eunomia-test-project
