@@ -10,10 +10,16 @@ import java.util.function.BiPredicate;
 public class IndexSearcher extends Searcher {
     private final BiPredicate<String, String> pred;
     private final String searchString;
+    private final String desc;
 
     public IndexSearcher(final String searchString, final BiPredicate<String, String> pred) {
+        this(searchString, pred, "");
+    }
+
+    public IndexSearcher(final String searchString, final BiPredicate<String, String> pred, final String desc) {
         this.searchString = searchString;
         this.pred = pred;
+        this.desc = desc;
     }
 
     @NonNull
@@ -30,5 +36,10 @@ public class IndexSearcher extends Searcher {
         }
 
         return Optional.empty();
+    }
+
+    @Override
+    public @NonNull String description() {
+        return desc.isEmpty() ? searchString : desc;
     }
 }

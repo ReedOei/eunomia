@@ -5,13 +5,12 @@ import java.util.Collection;
 import java.util.List;
 
 public class Averager {
-    private final List<Double> values = new ArrayList<>();
+    private final Collection<Double> values = new ArrayList<>();
 
     public Averager() {
-
     }
 
-    public Averager(final List<Double> values) {
+    public Averager(final Collection<Double> values) {
         this.values.addAll(values);
     }
 

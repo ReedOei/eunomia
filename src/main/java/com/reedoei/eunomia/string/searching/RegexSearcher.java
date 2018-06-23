@@ -26,4 +26,9 @@ public class RegexSearcher extends Searcher {
             return Optional.empty();
         }
     }
+
+    @Override
+    public @NonNull String description() {
+        return pattern.toString();
+    }
 }

@@ -22,4 +22,9 @@ public class SubstringSearcher extends Searcher {
             return Optional.empty();
         }
     }
+
+    @Override
+    public @NonNull String description() {
+        return searchString;
+    }
 }

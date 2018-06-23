@@ -29,4 +29,7 @@ public abstract class Searcher {
 
     @NonNull
     public abstract Optional<Match> test(String s);
+
+    @NonNull
+    public abstract String description();
 }

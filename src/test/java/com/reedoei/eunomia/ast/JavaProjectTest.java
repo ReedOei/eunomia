@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +22,7 @@ public class JavaProjectTest {
 
     @Before
     public void setUp() throws Exception {
-        project = new JavaProjectBuilder("src/test/resources/eunomia-test-project/.git", "HEAD").build();
+        project = new JavaProjectBuilder(Paths.get("src/test/resources/eunomia-test-project/.git"), "HEAD").build();
     }
 
     @After

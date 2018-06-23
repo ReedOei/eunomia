@@ -4,9 +4,12 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Streams;
 import com.reedoei.eunomia.string.matching.LineMatch;
 import com.reedoei.eunomia.string.matching.Match;
+import com.reedoei.eunomia.util.FileUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +29,14 @@ public class StringSearch {
         final String[] split = base.split(System.lineSeparator());
         Preconditions.checkNotNull(split);
         this.lines = Arrays.asList(split);
+    }
+
+    public StringSearch(final Path repoPath) throws IOException {
+        this(FileUtil.readFile(repoPath));
+    }
+
+    public LineMatch searchMustMatch(final Searcher searcher) {
+        return searchFirst(searcher).orElseThrow(() -> new IllegalArgumentException("No match found for: " + searcher.description()));
     }
 
     @NonNull

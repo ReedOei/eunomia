@@ -8,6 +8,9 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSol
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JarTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
+import com.reedoei.eunomia.string.matching.LineMatch;
+import com.reedoei.eunomia.string.searching.Searcher;
+import com.reedoei.eunomia.string.searching.StringSearch;
 import com.reedoei.eunomia.util.FileUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.cli.MavenCli;
@@ -19,6 +22,7 @@ import org.eclipse.jgit.internal.storage.file.FileRepository;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -31,18 +35,32 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 public class JavaProjectBuilder {
-    private final String repoPath;
+    private final Path repoPath;
     private final Path path;
     private final String ref;
 
     private final Git git;
 
-    public JavaProjectBuilder(final String repoPath, final String ref) throws IOException {
+    public JavaProjectBuilder(final Path repoPath, final String ref) throws IOException {
         this.repoPath = repoPath;
-        this.path = Paths.get(repoPath).getParent();
+        this.path = repoPath.getParent();
         this.ref = ref;
 
-        this.git = new Git(new FileRepository(repoPath));
+        this.git = new Git(new FileRepository(getGitRepoPath(repoPath)));
+    }
+
+    private static String getGitRepoPath(final Path repoPath) throws IOException {
+        // If it's a directory, we're probably good.
+        // Otherwise, it's probably a submodule so we need to resolve the actual directory.
+        if (Files.isDirectory(repoPath)) {
+            return repoPath.toAbsolutePath().toString();
+        } else {
+            return repoPath.getParent().resolve(
+                    new StringSearch(repoPath)
+                            .searchMustMatch(Searcher.exactly("gitdir: "))
+                            .nonmatching())
+                    .toAbsolutePath().toString();
+        }
     }
 
     public JavaProject build() throws GitAPIException {

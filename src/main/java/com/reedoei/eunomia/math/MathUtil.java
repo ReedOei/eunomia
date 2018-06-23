@@ -8,7 +8,7 @@ public class MathUtil {
         return values.stream().mapToDouble(Double::doubleValue).sum();
     }
 
-    public static double product(final List<Double> values) {
+    public static double product(final Collection<Double> values) {
         return values.stream().mapToDouble(Double::doubleValue)
                 .reduce(1.0, (a, b) -> a * b);
     }

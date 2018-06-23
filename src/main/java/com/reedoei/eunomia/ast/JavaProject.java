@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class JavaProject {
-    private final String repoPath;
+    private final Path repoPath;
     private final Path path;
     private final String ref;
     private final Git git;
@@ -45,7 +45,7 @@ public class JavaProject {
     private final Set<ResolvedClass> resolvedClasses = new HashSet<>();
     private final Set<CompilationUnit> files;
 
-    public JavaProject(final String repoPath,
+    public JavaProject(final Path repoPath,
                        final Path path,
                        final String ref,
                        final Set<CompilationUnit> files,
