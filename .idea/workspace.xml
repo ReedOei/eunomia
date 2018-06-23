@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b6c9c52-3c20-447d-af0c-e875c9671498" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/PairStream.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/functional/ConsTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -17,22 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/Util.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
-              <caret line="102" selection-start-line="102" selection-end-line="102" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MapUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="234">
+              <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,10 +27,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Cons.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Cons.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConsTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/functional/ConsTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="810">
+              <caret line="46" column="58" selection-start-line="46" selection-start-column="58" selection-end-line="46" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
+            <state relative-caret-position="1746">
               <caret line="97" column="30" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
             </state>
           </provider>
@@ -52,8 +60,8 @@
       <file leaf-file-name="StandardMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StandardMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+            <state relative-caret-position="522">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -150,7 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/string/searching/SearcherTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/string/StringSearchTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/TestUtil.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/util/UtilTest.java" />
@@ -201,6 +208,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StandardMain.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/functional/ConsTest.java" />
       </list>
     </option>
   </component>
@@ -274,6 +282,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="eunomia" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eunomia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eunomia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="eunomia" type="462c0819:PsiDirectoryNode" />
+              <item name="functional" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="eunomia" type="b2602c69:ProjectViewProjectNode" />
@@ -406,11 +423,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.reedoei.eunomia.functional" />
       <recent name="com.reedoei.eunomia.util" />
       <recent name="com.reedoei.eunomia.string.matching" />
       <recent name="com.reedoei.eunomia.string.searching" />
       <recent name="com.reedoei.eunomia.string" />
-      <recent name="com.reedoei.eunomia.io" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.reedoei.eunomia.string" />
@@ -438,12 +455,35 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ListUtilTest">
+  <component name="RunManager" selected="JUnit.ConsTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="ConsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eunomia" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.reedoei.eunomia.functional.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.functional" />
+      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.functional.ConsTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
     </configuration>
     <configuration name="ListUtilTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="eunomia" />
@@ -537,29 +577,6 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="ListUtilTest.takeWhileIncCurried" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="eunomia" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.reedoei.eunomia.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.reedoei.eunomia.util" />
-      <option name="MAIN_CLASS_NAME" value="com.reedoei.eunomia.util.ListUtilTest" />
-      <option name="METHOD_NAME" value="takeWhileIncCurried" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -613,18 +630,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.ListUtilTest" />
-      <item itemvalue="JUnit.ListUtilTest.takeWhileIncCurried" />
       <item itemvalue="JUnit.ListUtilTest.takeWhileCurried" />
       <item itemvalue="JUnit.ListUtilTest.dropWhileCurried" />
       <item itemvalue="JUnit.ListUtilTest.dropWhile" />
+      <item itemvalue="JUnit.ConsTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ConsTest" />
         <item itemvalue="JUnit.ListUtilTest" />
         <item itemvalue="JUnit.ListUtilTest.dropWhileCurried" />
         <item itemvalue="JUnit.ListUtilTest.dropWhile" />
         <item itemvalue="JUnit.ListUtilTest.takeWhileCurried" />
-        <item itemvalue="JUnit.ListUtilTest.takeWhileIncCurried" />
       </list>
     </recent_temporary>
   </component>
@@ -661,7 +678,7 @@
       <workItem from="1529441083488" duration="5511000" />
       <workItem from="1529462927216" duration="27598000" />
       <workItem from="1529592801097" duration="5127000" />
-      <workItem from="1529681388604" duration="2701000" />
+      <workItem from="1529681388604" duration="2990000" />
     </task>
     <task id="LOCAL-00001" summary="Added ast tools.">
       <created>1525386358496</created>
@@ -797,7 +814,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95926000" />
+    <option name="totallyTimeSpent" value="96215000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="32" y="-4" width="1889" height="1085" extended-state="6" />
@@ -960,30 +977,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StandardMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Func.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1242">
           <caret line="71" selection-start-line="71" selection-end-line="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2322">
-          <caret line="137" column="49" selection-start-line="137" selection-start-column="49" selection-end-line="137" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1026,19 +1023,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="1746">
+          <caret line="97" column="30" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/StandardMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/ListUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="97" column="30" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
+        <state relative-caret-position="2322">
+          <caret line="137" column="49" selection-start-line="137" selection-start-column="49" selection-end-line="137" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/util/MapUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/reedoei/eunomia/functional/Cons.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/reedoei/eunomia/functional/ConsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="46" column="58" selection-start-line="46" selection-start-column="58" selection-end-line="46" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

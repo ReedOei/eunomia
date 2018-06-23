@@ -11,6 +11,6 @@ public class ResolvedMethodCall {
     public ResolvedMethodCall(final MethodCallExpr base) {
         this.base = base;
 
-        invoked = base.resolveInvokedMethod();
+        invoked = base.resolve();
     }
 }
