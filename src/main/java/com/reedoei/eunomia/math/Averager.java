@@ -1,10 +1,7 @@
 package com.reedoei.eunomia.math;
 
-import com.sun.prism.null3d.NULL3DPipeline;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class Averager<N extends Number> {
     private final Collection<N> values = new ArrayList<>();
