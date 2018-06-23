@@ -29,15 +29,18 @@ import java.util.stream.Stream;
 public class PairStream<T, U> {
     private Stream<Pair<T, U>> stream;
 
+    // TODO: Handle the case where one/both are empty.
     public static <T, U> PairStream<T, U> product(final Iterable<T> ts, final Iterable<U> us) {
         return new PairStream<>(new Iterator<Pair<T, U>>() {
             private final Iterator<T> tIter = ts.iterator();
             private Iterator<U> uIter = us.iterator();
             private @Nullable T curT = null;
 
+            private final boolean nonEmpty = us.iterator().hasNext() && ts.iterator().hasNext();
+
             @Override
             public boolean hasNext() {
-                return tIter.hasNext() || uIter.hasNext();
+                return nonEmpty && (tIter.hasNext() || uIter.hasNext());
             }
 
             @Override
