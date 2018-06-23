@@ -1,6 +1,6 @@
 package com.reedoei.eunomia.functional;
 
-import com.reedoei.eunomia.util.ListUtil;
+import com.reedoei.eunomia.collections.ListUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;

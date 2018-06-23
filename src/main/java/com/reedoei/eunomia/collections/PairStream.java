@@ -1,9 +1,10 @@
-package com.reedoei.eunomia.util;
+package com.reedoei.eunomia.collections;
 
 import com.google.common.collect.Streams;
 import com.reedoei.eunomia.functional.Func;
 import com.reedoei.eunomia.functional.Pred;
 import com.reedoei.eunomia.functional.TriConsumer;
+import com.reedoei.eunomia.util.Util;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.checkerframework.checker.nullness.qual.NonNull;

@@ -1,10 +1,12 @@
-package com.reedoei.eunomia.util;
+package com.reedoei.eunomia.collections;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -166,5 +168,17 @@ public class ListUtil {
     @SafeVarargs
     public static <T> List<@Nullable T> fromArrayUnsafe(final T... ts) {
         return new ArrayList<>(Arrays.asList(ts));
+    }
+
+    public static <T> List<T> collect(final Iterable<T> it) {
+        return collect(it.iterator());
+    }
+
+    public static <T> List<T> collect(final Iterator<T> it) {
+        final List<T> result = Collections.synchronizedList(new ArrayList<>());
+
+        it.forEachRemaining(result::add);
+
+        return result;
     }
 }

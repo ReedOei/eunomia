@@ -1,4 +1,4 @@
-package com.reedoei.eunomia.util;
+package com.reedoei.eunomia.collections;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.Test;

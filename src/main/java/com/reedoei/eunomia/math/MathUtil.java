@@ -1,15 +1,14 @@
 package com.reedoei.eunomia.math;
 
 import java.util.Collection;
-import java.util.List;
 
 public class MathUtil {
-    public static double sum(final Collection<Double> values) {
-        return values.stream().mapToDouble(Double::doubleValue).sum();
+    public static <N extends Number> double sum(final Collection<N> values) {
+        return values.stream().mapToDouble(Number::doubleValue).sum();
     }
 
-    public static double product(final Collection<Double> values) {
-        return values.stream().mapToDouble(Double::doubleValue)
+    public static <N extends Number> double product(final Collection<N> values) {
+        return values.stream().mapToDouble(Number::doubleValue)
                 .reduce(1.0, (a, b) -> a * b);
     }
 

@@ -16,7 +16,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -26,7 +25,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -167,12 +165,6 @@ public class Util {
         return result;
     }
 
-    public static <K,V> Optional<Map.Entry<K, V>> where(final Map<K, V> map, BiPredicate<K, V> pred) {
-        return map.entrySet().stream()
-                .filter(entry -> pred.test(entry.getKey(), entry.getValue()))
-                .findAny();
-    }
-
     public static String elementToString(final Element element) {
         StringWriter sWriter = new StringWriter();
 
@@ -186,24 +178,6 @@ public class Util {
 
         sWriter.flush();
         return sWriter.toString();
-    }
-
-    public static int total(final Map<String, Integer> map) {
-        return map.values().stream().mapToInt(Integer::intValue).sum();
-    }
-
-    public static int count(final Map<String, Boolean> map) {
-        return count(map, (k, v) -> v);
-    }
-
-    public static <K, V> int count(final Map<K, V> map, final BiPredicate<K, V> pred) {
-        return Math.toIntExact(map.entrySet().stream()
-                .filter(entry -> pred.test(entry.getKey(), entry.getValue()))
-                .count());
-    }
-
-    public static <T> BiFunction<T, Integer, Integer> incrementBy(final int amount) {
-        return (ignored, count) -> count == null ? amount : count + amount;
     }
 
     public static <T> Set<T> addSet(Set<T> a, final Set<T> b) {
@@ -303,12 +277,6 @@ public class Util {
     public static <T> Predicate<@NonNull T> distinctByKey(final Function<? super T, @NonNull ?> keyExtractor) {
         final Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
-    }
-
-    public static <K, V extends Comparable<? super V>> Optional<K> maxKey(final Map<K, V> map) {
-        return map.entrySet().stream()
-                .max(Comparator.comparing(Map.Entry::getValue))
-                .map(Map.Entry::getKey);
     }
 
     public static <K, V> BiFunction<K, Set<V>, Set<V>> add(final V v) {

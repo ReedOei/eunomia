@@ -1,5 +1,7 @@
 package com.reedoei.eunomia.util;
 
+import com.reedoei.eunomia.collections.ListUtil;
+
 import java.util.List;
 
 public class StringUtil {

@@ -1,6 +1,6 @@
 package com.reedoei.eunomia.math;
 
-import com.reedoei.eunomia.util.ListUtil;
+import com.reedoei.eunomia.collections.ListUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,11 +12,11 @@ public class AveragerTest {
     private static final List<Double> values = ListUtil.fromArray(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0);
 
     @SuppressWarnings("nullness")
-    private Averager averager;
+    private Averager<Double> averager;
 
     @Before
     public void setUp() throws Exception {
-        averager = new Averager(values);
+        averager = new Averager<>(values);
     }
 
     @Test

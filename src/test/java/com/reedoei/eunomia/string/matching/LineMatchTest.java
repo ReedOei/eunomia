@@ -1,7 +1,7 @@
 package com.reedoei.eunomia.string.matching;
 
+import com.reedoei.eunomia.collections.ListUtil;
 import com.reedoei.eunomia.functional.Func;
-import com.reedoei.eunomia.util.ListUtil;
 import org.junit.Test;
 
 import java.util.List;

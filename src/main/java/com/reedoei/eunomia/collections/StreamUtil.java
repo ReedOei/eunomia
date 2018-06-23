@@ -1,4 +1,4 @@
-package com.reedoei.eunomia.util;
+package com.reedoei.eunomia.collections;
 
 import java.util.Optional;
 import java.util.stream.Stream;

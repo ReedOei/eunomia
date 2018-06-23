@@ -1,6 +1,6 @@
 package com.reedoei.eunomia.latex;
 
-import com.reedoei.eunomia.util.Util;
+import com.reedoei.eunomia.collections.MapUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.stream.Stream;
 
 public class LatexTable {
     public static class Cell {
@@ -320,7 +319,7 @@ public class LatexTable {
         final List<Cell> newRow = new ArrayList<>();
         setRowDisplay(rows.get(cells.size()), display);
 
-        int total = Util.total(m);
+        int total = MapUtil.total(m);
 
         for (final String column : columns) {
             makeCell(m.get(column), total, display)
@@ -375,7 +374,7 @@ public class LatexTable {
         columns.add(colName);
 //        setColumnDisplay(colName, display);
 
-        int total = Util.total(m);
+        int total = MapUtil.total(m);
 
         for (int i = 0; i < rows.size(); i++) {
             if (cells.size() <= i) {

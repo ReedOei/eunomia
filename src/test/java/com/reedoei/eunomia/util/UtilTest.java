@@ -115,27 +115,7 @@ public class UtilTest {
     }
 
     @Test
-    public void where() {
-    }
-
-    @Test
     public void elementToString() {
-    }
-
-    @Test
-    public void total() {
-    }
-
-    @Test
-    public void count() {
-    }
-
-    @Test
-    public void count1() {
-    }
-
-    @Test
-    public void incrementBy() {
     }
 
     @Test
@@ -172,10 +152,6 @@ public class UtilTest {
 
     @Test
     public void distinctByKey() {
-    }
-
-    @Test
-    public void maxKey() {
     }
 
     @Test
