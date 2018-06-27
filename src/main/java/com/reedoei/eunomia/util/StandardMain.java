@@ -1,10 +1,12 @@
 package com.reedoei.eunomia.util;
 
+import com.google.common.base.Preconditions;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public abstract class StandardMain {
@@ -29,19 +31,31 @@ public abstract class StandardMain {
     }
 
     @NonNull
-    protected Optional<String> getArgValue(@NonNull final String argName) {
+    public Optional<String> getArg(@NonNull final String argName) {
         return Util.tryNext(Util.getNext(cleanArgs, cleanArg(argName)), Util.getNext(argList, argName));
     }
 
     @NonNull
-    protected String getRequiredArg(@NonNull final String argName) throws IllegalArgumentException {
-        final Optional<String> value = getArgValue(argName);
+    public String getArgRequired(@NonNull final String argName) {
+        final Optional<String> value = getArg(argName);
 
         if (!value.isPresent()) {
-            throw new IllegalArgumentException("Argument '" + argName + "' must be provided with a value, but was not.");
+            throw new IllegalArgumentException("You must pass in argument '" + argName + "' with a value!");
         }
 
         return value.get();
+    }
+
+    @Deprecated
+    @NonNull
+    protected Optional<String> getArgValue(@NonNull final String argName) {
+        return getArg(argName);
+    }
+
+    @Deprecated
+    @NonNull
+    protected String getRequiredArg(@NonNull final String argName) throws IllegalArgumentException {
+        return getArgRequired(argName);
     }
 
     protected abstract void run() throws Exception;

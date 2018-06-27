@@ -109,6 +109,11 @@ public class ListUtilTest {
     }
 
     @Test
+    public void subsequences() {
+        ListUtil.subsequences(ListUtil.fromArray(1, 2, 3));
+    }
+
+    @Test
     public void rangeJustEnd() {
         assertEquals(ListUtil.fromArray(0, 1, 2), ListUtil.range(3));
     }

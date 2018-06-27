@@ -3,14 +3,15 @@ package com.reedoei.eunomia.io;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.PrintStream;
+import java.util.function.Supplier;
 
-public class CaptureOutStream extends CaptureStream {
-    public CaptureOutStream(Runnable runnable) {
-        super(runnable);
+public class CaptureOutStream<T> extends CaptureStream<T> {
+    public CaptureOutStream(final Supplier<T> supplier) {
+        super(supplier);
     }
 
     @Override
-    protected void setStream(PrintStream stream) {
+    protected void setStream(final PrintStream stream) {
         System.setOut(stream);
     }
 

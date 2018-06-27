@@ -1,5 +1,6 @@
 package com.reedoei.eunomia.collections;
 
+import com.reedoei.eunomia.util.Util;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -11,6 +12,10 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+// TODO: Add collection casting functions!!!
+// TODO: Move and deprecate functions from Util.
 
 public class ListUtil {
     public static List<Integer> range(final int end) {
@@ -51,6 +56,10 @@ public class ListUtil {
         return s -> read(s, constructor);
     }
 
+    public static @NonNull List<String> read(@NonNull final String s) {
+        return read(s, Function.identity());
+    }
+
     @NonNull
     public static <T> List<T> read(@NonNull final String s,
                                    @NonNull final Function<String, T> constructor) {
@@ -61,6 +70,16 @@ public class ListUtil {
                 .map(String::trim)
                 .map(constructor)
                 .collect(Collectors.toList());
+    }
+
+    public static <T> List<T> beforeInc(final List<T> ts, final @NonNull T t) {
+        final int i = ts.indexOf(t);
+
+        if (i != -1) {
+            return new ArrayList<>(ts.subList(0, Math.min(ts.size(), i + 1)));
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     public static <T> Function<List<T>, List<T>> take(final int n) {
@@ -180,5 +199,53 @@ public class ListUtil {
         it.forEachRemaining(result::add);
 
         return result;
+    }
+
+    public static <T> Stream<List<T>> subsequences(final List<T> list) {
+        if (list.isEmpty()) {
+            return Stream.empty();
+        }
+
+        final T x = list.get(0);
+        final List<T> xs = list.subList(1, list.size());
+
+        return Stream.concat(
+                Stream.of(new ArrayList<>(Collections.singletonList(x))),
+                subsequences(xs)
+                        .reduce(Stream.empty(), (Stream<List<T>> r, List<T> ys) -> {
+                            List<T> temp = new ArrayList<>(ys);
+                            temp.add(0, x);
+
+                            return Stream.concat(Stream.concat(Stream.of(ys), Stream.of(temp)), r);
+                        }, Stream::concat));
+    }
+
+    public static <T> List<List<T>> permutations(final List<T> ts) {
+        if (ts.isEmpty()) {
+            return ListUtil.fromArray(new ArrayList<>());
+        }
+
+        final List<List<T>> result = Collections.synchronizedList(new ArrayList<>());
+
+        for (int i = 0; i < ts.size(); i++) {
+            final List<T> newTs = new ArrayList<>(ts);
+            newTs.remove(i);
+
+            for (final List<T> seq : permutations(newTs)) {
+                result.add(Util.prepend(ts.get(i), seq));
+            }
+        }
+
+        return result;
+    }
+
+    public static <T> List<T> sample(final Stream<T> ts, final int n) {
+        return sample(ts.collect(Collectors.toList()), n);
+    }
+
+    public static <T> List<T> sample(final List<T> ts, final int n) {
+        final List<T> temp = Collections.synchronizedList(new ArrayList<>(ts));
+        Collections.shuffle(temp);
+        return ListUtil.take(n, temp);
     }
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Func {
@@ -68,6 +69,14 @@ public class Func {
 
     public static <T, U> Set<U> mapSet(final Function<T, U> f, final Set<T> ts) {
         return ts.stream().map(f).collect(Collectors.toSet());
+    }
+
+    // TODO: move to supplier utils
+    public static Supplier<Void> asVoid(final Runnable runnable) {
+        return () -> {
+            runnable.run();
+            return null;
+        };
     }
 
     // TODO: filter, reduce

@@ -1,36 +1,42 @@
 package com.reedoei.eunomia.io;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.function.Supplier;
 
-public abstract class CaptureStream {
-    private final Runnable runnable;
+public abstract class CaptureStream<T> {
+    private final Supplier<T> supplier;
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private boolean hasRun = false;
 
-    public CaptureStream(final Runnable runnable) {
-        this.runnable = runnable;
+    public CaptureStream(final Supplier<T> supplier) {
+        this.supplier = supplier;
     }
 
-    public ByteArrayOutputStream run() {
+    public CapturedOutput<T> run() {
         if (hasRun) {
             throw new IllegalStateException("Can only execute a CaptureStream once! To repeat a computation, create a new CaptureStream!");
         }
 
+        @Nullable T value = null;
+        final PrintStream stream = getStream();
+        @Nullable Throwable error = null;
+
         try {
-            final PrintStream stream = getStream();
             setStream(new PrintStream(outputStream));
 
-            runnable.run();
-
-            setStream(stream);
+            value = supplier.get();
+        } catch (Throwable t) {
+            error = t;
         } finally {
+            setStream(stream);
             hasRun = true;
         }
 
-        return outputStream;
+        return new CapturedOutput<>(error, value, outputStream);
     }
 
     protected abstract void setStream(final PrintStream stream);

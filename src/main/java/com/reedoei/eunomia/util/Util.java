@@ -1,5 +1,6 @@
 package com.reedoei.eunomia.util;
 
+import com.reedoei.eunomia.collections.ListUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.dom4j.Document;
@@ -98,14 +99,9 @@ public class Util {
         }
     }
 
+    @Deprecated
     public static <T> List<T> beforeInc(final List<T> ts, final @NonNull T t) {
-        final int i = ts.indexOf(t);
-
-        if (i != -1) {
-            return new ArrayList<>(ts);
-        } else {
-            return new ArrayList<>();
-        }
+        return ListUtil.beforeInc(ts, t);
     }
 
 
@@ -320,5 +316,9 @@ public class Util {
         }
 
         return result;
+    }
+
+    public static <T> List<T> prepend(final T t, final List<T> rest) {
+        return prependAll(Collections.singletonList(t), rest);
     }
 }
