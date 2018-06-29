@@ -6,8 +6,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -114,5 +116,17 @@ public class MapUtil {
         return map.entrySet().stream()
                 .min(Comparator.comparing(Map.Entry::getValue))
                 .map(Map.Entry::getKey);
+    }
+
+    public static <K, V> Set<K> diff(final Map<K, V> a, final Map<K, V> b) {
+        final Set<K> result = Collections.synchronizedSet(new HashSet<>());
+
+        a.forEach((k, v) -> {
+            if (v != null && b.containsKey(k) && !v.equals(b.get(k))) {
+                result.add(k);
+            }
+        });
+
+        return result;
     }
 }

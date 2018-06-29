@@ -83,7 +83,7 @@ public class Util {
     public static <T> Optional<T> getOffset(final List<T> ts, final @NonNull T t, final int offset) {
         final int index = ts.indexOf(t);
 
-        if (inRange(index, 0, ts.size())) {
+        if (index != -1 && inRange(index + offset, 0, ts.size())) {
             return Optional.ofNullable(ts.get(index + offset));
         } else {
             return Optional.empty();
@@ -320,5 +320,9 @@ public class Util {
 
     public static <T> List<T> prepend(final T t, final List<T> rest) {
         return prependAll(Collections.singletonList(t), rest);
+    }
+
+    public static Function<Integer, Integer> incrementBy(final int amount) {
+        return x -> x == null ? amount : x + amount;
     }
 }

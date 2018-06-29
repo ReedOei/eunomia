@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -247,5 +248,21 @@ public class ListUtil {
         final List<T> temp = Collections.synchronizedList(new ArrayList<>(ts));
         Collections.shuffle(temp);
         return ListUtil.take(n, temp);
+    }
+
+    public static <T> List<T> ensureCapacity(final List<T> ts, final List<T> other, final T t) {
+        return ensureCapacity(ts, other.size(), () -> t);
+    }
+
+    public static <T> List<T> ensureCapacity(final List<T> ts, final List<T> other, final Supplier<T> supplier) {
+        return ensureCapacity(ts, other.size(), supplier);
+    }
+
+    public static <T> List<T> ensureCapacity(final List<T> ts, final int n, final Supplier<T> supplier) {
+        while (ts.size() < n) {
+            ts.add(supplier.get());
+        }
+
+        return ts;
     }
 }

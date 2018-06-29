@@ -8,7 +8,7 @@ public class FileUtil {
     public static boolean makeDirectoryDestructive(final Path path) throws IOException {
         if (!Files.isDirectory(path)) {
             Files.deleteIfExists(path);
-            Files.createDirectory(path);
+            Files.createDirectories(path);
         }
 
         return true;

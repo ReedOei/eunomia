@@ -2,11 +2,18 @@ package com.reedoei.eunomia.math;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Averager<N extends Number> {
-    private final Collection<N> values = new ArrayList<>();
+    private final List<N> values = new ArrayList<>();
 
     public Averager() {
+    }
+
+    public Averager(final Stream<N> values) {
+        this(values.collect(Collectors.toList()));
     }
 
     public Averager(final Collection<N> values) {
@@ -35,5 +42,9 @@ public class Averager<N extends Number> {
 
     public double geoMean() {
         return Math.pow(MathUtil.product(values), 1.0 / values.size());
+    }
+
+    public List<N> getValues() {
+        return values;
     }
 }

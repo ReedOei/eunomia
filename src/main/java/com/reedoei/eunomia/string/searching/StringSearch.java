@@ -10,6 +10,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +29,7 @@ public class StringSearch {
 
         final String[] split = base.split(System.lineSeparator());
         Preconditions.checkNotNull(split);
-        this.lines = Arrays.asList(split);
+        this.lines = new ArrayList<>(Arrays.asList(split));
     }
 
     public StringSearch(final Path repoPath) throws IOException {
