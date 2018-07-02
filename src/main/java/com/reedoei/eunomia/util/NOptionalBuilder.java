@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Deprecated // In 1.3.0
 public class NOptionalBuilder<K, V> {
     private final Map<@NonNull K, Optional<V>> values = new HashMap<>();
 

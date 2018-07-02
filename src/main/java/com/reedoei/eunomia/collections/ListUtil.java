@@ -250,19 +250,41 @@ public class ListUtil {
         return ListUtil.take(n, temp);
     }
 
-    public static <T> List<T> ensureCapacity(final List<T> ts, final List<T> other, final T t) {
-        return ensureCapacity(ts, other.size(), () -> t);
+    public static <T> List<T> ensureSize(final List<T> ts, final List<T> other, final T t) {
+        return ensureSize(ts, other.size(), () -> t);
     }
 
-    public static <T> List<T> ensureCapacity(final List<T> ts, final List<T> other, final Supplier<T> supplier) {
-        return ensureCapacity(ts, other.size(), supplier);
+    public static <T> List<T> ensureSize(final List<T> ts, final List<T> other, final Supplier<T> supplier) {
+        return ensureSize(ts, other.size(), supplier);
     }
 
-    public static <T> List<T> ensureCapacity(final List<T> ts, final int n, final Supplier<T> supplier) {
+    public static <T> List<T> ensureSize(final List<T> ts, final int n, final Supplier<T> supplier) {
         while (ts.size() < n) {
             ts.add(supplier.get());
         }
 
         return ts;
+    }
+
+    @Deprecated
+    public static <T> List<T> ensureCapacity(final List<T> ts, final List<T> other, final T t) {
+        return ensureCapacity(ts, other.size(), () -> t);
+    }
+
+    @Deprecated
+    public static <T> List<T> ensureCapacity(final List<T> ts, final List<T> other, final Supplier<T> supplier) {
+        return ensureCapacity(ts, other.size(), supplier);
+    }
+
+    @Deprecated
+    public static <T> List<T> ensureCapacity(final List<T> ts, final int n, final Supplier<T> supplier) {
+        return ensureSize(ts, n, supplier);
+    }
+
+    public static <T> List<T> append(final List<T> ts, final T t) {
+        final List<T> result = Collections.synchronizedList(new ArrayList<>(ts));
+        result.add(t);
+
+        return result;
     }
 }

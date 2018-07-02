@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@Deprecated
 public class FileUtil {
     public static boolean inParent(final String path, final String parent) {
         Path p = Paths.get(path);

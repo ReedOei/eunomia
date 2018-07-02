@@ -4,6 +4,8 @@ import com.reedoei.eunomia.collections.ListUtil;
 
 import java.util.List;
 
+// Should use the one from string package.
+@Deprecated
 public class StringUtil {
     public static List<String> lines(final String s) {
         return ListUtil.fromArray(s.split(System.lineSeparator()));

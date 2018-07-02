@@ -1,16 +1,15 @@
 package com.reedoei.eunomia.io;
 
+import com.reedoei.eunomia.string.CharUtil;
+import com.reedoei.eunomia.string.StringUtil;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Printer {
     // TODO: Add coordinated printer so that we can do things like:
-    // print("Test "); print(" ing"); and only get one spcae
-    // or:
     // print("Done."); print(", result is") and get "Done, result is".
-    // or:
-    // print("123"); print("456"); is "123 456"
     // or:
     // print("Line start:"); printIntermediate(" progress here "); println(" line end");
     // First is Line start: progress here, then becomes "Line start: line end".
@@ -25,7 +24,7 @@ public class Printer {
 
     private final List<String> lines = new ArrayList<>();
     private String currentLine = "";
-    private String constantLineText = "";
+    private String currentLineConst = "";
 
     public Printer(final PrintStream stream) {
         this.stream = stream;
@@ -33,17 +32,38 @@ public class Printer {
 
     // Makes the line text safe. TODO: Should this be text suitable for printing via clearline always?
     // Probably. Then we can always do the same print operation.
-    private String makeSafe(final String s) {
-        return s;
+    private String makeSafe(String base, String s) {
+        // Don't want to have double/triple/etc. spaces.
+        if (base.endsWith(" ")) {
+            while (s.startsWith(" ")) {
+                s = s.substring(1);
+            }
+        } else {
+            // But make sure we have at least one space if we're not starting a newline.
+            if (!base.isEmpty() && !s.startsWith(" ")) {
+                s = " " + s;
+            }
+        }
+
+        if (StringUtil.lastChar(base).map(CharUtil::isPunctuation).orElse(false) &&
+            StringUtil.firstChar(s).map(CharUtil::isPunctuation).orElse(false)) {
+            base = StringUtil.removeLast(CharUtil::isPunctuation, base);
+        }
+
+        return base + s;
     }
 
     public void print(final String s) {
-        stream.print(s);
+        currentLineConst = makeSafe(currentLineConst, s);
+        currentLine = currentLineConst;
+
+        IOUtil.printClearLine(stream, currentLineConst);
     }
 
     public void printTemporary(final String s) {
-        stream.print(s);
-        currentLine += s;
+        currentLine = makeSafe(currentLine, s);
+
+        IOUtil.printClearLine(stream, currentLine);
     }
 
     public void clearLine() {
@@ -51,9 +71,10 @@ public class Printer {
     }
 
     public void clearLine(final String s) {
-        IOUtil.printClearLine(stream, s);
         currentLine = s;
-        constantLineText = s;
+        currentLineConst = s;
+
+        IOUtil.printClearLine(stream, s);
     }
 
     public void println() {
@@ -61,6 +82,13 @@ public class Printer {
     }
 
     public void println(final String s) {
+        // End the current line if we've got one going.
+        if (!currentLine.isEmpty()) {
+            stream.println();
+            currentLine = "";
+            currentLineConst = "";
+        }
+
         stream.println(s);
     }
 }

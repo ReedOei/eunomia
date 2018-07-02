@@ -1,4 +1,4 @@
-package com.reedoei.eunomia.io;
+package com.reedoei.eunomia.io.capture;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -7,7 +7,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.function.Supplier;
 
-@Deprecated // In 1.3.0
 public abstract class CaptureStream<T> {
     private final Supplier<T> supplier;
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

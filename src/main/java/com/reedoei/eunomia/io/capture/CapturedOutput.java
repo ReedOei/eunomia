@@ -1,4 +1,4 @@
-package com.reedoei.eunomia.io;
+package com.reedoei.eunomia.io.capture;
 
 import com.google.common.base.Preconditions;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -6,7 +6,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.util.Optional;
 
-@Deprecated // In 1.3.0
 public class CapturedOutput<T> {
     private final @Nullable Throwable error;
     private final @Nullable T t;

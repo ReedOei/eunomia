@@ -40,6 +40,10 @@ public class Averager<N extends Number> {
         return MathUtil.sum(values) / values.size();
     }
 
+    public double average() {
+        return mean();
+    }
+
     public double geoMean() {
         return Math.pow(MathUtil.product(values), 1.0 / values.size());
     }

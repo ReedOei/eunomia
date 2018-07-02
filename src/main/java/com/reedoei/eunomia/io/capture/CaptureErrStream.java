@@ -1,24 +1,23 @@
-package com.reedoei.eunomia.io;
+package com.reedoei.eunomia.io.capture;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.PrintStream;
 import java.util.function.Supplier;
 
-@Deprecated // In 1.3.0
-public class CaptureOutStream<T> extends CaptureStream<T> {
-    public CaptureOutStream(final Supplier<T> supplier) {
+public class CaptureErrStream<T> extends CaptureStream<T> {
+    public CaptureErrStream(final Supplier<T> supplier) {
         super(supplier);
     }
 
     @Override
     protected void setStream(final PrintStream stream) {
-        System.setOut(stream);
+        System.setErr(stream);
     }
 
     @NonNull
     @Override
     protected PrintStream getStream() {
-        return System.out;
+        return System.err;
     }
 }

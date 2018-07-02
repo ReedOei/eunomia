@@ -104,7 +104,6 @@ public class Util {
         return ListUtil.beforeInc(ts, t);
     }
 
-
     public static <T> Function<T, T> modify(final Consumer<T> f) {
         return base -> {
             f.accept(base);
@@ -112,26 +111,30 @@ public class Util {
         };
     }
 
-
     public static <T> Function<List<T>, List<T>> prependAll( final List<T> toAdd) {
-        return modify(base -> base.addAll(0, toAdd));
-    }
+        return base -> {
+            final List<T> result = Collections.synchronizedList(new ArrayList<>(base));
+            result.addAll(0, toAdd);
 
+            return result;
+        };
+    }
 
     public static <T> List<T> prependAll( final List<T> toAdd,  final List<T> ts) {
         return prependAll(toAdd).apply(ts);
     }
 
-
     public static <T> Function<List<T>, List<T>> appendAll(final List<T> toAdd) {
-        return modify(base -> base.addAll(toAdd));
+        return base -> {
+            final List<T> result = Collections.synchronizedList(new ArrayList<>(base));
+            result.addAll(toAdd);
+            return result;
+        };
     }
-
 
     public static <T> List<T> appendAll(final List<T> toAdd, final List<T> ts) {
         return appendAll(toAdd).apply(ts);
     }
-
 
     public static <T> List<T> topHalf(final List<T> ts) {
         return new ArrayList<>(ts.subList(0, ts.size() / 2));

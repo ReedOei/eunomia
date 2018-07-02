@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+@Deprecated // In 1.3.0
 public class NOptional<K, V> {
     private final Map<@NonNull K, @NonNull V> values = new HashMap<>();
     private final boolean allPresent;

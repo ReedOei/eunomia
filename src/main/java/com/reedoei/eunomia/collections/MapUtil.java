@@ -122,7 +122,7 @@ public class MapUtil {
         final Set<K> result = Collections.synchronizedSet(new HashSet<>());
 
         a.forEach((k, v) -> {
-            if (v != null && b.containsKey(k) && !v.equals(b.get(k))) {
+            if (k != null && v != null && b.containsKey(k) && !v.equals(b.get(k))) {
                 result.add(k);
             }
         });

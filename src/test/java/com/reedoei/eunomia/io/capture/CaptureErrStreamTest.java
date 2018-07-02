@@ -1,4 +1,4 @@
-package com.reedoei.eunomia.io;
+package com.reedoei.eunomia.io.capture;
 
 import com.reedoei.eunomia.functional.Func;
 import org.junit.Test;

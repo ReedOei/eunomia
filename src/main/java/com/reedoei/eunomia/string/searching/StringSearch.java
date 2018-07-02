@@ -2,9 +2,9 @@ package com.reedoei.eunomia.string.searching;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Streams;
+import com.reedoei.eunomia.io.files.FileUtil;
 import com.reedoei.eunomia.string.matching.LineMatch;
 import com.reedoei.eunomia.string.matching.Match;
-import com.reedoei.eunomia.util.FileUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
