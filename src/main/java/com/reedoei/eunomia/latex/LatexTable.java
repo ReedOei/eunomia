@@ -422,7 +422,7 @@ public class LatexTable {
     }
 
     public String toString(boolean showRowNames) {
-        String result = "";
+        final StringBuilder result = new StringBuilder();
 
         for (int y = 0; y < cells.size(); y++) {
             List<Cell> row = cells.get(y);
@@ -467,9 +467,9 @@ public class LatexTable {
                 }
             }
 
-            result += String.join(" & ", cellStrs) + " \\\\ \\hline" + System.lineSeparator();
+            result.append(String.join(" & ", cellStrs)).append(" \\\\ \\hline").append(System.lineSeparator());
         }
 
-        return result;
+        return result.toString();
     }
 }

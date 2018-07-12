@@ -1,5 +1,7 @@
 package com.reedoei.eunomia.collections;
 
+import com.google.common.collect.Streams;
+import com.reedoei.eunomia.functional.Func;
 import com.reedoei.eunomia.util.Util;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -9,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -54,16 +57,23 @@ public class ListUtil {
 
     @NonNull
     public static <T> Function<String, List<T>> reader(@NonNull final Function<String, T> constructor) {
-        return s -> read(s, constructor);
+        return s -> read(constructor, s);
     }
 
     public static @NonNull List<String> read(@NonNull final String s) {
-        return read(s, Function.identity());
+        return read(Function.identity(), s);
     }
 
+    @Deprecated
     @NonNull
     public static <T> List<T> read(@NonNull final String s,
                                    @NonNull final Function<String, T> constructor) {
+        return read(constructor, s);
+    }
+
+    @NonNull
+    public static <T> List<T> read(@NonNull final Function<String, T> constructor,
+                                   @NonNull final String s) {
         return Arrays.stream(s
                 .replace("[", "")
                 .replace("]", "")
@@ -207,18 +217,41 @@ public class ListUtil {
             return Stream.empty();
         }
 
-        final T x = list.get(0);
-        final List<T> xs = list.subList(1, list.size());
+        return Streams.stream(new Iterator<List<T>>() {
+            private final List<List<T>> sequences =
+                    Collections.synchronizedList(new ArrayList<>(Collections.singletonList(Collections.synchronizedList(new ArrayList<>()))));
+            private final List<List<T>> newSequences = Collections.synchronizedList(new ArrayList<>());
 
-        return Stream.concat(
-                Stream.of(new ArrayList<>(Collections.singletonList(x))),
-                subsequences(xs)
-                        .reduce(Stream.empty(), (Stream<List<T>> r, List<T> ys) -> {
-                            List<T> temp = new ArrayList<>(ys);
-                            temp.add(0, x);
+            private List<T> prev = new ArrayList<>();
 
-                            return Stream.concat(Stream.concat(Stream.of(ys), Stream.of(temp)), r);
-                        }, Stream::concat));
+            private int i = 0;
+            private int j = 0;
+
+            @Override
+            public boolean hasNext() {
+                return i < list.size() && (j < sequences.size() || i + 1 < list.size());
+            }
+
+            @Override
+            public List<T> next() {
+                // We're done now...
+                if (i < list.size()) {
+                    if (j >= sequences.size()) {
+                        sequences.addAll(newSequences);
+                        newSequences.clear();
+                        j = 0;
+                        i++;
+                    }
+
+                    prev = Collections.synchronizedList(new ArrayList<>(sequences.get(j)));
+                    prev.add(list.get(i));
+                    newSequences.add(prev);
+                    j++;
+                }
+
+                return prev;
+            }
+        });
     }
 
     public static <T> List<List<T>> permutations(final List<T> ts) {
@@ -286,5 +319,35 @@ public class ListUtil {
         result.add(t);
 
         return result;
+    }
+
+    public static <T, U> Function<List<T>, List<U>> mapWithIndex(final BiFunction<Integer, T, U> f) {
+        return l -> mapWithIndex(f, l);
+    }
+
+    public static <T, U> List<U> mapWithIndex(final BiFunction<Integer, T, U> f, final List<T> ts) {
+        final List<U> result = new ArrayList<>();
+
+        for (int i = 0; i < ts.size(); i++) {
+            result.add(f.apply(i, ts.get(i)));
+        }
+
+        return result;
+    }
+
+    public static <T, U> Function<List<T>, List<U>> map(final Function<T, U> f) {
+        return l -> map(f, l);
+    }
+
+    public static <T, U> List<U> map(final Function<T, U> f, final List<T> ts) {
+        return ts.stream().map(f).collect(Collectors.toList());
+    }
+
+    public static <T> Function<List<T>, List<T>> filter(final Predicate<T> pred) {
+        return l -> filter(pred, l);
+    }
+
+    public static <T> List<T> filter(final Predicate<T> pred, final List<T> ts) {
+        return ts.stream().filter(pred).collect(Collectors.toList());
     }
 }

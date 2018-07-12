@@ -44,7 +44,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- These properties will be set by the Maven Dependency plugin -->
         <annotatedJdk>${org.checkerframework:jdk8:jar}</annotatedJdk>
-         <gpg.skip>true</gpg.skip>
+        <gpg.skip>true</gpg.skip>
     </properties>
 
     <build>

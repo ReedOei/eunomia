@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -110,7 +111,7 @@ public class ListUtilTest {
 
     @Test
     public void subsequences() {
-        ListUtil.subsequences(ListUtil.fromArray(1, 2, 3));
+        System.out.println(ListUtil.subsequences(ListUtil.fromArray(1, 2, 3)).collect(Collectors.toList()));
     }
 
     @Test

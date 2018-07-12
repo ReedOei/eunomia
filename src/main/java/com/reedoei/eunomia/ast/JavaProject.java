@@ -5,7 +5,7 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.resolution.MethodUsage;
 import com.reedoei.eunomia.ast.resolved.ResolvedClass;
-import com.reedoei.eunomia.util.NOptionalBuilder;
+import com.reedoei.eunomia.util.OptUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.api.Git;
@@ -74,13 +74,9 @@ public class JavaProject {
 
         for (final String path : changedFileNames) {
             if (FilenameUtils.isExtension(path, "java")) {
-                new NOptionalBuilder<String, CompilationUnit>()
-                        .add("old", getFileContent(ref, path))
-                        .add("new", getFileContent(newCommitId, path))
-                        .build().ifPresent(m ->
-                            ChangedFile.create(m.get("old"), m.get("new"), path, this)
-                                    .ifPresent(fileContent::add)
-                        );
+                OptUtil.ifAllPresent(getFileContent(ref, path), getFileContent(newCommitId, path), (oldFile, newFile) -> {
+                    ChangedFile.create(oldFile, newFile, path, this).ifPresent(fileContent::add);
+                });
             }
         }
 

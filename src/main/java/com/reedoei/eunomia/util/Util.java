@@ -1,6 +1,8 @@
 package com.reedoei.eunomia.util;
 
 import com.reedoei.eunomia.collections.ListUtil;
+import com.reedoei.eunomia.collections.PairStream;
+import com.reedoei.eunomia.collections.SetUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.dom4j.Document;
@@ -32,14 +34,11 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Util {
+    @Deprecated // In 1.3.1
     public static <T, U> void forEachPair(final List<T> ts,
                                           final List<U> us,
                                           final BiConsumer<T, U> consumer) {
-        for (final T t : ts) {
-            for (final U u : us) {
-                consumer.accept(t, u);
-            }
-        }
+        PairStream.product(ts, us).forEach(consumer);
     }
 
     public static <T, U, V> BiFunction<List<T>, List<U>, List<V>> zipWith(final BiFunction<T, U, V> f) {
@@ -49,36 +48,20 @@ public class Util {
     public static <T, U, V> List<V> zipWith(final BiFunction<T, U, V> f,
                                             final List<T> ts,
                                             final List<U> us) {
-        final List<V> result = new ArrayList<>();
-
-        for (int i = 0; i < ts.size(); i++) {
-            if (i >= us.size()) {
-                break;
-            }
-
-            result.add(f.apply(ts.get(i), us.get(i)));
-        }
-
-        return result;
+        return PairStream.zip(ts, us).mapToStream(f).collect(Collectors.toList());
     }
 
-    public static <T extends Comparable<? super T>> boolean inRange( final T t,
-                                                                     final T min,
-                                                                     final T max) {
-        return t.compareTo(min) >= 0 &&
-                t.compareTo(max) <= -1;
+    public static <T extends Comparable<? super T>> boolean inRange(final T t, final T min, final T max) {
+        return t.compareTo(min) >= 0 && t.compareTo(max) <= -1;
     }
 
-
-    public static <T> Optional<T> getNext( final List<T> ts, final @NonNull T t) {
+    public static <T> Optional<T> getNext(final List<T> ts, final @NonNull T t) {
         return getOffset(ts, t, 1);
     }
 
-
-    public static <T> Optional<T> getPrevious( final List<T> ts, final @NonNull T t) {
+    public static <T> Optional<T> getPrevious(final List<T> ts, final @NonNull T t) {
         return getOffset(ts, t, -1);
     }
-
 
     public static <T> Optional<T> getOffset(final List<T> ts, final @NonNull T t, final int offset) {
         final int index = ts.indexOf(t);
@@ -89,7 +72,6 @@ public class Util {
             return Optional.empty();
         }
     }
-
 
     public static <T> Optional<T> tryNext( final Optional<T> a,  final Optional<T> b) {
         if (a.isPresent()) {
@@ -289,36 +271,10 @@ public class Util {
         };
     }
 
+    @Deprecated
     @SafeVarargs
-    public static <T> Set<@NonNull T> common(final Set<@NonNull T>... sets) {
-        if (sets.length == 0) {
-            return new HashSet<>();
-        }
-
-        final Set<@NonNull T> result = new HashSet<>();
-
-        // We only have to loop through the first set, because values in all sets must be in the
-        // first set
-        for (final @NonNull T t : sets[0]) {
-            if (result.contains(t)) {
-                continue;
-            }
-
-            boolean allContain = true;
-
-            for (final Set<@NonNull T> set : sets) {
-                if (!set.contains(t)) {
-                    allContain = false;
-                    break;
-                }
-            }
-
-            if (allContain) {
-                result.add(t);
-            }
-        }
-
-        return result;
+    public static <T> Set<T> common(final Set<T>... sets) {
+        return SetUtil.intersect(sets);
     }
 
     public static <T> List<T> prepend(final T t, final List<T> rest) {
@@ -327,5 +283,35 @@ public class Util {
 
     public static Function<Integer, Integer> incrementBy(final int amount) {
         return x -> x == null ? amount : x + amount;
+    }
+
+    public static String buildClassPath(final String path) {
+        return buildClassPath(path.split(System.getProperty("path.separator")));
+    }
+
+    public static String buildClassPath(final String... paths) {
+        final StringBuilder sb = new StringBuilder();
+        for (String path : paths) {
+            if (path.endsWith("*")) {
+                path = path.substring(0, path.length() - 1);
+                final File pathFile = new File(path);
+
+                final File[] files = pathFile.listFiles();
+
+                if (files != null) {
+                    for (final File file : files) {
+                        if (file.isFile() && file.getName().endsWith(".jar")) {
+                            sb.append(path);
+                            sb.append(file.getName());
+                            sb.append(System.getProperty("path.separator"));
+                        }
+                    }
+                }
+            } else {
+                sb.append(path);
+                sb.append(System.getProperty("path.separator"));
+            }
+        }
+        return sb.toString();
     }
 }

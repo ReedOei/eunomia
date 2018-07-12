@@ -1,5 +1,6 @@
 package com.reedoei.eunomia.collections;
 
+import com.reedoei.eunomia.functional.TriFunction;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Arrays;
@@ -17,6 +18,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MapUtil {
+    public static <K, U, V, W> Map<K, W> zip(final TriFunction<K, U, V, Optional<W>> f, final Map<K, U> a, final Map<K, V> b) {
+        final Map<K, W> m = Collections.synchronizedMap(new HashMap<>());
+
+        for (final K k : a.keySet()) {
+            if (b.containsKey(k)) {
+                f.apply(k, a.get(k), b.get(k)).ifPresent(w -> m.put(k, w));
+            }
+        }
+
+        return m;
+    }
+
     // TODO: Make all methods return syncrhonized collections by default when creating a new collection.
     // TODO: Move map/filter/etc. into specific util packages.
     public static <K, V> Function<Map<K, V>, Map<K, V>> filter(final BiPredicate<K, V> pred) {
@@ -119,10 +132,14 @@ public class MapUtil {
     }
 
     public static <K, V> Set<K> diff(final Map<K, V> a, final Map<K, V> b) {
+        return diffBy(a, b, (aVal, bVal) -> aVal != null && !aVal.equals(bVal));
+    }
+
+    public static <K, V> Set<K> diffBy(final Map<K, V> a, final Map<K, V> b, final BiPredicate<V, V> pred) {
         final Set<K> result = Collections.synchronizedSet(new HashSet<>());
 
         a.forEach((k, v) -> {
-            if (k != null && v != null && b.containsKey(k) && !v.equals(b.get(k))) {
+            if (k != null && v != null && b.containsKey(k) && pred.test(v, b.get(k))) {
                 result.add(k);
             }
         });

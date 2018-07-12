@@ -1,15 +1,12 @@
 package com.reedoei.eunomia.util;
 
-import com.google.common.base.Preconditions;
 import com.reedoei.eunomia.collections.StreamUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public abstract class StandardMain {
     private static String cleanArg(@NonNull final String arg) {
@@ -30,6 +27,20 @@ public abstract class StandardMain {
         for (final String arg : argList) {
             cleanArgs.add(cleanArg(arg));
         }
+    }
+
+    public boolean hasArg(final String... argNames) {
+        for (final String argName : argNames) {
+           if (cleanArgs.contains(cleanArg(argName)) || argList.contains(argName)) {
+               return true;
+           }
+        }
+
+        return false;
+    }
+
+    public String getClasspathArg() {
+        return Util.buildClassPath(getArg("cp", "classpath").orElse(System.getProperty("java.class.path")));
     }
 
     public Optional<String> getArg(final String... argNames) {

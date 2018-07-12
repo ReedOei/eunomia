@@ -1,5 +1,7 @@
 package com.reedoei.eunomia.functional;
 
+import com.reedoei.eunomia.collections.ListUtil;
+import com.reedoei.eunomia.collections.SetUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -41,34 +43,34 @@ public class Func {
         return ignored -> u;
     }
 
+    @Deprecated // In 1.3.1
     public static <T, U> Function<List<T>, List<U>> mapWithIndex(final BiFunction<Integer, T, U> f) {
-        return l -> mapWithIndex(f, l);
+        return ListUtil.mapWithIndex(f);
     }
 
+    @Deprecated // In 1.3.1
     public static <T, U> List<U> mapWithIndex(final BiFunction<Integer, T, U> f, final List<T> ts) {
-        final List<U> result = new ArrayList<>();
-
-        for (int i = 0; i < ts.size(); i++) {
-            result.add(f.apply(i, ts.get(i)));
-        }
-
-        return result;
+        return ListUtil.mapWithIndex(f, ts);
     }
 
+    @Deprecated // In 1.3.1
     public static <T, U> Function<List<T>, List<U>> map(final Function<T, U> f) {
-        return l -> map(f, l);
+        return ListUtil.map(f);
     }
 
+    @Deprecated // In 1.3.1
     public static <T, U> List<U> map(final Function<T, U> f, final List<T> ts) {
-        return ts.stream().map(f).collect(Collectors.toList());
+        return ListUtil.map(f, ts);
     }
 
+    @Deprecated // In 1.3.1
     public static <T, U> Function<Set<T>, Set<U>> mapSet(final Function<T, U> f) {
-        return l -> mapSet(f, l);
+        return SetUtil.map(f);
     }
 
+    @Deprecated // In 1.3.1
     public static <T, U> Set<U> mapSet(final Function<T, U> f, final Set<T> ts) {
-        return ts.stream().map(f).collect(Collectors.toSet());
+        return SetUtil.map(f, ts);
     }
 
     // TODO: move to supplier utils

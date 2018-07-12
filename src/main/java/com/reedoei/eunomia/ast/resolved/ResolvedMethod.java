@@ -1,11 +1,9 @@
 package com.reedoei.eunomia.ast.resolved;
 
-import com.github.javaparser.Range;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
-import com.reedoei.eunomia.util.NOptionalBuilder;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import com.reedoei.eunomia.util.OptUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,27 +25,16 @@ public class ResolvedMethod {
 
         // Sort by line, then by column.
         methodCalls.sort((a, b) ->
-            new NOptionalBuilder<String, Range>().
-                    add("a", a.base.getRange())
-                    .add("b", b.base.getRange())
-                    .build()
-                    .fromOptional(0, m -> {
-                        final @Nullable Range aRange = m.get("a");
-                        final @Nullable Range bRange = m.get("b");
-
-                        if (aRange != null && bRange != null) {
-                            if (aRange.begin.line < bRange.begin.line ||
-                                    (aRange.begin.line == bRange.begin.line && aRange.begin.column < bRange.begin.column)) {
-                                return -1;
-                            } else if (aRange.begin.line == bRange.begin.line &&
-                                    aRange.begin.column == bRange.begin.column){
-                                return 0;
-                            } else {
-                                return 1;
-                            }
-                        } else {
-                            return 0;
-                        }
-                    }));
+            OptUtil.map(a.base.getRange(), b.base.getRange(), (aRange, bRange) -> {
+                if (aRange.begin.line < bRange.begin.line ||
+                        (aRange.begin.line == bRange.begin.line && aRange.begin.column < bRange.begin.column)) {
+                    return -1;
+                } else if (aRange.begin.line == bRange.begin.line &&
+                        aRange.begin.column == bRange.begin.column){
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }).orElse(0));
     }
 }
