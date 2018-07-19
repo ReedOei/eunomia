@@ -48,4 +48,16 @@ public class FileUtil {
             }
         }
     }
+
+    public static boolean isEmpty(final Path path) {
+        if (!Files.exists(path) || Files.isRegularFile(path)) {
+            return true;
+        }
+
+        try {
+            return Files.walk(path).count() == 0;
+        } catch (IOException ignored) {}
+
+        return true;
+    }
 }

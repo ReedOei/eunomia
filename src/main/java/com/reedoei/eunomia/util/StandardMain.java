@@ -2,6 +2,7 @@ package com.reedoei.eunomia.util;
 
 import com.reedoei.eunomia.collections.StreamUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +28,14 @@ public abstract class StandardMain {
         for (final String arg : argList) {
             cleanArgs.add(cleanArg(arg));
         }
+    }
+
+    public ArrayList<String> argList() {
+        return argList;
+    }
+
+    public List<String> cleanArgs() {
+        return cleanArgs;
     }
 
     public boolean hasArg(final String... argNames) {

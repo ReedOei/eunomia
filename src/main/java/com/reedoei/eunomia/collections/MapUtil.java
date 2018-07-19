@@ -22,7 +22,7 @@ public class MapUtil {
         final Map<K, W> m = Collections.synchronizedMap(new HashMap<>());
 
         for (final K k : a.keySet()) {
-            if (b.containsKey(k)) {
+            if (k != null && b.containsKey(k)) {
                 f.apply(k, a.get(k), b.get(k)).ifPresent(w -> m.put(k, w));
             }
         }
@@ -132,7 +132,7 @@ public class MapUtil {
     }
 
     public static <K, V> Set<K> diff(final Map<K, V> a, final Map<K, V> b) {
-        return diffBy(a, b, (aVal, bVal) -> aVal != null && !aVal.equals(bVal));
+        return diffBy(a, b, (aVal, bVal) -> aVal != null && bVal != null && !aVal.equals(bVal));
     }
 
     public static <K, V> Set<K> diffBy(final Map<K, V> a, final Map<K, V> b, final BiPredicate<V, V> pred) {

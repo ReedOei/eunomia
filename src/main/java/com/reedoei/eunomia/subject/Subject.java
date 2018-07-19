@@ -1,6 +1,7 @@
 package com.reedoei.eunomia.subject;
 
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 // TODO: Add new methods like compile, test, gather dependencies, etc.
 // TODO: Add subjects for other build systems (ant, gradle)
@@ -16,4 +17,6 @@ public interface Subject {
     String classpath();
 
     String getName();
+
+    Stream<Subject> submodules();
 }
