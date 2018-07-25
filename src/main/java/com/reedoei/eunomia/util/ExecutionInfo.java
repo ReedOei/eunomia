@@ -14,21 +14,14 @@ public class ExecutionInfo {
     @Nullable
     private final Path javaAgent;
 
-    public ExecutionInfo() {
-        this(System.getProperty("java.class.path"));
-    }
+    private final List<String> javaOpts;
+    private final Class<?> clz;
 
-    public ExecutionInfo(final String classpath) {
-        this(classpath, null);
-    }
-
-    public ExecutionInfo(@Nullable final Path javaAgent) {
-        this(System.getProperty("java.class.path"), javaAgent);
-    }
-
-    public ExecutionInfo(final String classpath, @Nullable final Path javaAgent) {
+    public ExecutionInfo(final String classpath, @Nullable final Path javaAgent, final List<String> javaOpts, final Class<?> clz) {
         this.classpath = classpath;
         this.javaAgent = javaAgent;
+        this.javaOpts = javaOpts;
+        this.clz = clz;
     }
 
     public String classpath() {
@@ -40,13 +33,19 @@ public class ExecutionInfo {
         return javaAgent;
     }
 
-    public List<String> args(final Class<?> clz, final String... args) {
+    public List<String> javaOpts() {
+        return javaOpts;
+    }
+
+    public List<String> args(final String... args) {
         final List<String> allArgs = ListUtil.fromArray("java", "-cp", classpath());
 
         final Path javaAgent = javaAgent();
         if (javaAgent != null) {
             allArgs.add("-javaagent:" + javaAgent.toAbsolutePath().toString());
         }
+
+        allArgs.addAll(javaOpts);
 
         allArgs.add(Objects.requireNonNull(clz.getCanonicalName()));
         allArgs.addAll(Arrays.asList(args));

@@ -33,18 +33,26 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 public class JavaProjectBuilder {
-    private final Path repoPath;
-    private final Path path;
-    private final String ref;
+    private Path repoPath;
+    private Path path;
+    private String ref;
 
-    private final Git git;
-
-    public JavaProjectBuilder(final Path repoPath, final String ref) throws IOException {
+    public JavaProjectBuilder(final Path repoPath) {
         this.repoPath = repoPath;
         this.path = repoPath.getParent();
-        this.ref = ref;
+        this.ref = "HEAD";
+    }
 
-        this.git = new Git(new FileRepository(getGitRepoPath(repoPath)));
+    public JavaProjectBuilder repoPath(final Path repoPath) {
+        this.repoPath = repoPath;
+        this.path = repoPath.toAbsolutePath().getParent();
+
+        return this;
+    }
+
+    public JavaProjectBuilder ref(final String ref) {
+        this.ref = ref;
+        return this;
     }
 
     private static String getGitRepoPath(final Path repoPath) throws IOException {
@@ -61,21 +69,23 @@ public class JavaProjectBuilder {
         }
     }
 
-    public JavaProject build() throws GitAPIException {
-        final Set<CompilationUnit> files = parseJavaFiles(ref, "");
+    public JavaProject build() throws GitAPIException, IOException {
+        final Git git = new Git(new FileRepository(getGitRepoPath(repoPath)));
+
+        final Set<CompilationUnit> files = parseJavaFiles(git, "");
 
         return new JavaProject(repoPath, path, ref, files, git);
     }
 
-    private Set<CompilationUnit> parseJavaFiles(final String commitId, final String filter)
+    private Set<CompilationUnit> parseJavaFiles(final Git git, final String filter)
             throws GitAPIException {
-        setupSolver(commitId);
+        setupSolver(git);
 
         return getAllFileContent(filter);
     }
 
-    private void setupSolver(final String commitId) throws GitAPIException {
-        CombinedTypeSolver solver = createSolver(commitId);
+    private void setupSolver(final Git git) throws GitAPIException {
+        CombinedTypeSolver solver = createSolver(git);
 
         ParserConfiguration parserConfiguration = new ParserConfiguration();
         parserConfiguration.setSymbolResolver(new JavaSymbolSolver(solver));
@@ -98,8 +108,8 @@ public class JavaProjectBuilder {
         return result;
     }
 
-    private CombinedTypeSolver createSolver(final String ref) throws GitAPIException {
-        gitSetProjectCommit(ref, true);
+    private CombinedTypeSolver createSolver(final Git git) throws GitAPIException {
+        gitSetProjectCommit(git, true);
 
         // Add basic reflection solver.
         final CombinedTypeSolver solver = new CombinedTypeSolver();
@@ -160,7 +170,7 @@ public class JavaProjectBuilder {
         return new ArrayList<>();
     }
 
-    private void gitSetProjectCommit(final String ref, boolean recompile)
+    private void gitSetProjectCommit(final Git git, boolean recompile)
             throws GitAPIException {
         // Reset the repository to the desired version.
         git.reset().setMode(ResetCommand.ResetType.HARD).setRef(ref).call();

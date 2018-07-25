@@ -22,7 +22,7 @@ public class JavaProjectTest {
 
     @Before
     public void setUp() throws Exception {
-        project = new JavaProjectBuilder(Paths.get("src/test/resources/eunomia-test-project/.git"), "HEAD").build();
+        project = new JavaProjectBuilder(Paths.get("src/test/resources/eunomia-test-project/.git")).ref("HEAD").build();
     }
 
     @After

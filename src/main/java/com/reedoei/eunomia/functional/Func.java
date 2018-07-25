@@ -73,6 +73,18 @@ public class Func {
         return SetUtil.map(f, ts);
     }
 
+    public static <T, U, V> Function<T, Function<U, V>> curry(final BiFunction<T, U, V> f) {
+        return t -> u -> f.apply(t, u);
+    }
+
+    public static <T, U, V> BiFunction<T, U, V> uncurry(final Function<T, Function<U, V>> f) {
+        return (t, u) -> f.apply(t).apply(u);
+    }
+
+    public static <T, U, V, W> Function<T, Function<U, Function<V, W>>> curry(final TriFunction<T, U, V, W> f) {
+        return t -> u -> v -> f.apply(t, u, v);
+    }
+
     // TODO: move to supplier utils
     public static Supplier<Void> asVoid(final Runnable runnable) {
         return () -> {

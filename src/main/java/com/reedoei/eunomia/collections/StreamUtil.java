@@ -14,4 +14,10 @@ public class StreamUtil {
     public static <T> void seq(final Stream<T> stream) {
         stream.forEach(t -> {});
     }
+
+    public static <T> Iterable<T> fromStream(final Stream<T> stream) {
+        // Iterable is a functional interface, so because stream implements the right methods we can
+        // do this.
+        return stream::iterator;
+    }
 }

@@ -32,4 +32,14 @@ public class StreamUtilTest {
         StreamUtil.seq(booleanStream);
         assertFalse(l.isEmpty());
     }
+
+    @Test
+    public void fromStream() {
+        int total = 0;
+        for (final Integer i : StreamUtil.fromStream(IntStream.range(0, 10).boxed())) {
+            total += i;
+        }
+
+        assertEquals(45, total);
+    }
 }
