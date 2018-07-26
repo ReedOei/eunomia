@@ -315,10 +315,14 @@ public class ListUtil {
     }
 
     public static <T> List<T> append(final List<T> ts, final T t) {
-        final List<T> result = Collections.synchronizedList(new ArrayList<>(ts));
-        result.add(t);
+        if (ts == null) {
+            return Collections.synchronizedList(new ArrayList<>(Collections.singletonList(t)));
+        } else {
+            final List<T> result = Collections.synchronizedList(new ArrayList<>(ts));
+            result.add(t);
 
-        return result;
+            return result;
+        }
     }
 
     public static <T, U> Function<List<T>, List<U>> mapWithIndex(final BiFunction<Integer, T, U> f) {
