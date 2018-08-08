@@ -8,7 +8,6 @@ Note: this package is very opinionated. May or may not suit you.
 
 - Many functional style methods. Includes curried versions of your favorite methods (e.g., `map`, `filter`).
 - Easy string searching 
-    - Find the line **after** the matching line of text.
     - Modify the text around the match easily.
 - Work more easily with pairs with PairStreams and a variety of other functional utilities.
 - Easily capture output from stdout and stderr with `CaptureStream`
