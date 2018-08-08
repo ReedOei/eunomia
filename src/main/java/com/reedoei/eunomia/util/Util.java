@@ -3,6 +3,7 @@ package com.reedoei.eunomia.util;
 import com.reedoei.eunomia.collections.ListUtil;
 import com.reedoei.eunomia.collections.PairStream;
 import com.reedoei.eunomia.collections.SetUtil;
+import com.reedoei.eunomia.subject.classpath.Classpath;
 import org.apache.commons.io.FilenameUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.dom4j.Document;
@@ -285,33 +286,13 @@ public class Util {
         return x -> x == null ? amount : x + amount;
     }
 
+    @Deprecated // In 1.3.1
     public static String buildClassPath(final String path) {
-        return buildClassPath(path.split(System.getProperty("path.separator")));
+        return Classpath.build(path).toString();
     }
 
+    @Deprecated // In 1.3.1
     public static String buildClassPath(final String... paths) {
-        final StringBuilder sb = new StringBuilder();
-        for (String path : paths) {
-            if (path.endsWith("*")) {
-                path = path.substring(0, path.length() - 1);
-                final File pathFile = new File(path);
-
-                final File[] files = pathFile.listFiles();
-
-                if (files != null) {
-                    for (final File file : files) {
-                        if (file.isFile() && file.getName().endsWith(".jar")) {
-                            sb.append(path);
-                            sb.append(file.getName());
-                            sb.append(System.getProperty("path.separator"));
-                        }
-                    }
-                }
-            } else {
-                sb.append(path);
-                sb.append(System.getProperty("path.separator"));
-            }
-        }
-        return sb.toString();
+        return Classpath.build(paths).toString();
     }
 }

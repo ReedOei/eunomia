@@ -92,7 +92,4 @@ public class Func {
             return null;
         };
     }
-
-    // TODO: filter, reduce
-    // TODO: Also copy functions for Maps
 }

@@ -1,5 +1,7 @@
 package com.reedoei.eunomia.subject;
 
+import com.reedoei.eunomia.ast.JavaProject;
+import com.reedoei.eunomia.ast.JavaProjectBuilder;
 import com.reedoei.eunomia.util.Util;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -51,6 +53,11 @@ public class MavenSubject implements Subject {
     }
 
     @Override
+    public Path root() {
+        return root;
+    }
+
+    @Override
     public Path testClasses() {
         return root.resolve("target").resolve("test-classes");
     }
@@ -90,11 +97,16 @@ public class MavenSubject implements Subject {
         try {
             return Files.walk(root)
                     .filter(p -> p.toFile().getName().equals("pom.xml") && !root.resolve("pom.xml").equals(p))
-                    .map(p -> MavenSubject.fromRoot("n", p.getParent()));
+                    .map(p -> MavenSubject.fromRoot(p.getParent()));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return Stream.empty();
+    }
+
+    @Override
+    public JavaProject project() throws Exception {
+        return new JavaProjectBuilder(root()).build();
     }
 }

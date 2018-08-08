@@ -5,6 +5,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.text.NumberFormat;
 
+// TODO: Make different kinds of cells instead of using celltype
+// TODO: Add ability to bold/italicize/surround with arbitrary latex commands/apply function to display string
 public class Cell {
     public int value;
     public int total;
@@ -136,10 +138,10 @@ public class Cell {
                 return "&";
             }
         }
-//
-//            if (showOverride != null && !showOverride.isEmpty()) {
-//                return showOverride;
-//            }
+
+            if (showOverride != null && !showOverride.isEmpty()) {
+                return showOverride;
+            }
 
         switch (cellType) {
             case PERCENT:
@@ -148,16 +150,12 @@ public class Cell {
                 return percent(longestN, longestD, "");
             case RATIO:
                 return ratio(longestN, longestD, minLength, null);
+            case JUST_RATIO:
+                return justRatio();
             case VALUE:
-                if (showOverride == null || showOverride.isEmpty()) {
-                    return "& " + latexPad(value, longestVal);
-                } else {
-                    return "& " + showOverride;
-                }
-
+                return "& " + latexPad(value, longestVal);
             case JUST_PERCENT:
                 return justPercent();
-
             case VALUE_SINGLE_COL:
                 return latexPad(value, longestVal);
             case DEFAULT:

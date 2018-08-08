@@ -1,15 +1,17 @@
 package com.reedoei.eunomia.util;
 
-public class RuntimeThrower<T> {
-    private final Computation<T> computation;
+import java.util.concurrent.Callable;
 
-    public RuntimeThrower(final Computation<T> computation) {
+public class RuntimeThrower<T> {
+    private final Callable<T> computation;
+
+    public RuntimeThrower(final Callable<T> computation) {
         this.computation = computation;
     }
 
     public T run() {
         try {
-            return computation.run();
+            return computation.call();
         } catch (Throwable throwable) {
             if (throwable instanceof RuntimeException) {
                 throw (RuntimeException) throwable;

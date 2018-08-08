@@ -2,6 +2,7 @@ package com.reedoei.eunomia.collections;
 
 import com.google.common.collect.Streams;
 import com.reedoei.eunomia.functional.Func;
+import com.reedoei.eunomia.util.RuntimeThrower;
 import com.reedoei.eunomia.util.Util;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -22,6 +23,19 @@ import java.util.stream.Stream;
 // TODO: Move and deprecate functions from Util.
 
 public class ListUtil {
+    public static <T> List<T> newList(final int n, final Class<T> clz) {
+        return ensureSize(Collections.synchronizedList(new ArrayList<>()), n,
+                () -> new RuntimeThrower<>(clz::newInstance).run());
+    }
+
+    public static <T> List<T> newList(final int n, final T t) {
+        return ensureSize(Collections.synchronizedList(new ArrayList<>()), n, () -> t);
+    }
+
+    public static <T> List<T> newList(final int n, final Supplier<T> supplier) {
+        return ensureSize(Collections.synchronizedList(new ArrayList<>()), n, supplier);
+    }
+
     public static List<Integer> range(final int end) {
         return range(0, end);
     }
@@ -42,8 +56,12 @@ public class ListUtil {
 
     @NonNull
     public static <T> List<T> concat(final List<T> a, final List<T> b) {
-        if (a == null || b == null) {
-            return new ArrayList<>();
+        if (a == null && b == null) {
+            return new ListEx<>();
+        } else if (a == null) {
+            return b;
+        } else if (b == null) {
+            return a;
         } else {
             a.addAll(b);
             return a;
@@ -88,6 +106,36 @@ public class ListUtil {
 
         if (i != -1) {
             return new ArrayList<>(ts.subList(0, Math.min(ts.size(), i + 1)));
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public static <T> List<T> before(final List<T> ts, final T t) {
+        final int i = ts.indexOf(t);
+
+        if (i != -1) {
+            return new ArrayList<>(ts.subList(0, Math.min(ts.size(), i)));
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public static <T> List<T> afterInc(final List<T> ts, final T t) {
+        final int i = ts.indexOf(t);
+
+        if (i != -1) {
+            return new ArrayList<>(ts.subList(Math.min(ts.size(), i), ts.size()));
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public static <T> List<T> after(final List<T> ts, final T t) {
+        final int i = ts.indexOf(t);
+
+        if (i != -1) {
+            return new ArrayList<>(ts.subList(Math.min(ts.size(), i + 1), ts.size()));
         } else {
             return new ArrayList<>();
         }
@@ -281,6 +329,10 @@ public class ListUtil {
         final List<T> temp = Collections.synchronizedList(new ArrayList<>(ts));
         Collections.shuffle(temp);
         return ListUtil.take(n, temp);
+    }
+
+    public static <T> List<T> ensureSize(final List<T> ts, final List<T> other, final Class<T> clz) {
+        return ensureSize(ts, other.size(), () -> new RuntimeThrower<>(clz::newInstance).run());
     }
 
     public static <T> List<T> ensureSize(final List<T> ts, final List<T> other, final T t) {

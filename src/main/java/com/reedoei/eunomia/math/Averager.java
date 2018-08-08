@@ -35,6 +35,10 @@ public class Averager<N extends Number> {
         return this;
     }
 
+    public Averager addAll(final Averager<N> averager) {
+        return addAll(averager.getValues());
+    }
+
     public double arithMean() {
         return mean();
     }

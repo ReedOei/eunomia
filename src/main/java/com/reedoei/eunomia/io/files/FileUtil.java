@@ -40,7 +40,7 @@ public class FileUtil {
      * Works recursively.
      */
     public static void copyFiles(final Path inputPath, final Path destPath) throws IOException {
-        for (Path path : Files.walk(inputPath).collect(Collectors.toList())) {
+        for (final Path path : Files.walk(inputPath).collect(Collectors.toList())) {
             final Path destFile = destPath.resolve(inputPath.relativize(path));
 
             if (!Files.exists(destFile)) {

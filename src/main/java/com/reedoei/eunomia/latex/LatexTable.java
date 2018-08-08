@@ -15,6 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
+// TODO: addAverageRow
 public class LatexTable {
     private final List<List<Cell>> cells = new ArrayList<>();
 
