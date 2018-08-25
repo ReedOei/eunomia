@@ -36,6 +36,9 @@ public class StringSearch {
         this(FileUtil.readFile(repoPath));
     }
 
+    // TODO: Do this
+    // public List<Stream<LineMatch>> searchMultiple
+
     public LineMatch searchMustMatch(final Searcher searcher) {
         return searchFirst(searcher).orElseThrow(() -> new IllegalArgumentException("No match found for: " + searcher.description()));
     }

@@ -2,22 +2,19 @@ package com.reedoei.eunomia.latex;
 
 import com.reedoei.eunomia.collections.ListUtil;
 import com.reedoei.eunomia.collections.MapUtil;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
 // TODO: addAverageRow
 public class LatexTable {
-    private final List<List<Cell>> cells = new ArrayList<>();
+    private final List<List<RationalCell>> cells = new ArrayList<>();
 
     private final Map<String, CellType> rowShow = new HashMap<>();
     private final Map<String, CellType> columnShow = new HashMap<>();
@@ -49,7 +46,14 @@ public class LatexTable {
         this.rows = rows;
     }
 
-    public Cell getCell(CellPos cellPos) {
+    public RationalCell getCell(String column, String row) {
+        int x = columns.indexOf(column);
+        int y = rows.indexOf(row);
+
+        return cells.get(y).get(x);
+    }
+
+    public RationalCell getCell(CellPos cellPos) {
         switch (cellPos) {
             case BOTTOM_LEFT:
                 return cells.get(cells.size() - 1).get(0);
@@ -137,26 +141,26 @@ public class LatexTable {
         return this;
     }
 
-    private Optional<Cell> makeCell(final @Nullable Integer value,
-                                    final @Nullable Integer total,
-                                    final CellType display) {
+    private Optional<RationalCell> makeCell(final @Nullable Integer value,
+                                            final @Nullable Integer total,
+                                            final CellType display) {
         if (value == null || total == null) {
             if (ignoreMissing) {
                 return Optional.empty();
             } else if (replaceMissing != null && !replaceMissing.isEmpty()) {
-                Cell cell = new Cell(0, 0, display);
-                cell.showOverride = replaceMissing;
-                return Optional.of(cell);
+                RationalCell rationalCell = new RationalCell(0, 0, display);
+                rationalCell.showOverride = replaceMissing;
+                return Optional.of(rationalCell);
             }
         } else {
-            return Optional.of(new Cell(value, total, display));
+            return Optional.of(new RationalCell(value, total, display));
         }
 
         return Optional.empty();
     }
 
     public LatexTable addRow(final Map<String, Integer> m, final Map<String, Integer> totals, CellType display) {
-        final List<Cell> newRow = new ArrayList<>();
+        final List<RationalCell> newRow = new ArrayList<>();
 
         for (final String column : columns) {
             makeCell(m.get(column), totals.getOrDefault(column, 0), display)
@@ -170,7 +174,7 @@ public class LatexTable {
 
     public LatexTable addRow(final Map<String, Integer> m,
                              final CellType display) {
-        final List<Cell> newRow = new ArrayList<>();
+        final List<RationalCell> newRow = new ArrayList<>();
         setRowDisplay(rows.get(cells.size()), display);
 
         int total = MapUtil.total(m);
@@ -222,9 +226,9 @@ public class LatexTable {
     }
 
     public LatexTable addTotalColumn(final String colName, final CellType display) {
-        for (final List<Cell> row : cells) {
+        for (final List<RationalCell> row : cells) {
             int total = row.stream().mapToInt(c -> c.value).sum();
-            row.add(new Cell(total, 0, display));
+            row.add(new RationalCell(total, 0, display));
         }
 
         columns.add(colName);
@@ -247,7 +251,7 @@ public class LatexTable {
 
             int finalI = i;
             makeCell(m.get(rows.get(i)), total, display)
-                    .ifPresent(cell -> cells.get(finalI).add(cell));
+                    .ifPresent(rationalCell -> cells.get(finalI).add(rationalCell));
         }
 
         return this;
@@ -269,7 +273,7 @@ public class LatexTable {
 
             int finalI = i;
             makeCell(m.get(rows.get(i)), totals.get(rows.get(i)), display)
-                    .ifPresent(cell -> cells.get(finalI).add(cell));
+                    .ifPresent(rationalCell -> cells.get(finalI).add(rationalCell));
         }
 
         return this;
@@ -294,7 +298,7 @@ public class LatexTable {
                 result.append(latexRow).append(System.lineSeparator());
             }
 
-            List<Cell> row = cells.get(y);
+            List<RationalCell> row = cells.get(y);
             final List<String> cellStrs = new ArrayList<>();
 
             if (showRowNames) {
@@ -306,13 +310,13 @@ public class LatexTable {
             }
 
             for (int i = 0; i < row.size(); i++) {
-                Cell cell = row.get(i);
+                RationalCell rationalCell = row.get(i);
 
                 int longestN = 0;
                 int longestD = 0;
                 int minLength = 0;
                 int longestVal = 0;
-                for (final List<Cell> r : cells) {
+                for (final List<RationalCell> r : cells) {
                     longestN = Math.max(longestN, Integer.toString(r.get(i).value).length());
                     if (r.get(i).cellType != CellType.VALUE && r.get(i).cellType != CellType.VALUE_SINGLE_COL) {
                         longestD = Math.max(longestD, Integer.toString(r.get(i).total).length());
@@ -321,17 +325,17 @@ public class LatexTable {
                     longestVal = Math.max(longestVal, Integer.toString(r.get(i).value).length());
                 }
 
-                if (cell.cellType != CellType.DEFAULT) {
-                    cellStrs.add(cell.showAs(longestN, longestD, minLength, longestVal, cell.cellType));
+                if (rationalCell.cellType != CellType.DEFAULT) {
+                    cellStrs.add(rationalCell.showAs(longestN, longestD, minLength, longestVal, rationalCell.cellType));
                 } else {
                     final CellType rowType = rows.size() > y ? rowShow.getOrDefault(rows.get(y), CellType.DEFAULT) : CellType.DEFAULT;
                     final CellType colType = columns.size() > i ? columnShow.getOrDefault(columns.get(i), CellType.DEFAULT) : CellType.DEFAULT;
 
                     // Col type overrides row type unless it is default
                     if (colType == CellType.DEFAULT) {
-                        cellStrs.add(cell.showAs(longestN, longestD, minLength, longestVal, rowType));
+                        cellStrs.add(rationalCell.showAs(longestN, longestD, minLength, longestVal, rowType));
                     } else {
-                        cellStrs.add(cell.showAs(longestN, longestD, minLength, longestVal, colType));
+                        cellStrs.add(rationalCell.showAs(longestN, longestD, minLength, longestVal, colType));
                     }
                 }
             }

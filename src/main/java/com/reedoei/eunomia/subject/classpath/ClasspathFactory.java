@@ -10,7 +10,7 @@ public class ClasspathFactory {
         } else if (path.toString().endsWith(".jar")) {
             return new JarClasspath(path);
         } else {
-            throw new IllegalArgumentException("Error");
+            throw new IllegalArgumentException("Error: Path " + path.toAbsolutePath() + " is neither a directory nor a jar file!");
         }
     }
 }

@@ -6,11 +6,16 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Classpath {
     public static Classpath current() {
         return build(System.getProperty("java.class.path"));
+    }
+
+    public static Classpath from(final Classpath... classpaths) {
+        return Arrays.stream(classpaths).reduce(new Classpath(), Classpath::combineWith);
     }
 
     public static Classpath build(final String path) {
@@ -39,25 +44,49 @@ public class Classpath {
             }
         }
 
-        return new Classpath(cpPaths);
+        final ClasspathBuilder builder = new ClasspathBuilder();
+        cpPaths.forEach(builder::element);
+        return builder.build();
     }
 
-    private final List<ClasspathElement> paths = new ArrayList<>();
+    private final List<ClasspathElement> elements = new ArrayList<>();
 
-    public Classpath(final List<Path> paths) {
-        paths.stream().map(ClasspathFactory::forPath).forEach(this.paths::add);
+    public Classpath() {
+        this(new ArrayList<>());
+    }
+
+    public Classpath(final List<ClasspathElement> elements) {
+        this.elements.addAll(elements);
     }
 
     public boolean contains(final Class<?> clz) {
-        return paths.stream().anyMatch(element -> element.contains(clz));
+        return elements.stream().anyMatch(element -> element.contains(clz));
     }
 
-    public List<ClasspathElement> paths() {
-        return paths;
+    public Classpath add(final Path path) {
+        return add(ClasspathFactory.forPath(path));
+    }
+
+    public Classpath add(final ClasspathElement element) {
+        if (elements.stream().noneMatch(p -> p.path().toAbsolutePath().equals(element.path().toAbsolutePath()))) {
+            elements.add(element);
+        }
+
+        return this;
+    }
+
+    public Classpath combineWith(final Classpath other) {
+        other.elements().forEach(this::add);
+
+        return this;
+    }
+
+    public List<ClasspathElement> elements() {
+        return elements;
     }
 
     @Override
     public String toString() {
-        return String.join(File.pathSeparator, ListUtil.map(ClasspathElement::toString, paths()));
+        return String.join(File.pathSeparator, ListUtil.map(ClasspathElement::show, elements()));
     }
 }

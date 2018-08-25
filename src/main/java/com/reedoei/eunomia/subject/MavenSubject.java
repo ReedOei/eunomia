@@ -2,6 +2,7 @@ package com.reedoei.eunomia.subject;
 
 import com.reedoei.eunomia.ast.JavaProject;
 import com.reedoei.eunomia.ast.JavaProjectBuilder;
+import com.reedoei.eunomia.subject.classpath.Classpath;
 import com.reedoei.eunomia.util.Util;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -84,7 +85,7 @@ public class MavenSubject implements Subject {
 
     @Override
     public String classpath() {
-        return Util.buildClassPath(classes().toString(), testClasses().toString(), dependencies() + "/*");
+        return Classpath.build(classes().toString(), testClasses().toString(), dependencies() + "/*").toString();
     }
 
     @Override

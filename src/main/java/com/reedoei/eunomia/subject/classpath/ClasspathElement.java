@@ -7,8 +7,11 @@ import java.util.Optional;
 
 public interface ClasspathElement {
     Path path();
-
     Optional<Path> pathTo(final @Nullable String classOrPackageName);
+
+    default String show() {
+        return path().toAbsolutePath().toString();
+    }
 
     default boolean contains(final Class<?> clz) {
         final String canonicalName = clz.getCanonicalName();
