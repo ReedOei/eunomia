@@ -14,8 +14,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-// TODO: Use maven calls to get the actual directories to handle project specific cases.
-// NOTE: Seems to not really be possible. Might have to use command line to call maven.
 public class MavenSubject implements Subject {
     private final String name;
     private final Path root;

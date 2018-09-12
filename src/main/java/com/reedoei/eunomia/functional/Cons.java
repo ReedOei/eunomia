@@ -22,4 +22,8 @@ public class Cons {
     public static <T, U> Consumer<Pair<T, U>> fromBi(final BiConsumer<T, U> consumer) {
         return p -> consumer.accept(p.getLeft(), p.getRight());
     }
+
+    public static <T> Consumer<T> ignore() {
+        return t -> {};
+    }
 }
