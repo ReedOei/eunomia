@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileUtil {
     public static boolean makeDirectoryDestructive(final Path path) throws IOException {
@@ -29,6 +30,21 @@ public class FileUtil {
         }
 
         return found;
+    }
+
+    /**
+     * Read a file, returning an empty stream if it fails, and a Stream containing a single
+     * String with the contents of the file if is succeeds.
+     *
+     * This is useful for things like Files.list(path).safeReadFile(FileUtil::fileContents), because
+     * it won't throw but will also not return bad results.
+     */
+    public static Stream<String> safeReadFile(final Path path) {
+        try {
+            return Stream.of(readFile(path));
+        } catch (IOException ignored) {}
+
+        return Stream.empty();
     }
 
     public static String readFile(final Path path) throws IOException {

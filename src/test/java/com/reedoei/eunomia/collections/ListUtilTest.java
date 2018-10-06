@@ -31,7 +31,7 @@ public class ListUtilTest {
     @Test
     public void read() {
         assertEquals(ListUtil.fromArray(1.5, 2.5, 3.5),
-                ListUtil.read("[1.5, 2.5, 3.5]", Double::parseDouble));
+                ListUtil.read(Double::parseDouble, "[1.5, 2.5, 3.5]"));
     }
 
     @Test

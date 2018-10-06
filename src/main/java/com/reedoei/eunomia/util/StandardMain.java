@@ -1,6 +1,7 @@
 package com.reedoei.eunomia.util;
 
 import com.reedoei.eunomia.collections.StreamUtil;
+import com.reedoei.eunomia.subject.classpath.Classpath;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -49,7 +50,7 @@ public abstract class StandardMain {
     }
 
     public String getClasspathArg() {
-        return Util.buildClassPath(getArg("cp", "classpath").orElse(System.getProperty("java.class.path")));
+        return Classpath.build(getArg("cp", "classpath").orElse(System.getProperty("java.class.path"))).toString();
     }
 
     public Optional<String> getArg(final String... argNames) {
@@ -74,18 +75,6 @@ public abstract class StandardMain {
         }
 
         return value.get();
-    }
-
-    @Deprecated
-    @NonNull
-    protected Optional<String> getArgValue(@NonNull final String argName) {
-        return getArg(argName);
-    }
-
-    @Deprecated
-    @NonNull
-    protected String getRequiredArg(@NonNull final String argName) throws IllegalArgumentException {
-        return getArgRequired(argName);
     }
 
     protected abstract void run() throws Exception;

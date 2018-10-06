@@ -39,7 +39,7 @@ public class SetUtil {
     }
 
     public static <T> Set<T> read(final Function<String, T> f, final String s) {
-        return Collections.synchronizedSet(new HashSet<>(ListUtil.read(s, f)));
+        return Collections.synchronizedSet(new HashSet<>(ListUtil.read(f, s)));
     }
 
     @SafeVarargs

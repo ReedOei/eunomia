@@ -43,36 +43,6 @@ public class Func {
         return ignored -> u;
     }
 
-    @Deprecated // In 1.3.1
-    public static <T, U> Function<List<T>, List<U>> mapWithIndex(final BiFunction<Integer, T, U> f) {
-        return ListUtil.mapWithIndex(f);
-    }
-
-    @Deprecated // In 1.3.1
-    public static <T, U> List<U> mapWithIndex(final BiFunction<Integer, T, U> f, final List<T> ts) {
-        return ListUtil.mapWithIndex(f, ts);
-    }
-
-    @Deprecated // In 1.3.1
-    public static <T, U> Function<List<T>, List<U>> map(final Function<T, U> f) {
-        return ListUtil.map(f);
-    }
-
-    @Deprecated // In 1.3.1
-    public static <T, U> List<U> map(final Function<T, U> f, final List<T> ts) {
-        return ListUtil.map(f, ts);
-    }
-
-    @Deprecated // In 1.3.1
-    public static <T, U> Function<Set<T>, Set<U>> mapSet(final Function<T, U> f) {
-        return SetUtil.map(f);
-    }
-
-    @Deprecated // In 1.3.1
-    public static <T, U> Set<U> mapSet(final Function<T, U> f, final Set<T> ts) {
-        return SetUtil.map(f, ts);
-    }
-
     public static <T, U, V> Function<T, Function<U, V>> curry(final BiFunction<T, U, V> f) {
         return t -> u -> f.apply(t, u);
     }

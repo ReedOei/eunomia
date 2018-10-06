@@ -82,19 +82,10 @@ public class ListUtil {
         return read(Function.identity(), s);
     }
 
-    @Deprecated
-    @NonNull
-    public static <T> List<T> read(@NonNull final String s,
-                                   @NonNull final Function<String, T> constructor) {
-        return read(constructor, s);
-    }
-
     @NonNull
     public static <T> List<T> read(@NonNull final Function<String, T> constructor,
                                    @NonNull final String s) {
-        return Arrays.stream(s
-                .replace("[", "")
-                .replace("]", "")
+        return Arrays.stream(s.trim().substring(1, s.length() - 1)
                 .split(","))
                 .map(String::trim)
                 .map(constructor)
@@ -349,21 +340,6 @@ public class ListUtil {
         }
 
         return ts;
-    }
-
-    @Deprecated
-    public static <T> List<T> ensureCapacity(final List<T> ts, final List<T> other, final T t) {
-        return ensureCapacity(ts, other.size(), () -> t);
-    }
-
-    @Deprecated
-    public static <T> List<T> ensureCapacity(final List<T> ts, final List<T> other, final Supplier<T> supplier) {
-        return ensureCapacity(ts, other.size(), supplier);
-    }
-
-    @Deprecated
-    public static <T> List<T> ensureCapacity(final List<T> ts, final int n, final Supplier<T> supplier) {
-        return ensureSize(ts, n, supplier);
     }
 
     public static <T> List<T> append(final List<T> ts, final T t) {

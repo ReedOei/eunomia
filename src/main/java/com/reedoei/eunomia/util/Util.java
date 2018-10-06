@@ -35,13 +35,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Util {
-    @Deprecated // In 1.3.1
-    public static <T, U> void forEachPair(final List<T> ts,
-                                          final List<U> us,
-                                          final BiConsumer<T, U> consumer) {
-        PairStream.product(ts, us).forEach(consumer);
-    }
-
     public static <T, U, V> BiFunction<List<T>, List<U>, List<V>> zipWith(final BiFunction<T, U, V> f) {
         return (ts, us) -> zipWith(f, ts, us);
     }
@@ -80,11 +73,6 @@ public class Util {
         } else {
             return b;
         }
-    }
-
-    @Deprecated
-    public static <T> List<T> beforeInc(final List<T> ts, final @NonNull T t) {
-        return ListUtil.beforeInc(ts, t);
     }
 
     public static <T> Function<T, T> modify(final Consumer<T> f) {
@@ -272,27 +260,11 @@ public class Util {
         };
     }
 
-    @Deprecated
-    @SafeVarargs
-    public static <T> Set<T> common(final Set<T>... sets) {
-        return SetUtil.intersect(sets);
-    }
-
     public static <T> List<T> prepend(final T t, final List<T> rest) {
         return prependAll(Collections.singletonList(t), rest);
     }
 
     public static Function<Integer, Integer> incrementBy(final int amount) {
         return x -> x == null ? amount : x + amount;
-    }
-
-    @Deprecated // In 1.3.1
-    public static String buildClassPath(final String path) {
-        return Classpath.build(path).toString();
-    }
-
-    @Deprecated // In 1.3.1
-    public static String buildClassPath(final String... paths) {
-        return Classpath.build(paths).toString();
     }
 }
