@@ -14,3 +14,5 @@ This package may or may not suit you.
 - Easily capture output from stdout and stderr with `CaptureStream`
 - Parse Java files and resolve method/class references for any commit
 - Create LaTeX tables
+    - Can also generate tables from sqlite queries
+- Immutable ListEx class for more convienent list operations
