@@ -6,6 +6,7 @@ import com.reedoei.eunomia.collections.SetUtil;
 import com.reedoei.eunomia.subject.classpath.Classpath;
 import org.apache.commons.io.FilenameUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -244,8 +245,8 @@ public class Util {
         return result;
     }
 
-    public static <T> Predicate<@NonNull T> distinctByKey(final Function<? super T, @NonNull ?> keyExtractor) {
-        final Set<Object> seen = ConcurrentHashMap.newKeySet();
+    public static <T> Predicate<T> distinctByKey(final Function<? super T, ?> keyExtractor) {
+        final Set<@Nullable Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
     }
 

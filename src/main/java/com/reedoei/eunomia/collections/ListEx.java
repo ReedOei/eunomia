@@ -11,7 +11,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -27,18 +29,78 @@ public class ListEx<T> extends ArrayList<T> {
         super();
     }
 
-//    public static <T> ListEx<T> newList(final int n, final Class<T> clz) {
-//        return ensureSize(Collections.synchronizedList(new ArrayList<>()), n,
-//                () -> new RuntimeThrower<>(clz::newInstance).run());
-//    }
-//
-//    public static <T> ListEx<T> newList(final int n, final T t) {
-//        return ensureSize(Collections.synchronizedList(new ArrayList<>()), n, () -> t);
-//    }
-//
-//    public static <T> ListEx<T> newList(final int n, final Supplier<T> supplier) {
-//        return ensureSize(Collections.synchronizedList(new ArrayList<>()), n, supplier);
-//    }
+    public static <T> ListEx<T> newList(final int n, final Class<T> clz) {
+        return newList(n, () -> new RuntimeThrower<>(clz::newInstance).run());
+    }
+
+    public static <T> ListEx<T> newList(final int n, final T t) {
+        return newList(n, () -> t);
+    }
+
+    public static <T> ListEx<T> newList(final int n, final Supplier<T> supplier) {
+        return new ListEx<T>().ensureSize(n, supplier);
+    }
+
+    public static ListEx<Double> fromArray(final double[] doubles) {
+        ListEx<Double> list = new ListEx<>();
+        for (double v : doubles) {
+            Double aDouble = v;
+            list.add(aDouble);
+        }
+        return list;
+    }
+
+    public static ListEx<Integer> fromArray(final int[] ints) {
+        ListEx<Integer> list = new ListEx<>();
+        for (int i : ints) {
+            Integer integer = i;
+            list.add(integer);
+        }
+        return list;
+    }
+
+    public static ListEx<Long> fromArray(final long[] longs) {
+        ListEx<Long> list = new ListEx<>();
+        for (long l : longs) {
+            Long aLong = l;
+            list.add(aLong);
+        }
+        return list;
+    }
+
+    @SafeVarargs
+    public static <T> ListEx<@NonNull T> fromArray(final T... ts) {
+        final ListEx<@NonNull T> result = new ListEx<>();
+
+        for (final T t : ts) {
+            if (t != null) {
+                result.add(t);
+            }
+        }
+
+        return result;
+    }
+
+    @SafeVarargs
+    public static <T> ListEx<@Nullable T> fromArrayUnsafe(final T... ts) {
+        return new ListEx<>(Arrays.asList(ts));
+    }
+
+    public static <T> ListEx<T> collect(final Stream<T> s) {
+        return s.collect(Collectors.toCollection(ListEx::new));
+    }
+
+    public static <T> ListEx<T> collect(final Iterable<T> it) {
+        return collect(it.iterator());
+    }
+
+    public static <T> ListEx<T> collect(final Iterator<T> it) {
+        final ListEx<T> result = new ListEx<>();
+
+        it.forEachRemaining(result::add);
+
+        return result;
+    }
 
     public static ListEx<Integer> range(final int end) {
         return range(0, end);
@@ -88,66 +150,74 @@ public class ListEx<T> extends ArrayList<T> {
         return new ListEx<>(ListUtil.read(constructor, s));
     }
 
-    public static <T> List<T> beforeInc(final List<T> ts, final @NonNull T t) {
-        final int i = ts.indexOf(t);
+    public ListEx<T> reversed() {
+        final ListEx<T> result = new ListEx<>(this);
+        Collections.reverse(result);
+        return result;
+    }
+
+    public <U> ListEx<T> distinctBy(final Function<T, U> f) {
+        return stream().filter(Util.distinctByKey(f)).collect(Collectors.toCollection(ListEx::new));
+    }
+
+    public ListEx<T> distinct() {
+        return distinctBy(Function.identity());
+    }
+
+    public ListEx<ListEx<T>> groupBy(final BiPredicate<T, T> f) {
+        final ListEx<ListEx<T>> result = new ListEx<>();
+
+        return result;
+    }
+
+    public ListEx<T> beforeInc(final @NonNull T t) {
+        final int i = indexOf(t);
 
         if (i != -1) {
-            return new ArrayList<>(ts.subList(0, Math.min(ts.size(), i + 1)));
+            return new ListEx<>(subList(0, Math.min(size(), i + 1)));
         } else {
-            return new ArrayList<>();
+            return new ListEx<>();
         }
     }
 
-    public static <T> List<T> before(final List<T> ts, final T t) {
-        final int i = ts.indexOf(t);
+    public ListEx<T> before(final T t) {
+        final int i = indexOf(t);
 
         if (i != -1) {
-            return new ArrayList<>(ts.subList(0, Math.min(ts.size(), i)));
+            return new ListEx<>(subList(0, Math.min(size(), i)));
         } else {
-            return new ArrayList<>();
+            return new ListEx<>();
         }
     }
 
-    public static <T> List<T> afterInc(final List<T> ts, final T t) {
-        final int i = ts.indexOf(t);
+    public ListEx<T> afterInc(final T t) {
+        final int i = indexOf(t);
 
         if (i != -1) {
-            return new ArrayList<>(ts.subList(Math.min(ts.size(), i), ts.size()));
+            return new ListEx<>(subList(Math.min(size(), i), size()));
         } else {
-            return new ArrayList<>();
+            return new ListEx<>();
         }
     }
 
-    public static <T> List<T> after(final List<T> ts, final T t) {
-        final int i = ts.indexOf(t);
+    public ListEx<T> after(final T t) {
+        final int i = indexOf(t);
 
         if (i != -1) {
-            return new ArrayList<>(ts.subList(Math.min(ts.size(), i + 1), ts.size()));
+            return new ListEx<>(subList(Math.min(size(), i + 1), size()));
         } else {
-            return new ArrayList<>();
+            return new ListEx<>();
         }
     }
 
-    public static <T> Function<List<T>, List<T>> take(final int n) {
-        return ts -> take(n, ts);
+    public ListEx<T> take(final int n) {
+        return new ListEx<>(subList(0, Math.min(n, size())));
     }
 
-    public static <T> List<T> take(final int n, final List<T> ts) {
-        if (ts == null) {
-            return new ArrayList<>();
-        }
+    public ListEx<T> takeWhileInc(final Predicate<T> f) {
+        final ListEx<T> result = new ListEx<>();
 
-        return new ArrayList<>(ts.subList(0, Math.min(n, ts.size())));
-    }
-
-    public static <T> Function<List<T>, List<T>> takeWhileInc(final Predicate<T> f) {
-        return ts -> takeWhileInc(f, ts);
-    }
-
-    public static <T> List<T> takeWhileInc(final Predicate<T> f, final List<T> ts) {
-        final List<T> result = new ArrayList<>();
-
-        for (final T t : ts) {
+        for (final T t : this) {
             result.add(t);
             if (!f.test(t)) {
                 break;
@@ -157,14 +227,10 @@ public class ListEx<T> extends ArrayList<T> {
         return result;
     }
 
-    public static <T> Function<List<T>, List<T>> takeWhile(final Predicate<T> pred) {
-        return ts -> takeWhile(pred, ts);
-    }
+    public ListEx<T> takeWhile(final Predicate<T> pred) {
+        final ListEx<T> result = new ListEx<>();
 
-    public static <T> List<T> takeWhile(final Predicate<T> pred, final List<T> ts) {
-        final List<T> result = new ArrayList<>();
-
-        for (final T t : ts) {
+        for (final T t : this) {
             if (pred.test(t)) {
                 result.add(t);
             } else {
@@ -175,12 +241,8 @@ public class ListEx<T> extends ArrayList<T> {
         return result;
     }
 
-    public static <T> Function<List<T>, List<T>> dropWhile(final Predicate<T> pred) {
-        return ts -> dropWhile(pred, ts);
-    }
-
-    public static <T> List<T> dropWhile(final Predicate<T> pred, final List<T> ts) {
-        final List<T> result = new ArrayList<>(ts);
+    public ListEx<T> dropWhile(final Predicate<T> pred) {
+        final ListEx<T> result = new ListEx<>(this);
 
         while (!result.isEmpty()) {
             if (pred.test(result.get(0))) {
@@ -197,65 +259,12 @@ public class ListEx<T> extends ArrayList<T> {
         return new ListEx<>(subList(Math.min(n, size()), size()));
     }
 
-    public static ListEx<Double> fromArray(final double[] doubles) {
-        ListEx<Double> list = new ListEx<>();
-        for (double v : doubles) {
-            Double aDouble = v;
-            list.add(aDouble);
-        }
-        return list;
+    public ListEx<T> tail() {
+        return drop(1);
     }
 
-    public static ListEx<Integer> fromArray(final int[] ints) {
-        ListEx<Integer> list = new ListEx<>();
-        for (int i : ints) {
-            Integer integer = i;
-            list.add(integer);
-        }
-        return list;
-    }
-
-    public static ListEx<Long> fromArray(final long[] longs) {
-        ListEx<Long> list = new ListEx<>();
-        for (long l : longs) {
-            Long aLong = l;
-            list.add(aLong);
-        }
-        return list;
-    }
-
-    @SafeVarargs
-    public static <T> ListEx<@NonNull T> fromArray(final T... ts) {
-        final ListEx<@NonNull T> result = new ListEx<>();
-
-        for (final T t : ts) {
-            if (t != null) {
-                result.add(t);
-            }
-        }
-
-        return result;
-    }
-
-    @SafeVarargs
-    public static <T> ListEx<@Nullable T> fromArrayUnsafe(final T... ts) {
-        return new ListEx<>(Arrays.asList(ts));
-    }
-
-    public static <T> ListEx<T> collect(final Iterable<T> it) {
-        return collect(it.iterator());
-    }
-
-    public static <T> ListEx<T> collect(final Iterator<T> it) {
-        final ListEx<T> result = new ListEx<>();
-
-        it.forEachRemaining(result::add);
-
-        return result;
-    }
-
-    public static <T> Stream<ListEx<T>> subsequences(final List<T> list) {
-        if (list.isEmpty()) {
+    public Stream<ListEx<T>> subsequences() {
+        if (isEmpty()) {
             return Stream.empty();
         }
 
@@ -271,13 +280,13 @@ public class ListEx<T> extends ArrayList<T> {
 
             @Override
             public boolean hasNext() {
-                return i < list.size() && (j < sequences.size() || i + 1 < list.size());
+                return i < size() && (j < sequences.size() || i + 1 < size());
             }
 
             @Override
             public ListEx<T> next() {
                 // We're done now...
-                if (i < list.size()) {
+                if (i < size()) {
                     if (j >= sequences.size()) {
                         sequences.addAll(newSequences);
                         newSequences.clear();
@@ -286,7 +295,7 @@ public class ListEx<T> extends ArrayList<T> {
                     }
 
                     prev = new ListEx<>(sequences.get(j));
-                    prev.add(list.get(i));
+                    prev.add(get(i));
                     newSequences.add(prev);
                     j++;
                 }
@@ -296,33 +305,38 @@ public class ListEx<T> extends ArrayList<T> {
         });
     }
 
-//    public static <T> ListEx<ListEx<T>> permutations(final List<T> ts) {
-//        if (ts.isEmpty()) {
-//            return ListUtil.fromArray(new ArrayList<>());
-//        }
-//
-//        final List<List<T>> result = Collections.synchronizedList(new ArrayList<>());
-//
-//        for (int i = 0; i < ts.size(); i++) {
-//            final List<T> newTs = new ArrayList<>(ts);
-//            newTs.remove(i);
-//
-//            for (final List<T> seq : permutations(newTs)) {
-//                result.add(Util.prepend(ts.get(i), seq));
-//            }
-//        }
-//
-//        return result;
-//    }
+    public Stream<ListEx<T>> permutations() {
+        if (isEmpty()) {
+            return Stream.of(new ListEx<>());
+        }
 
-    public static <T> List<T> sample(final Stream<T> ts, final int n) {
-        return sample(ts.collect(Collectors.toList()), n);
+        return tail().permutations().flatMap(p -> stream().map(p::prepend));
     }
 
-    public static <T> List<T> sample(final List<T> ts, final int n) {
-        final List<T> temp = Collections.synchronizedList(new ArrayList<>(ts));
+    private ListEx<T> prepend(final T t) {
+        final ListEx<T> result = new ListEx<>(this);
+
+        result.add(0, t);
+
+        return result;
+    }
+
+    public ListEx<T> sample(final int n) {
+        final ListEx<T> temp = new ListEx<>(this);
         Collections.shuffle(temp);
-        return ListUtil.take(n, temp);
+        return temp.take(n);
+    }
+
+    public ListEx<T> sampleWithReplacement(final int n) {
+        final ListEx<T> result = new ListEx<>();
+
+        final Random random = new Random();
+
+        for (int i = 0; i < n; i++) {
+            result.add(get(random.nextInt(size())));
+        }
+
+        return result;
     }
 
     public ListEx<T> ensureSize(final List<T> other, final Class<T> clz) {
