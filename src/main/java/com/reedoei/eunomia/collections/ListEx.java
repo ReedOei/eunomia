@@ -1,6 +1,9 @@
 package com.reedoei.eunomia.collections;
 
 import com.google.common.collect.Streams;
+import com.reedoei.eunomia.functional.ThrowingBiFunction;
+import com.reedoei.eunomia.functional.ThrowingFunction;
+import com.reedoei.eunomia.functional.ThrowingPredicate;
 import com.reedoei.eunomia.util.RuntimeThrower;
 import com.reedoei.eunomia.util.Util;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -11,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
@@ -20,13 +24,32 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+// TODO: Make a non-copying listex
+// TODO: Add find/other stream functions (foldl, foldr, etc.)
 public class ListEx<T> extends ArrayList<T> {
+    public ListEx(final Stream<T> s) {
+        this(s.collect(Collectors.toList()));
+    }
+
     public ListEx(final List<T> ts) {
         super(ts);
     }
 
     public ListEx() {
         super();
+    }
+
+    public static ListEx<ListEx<String>> transpose(final ListEx<ListEx<String>> rows) {
+        final ListEx<ListEx<String>> result = new ListEx<>();
+
+        final int len = rows.get(0).size();
+
+        for (int i = 0; i < len; i++) {
+            final int finalI = i;
+            result.add(rows.map(s -> s.get(finalI)));
+        }
+
+        return result;
     }
 
     public static <T> ListEx<T> newList(final int n, final Class<T> clz) {
@@ -43,27 +66,24 @@ public class ListEx<T> extends ArrayList<T> {
 
     public static ListEx<Double> fromArray(final double[] doubles) {
         ListEx<Double> list = new ListEx<>();
-        for (double v : doubles) {
-            Double aDouble = v;
-            list.add(aDouble);
+        for (final double v : doubles) {
+            list.add(v);
         }
         return list;
     }
 
     public static ListEx<Integer> fromArray(final int[] ints) {
         ListEx<Integer> list = new ListEx<>();
-        for (int i : ints) {
-            Integer integer = i;
-            list.add(integer);
+        for (final int i : ints) {
+            list.add(i);
         }
         return list;
     }
 
     public static ListEx<Long> fromArray(final long[] longs) {
         ListEx<Long> list = new ListEx<>();
-        for (long l : longs) {
-            Long aLong = l;
-            list.add(aLong);
+        for (final long l : longs) {
+            list.add(l);
         }
         return list;
     }
@@ -170,6 +190,30 @@ public class ListEx<T> extends ArrayList<T> {
         return result;
     }
 
+    public Optional<T> first() {
+        if (size() > 0) {
+            return Optional.ofNullable(get(0));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<T> last() {
+        if (size() > 0) {
+            return Optional.ofNullable(get(size() - 1));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public T firstUnsafe() {
+        return first().get();
+    }
+
+    public T lastUnsafe() {
+        return last().get();
+    }
+
     public ListEx<T> beforeInc(final @NonNull T t) {
         final int i = indexOf(t);
 
@@ -258,6 +302,18 @@ public class ListEx<T> extends ArrayList<T> {
     public ListEx<T> drop(final int n) {
         return new ListEx<>(subList(Math.min(n, size()), size()));
     }
+//
+//    public ListEx<ListEx<T>> inits() {
+//        return new ListEx<ListEx<T>>(StreamUtil.<ListEx<T>>takeWhile(t -> !t.isEmpty(), Stream.iterate(this, ListEx::init)));
+//    }
+
+    public ListEx<T> init() {
+        if (size() > 0) {
+            return take(size() - 1);
+        } else {
+            return new ListEx<>();
+        }
+    }
 
     public ListEx<T> tail() {
         return drop(1);
@@ -285,7 +341,7 @@ public class ListEx<T> extends ArrayList<T> {
 
             @Override
             public ListEx<T> next() {
-                // We're done now...
+                // We're done now
                 if (i < size()) {
                     if (j >= sequences.size()) {
                         sequences.addAll(newSequences);
@@ -359,35 +415,93 @@ public class ListEx<T> extends ArrayList<T> {
         return this;
     }
 
-    public <U> ListEx<U> mapWithIndex(final BiFunction<Integer, T, U> f)  {
+    public <U> ListEx<U> mapWithIndex(final ThrowingBiFunction<Integer, T, U> f) {
         final ListEx<U> result = new ListEx<>();
 
-        for (int i = 0; i < size(); i++) {
-            result.add(f.apply(i, get(i)));
+        try {
+            for (int i = 0; i < size(); i++) {
+                result.add(f.apply(i, get(i)));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         return result;
     }
 
-    public <U> ListEx<U> map(final Function<T, U> f) {
+    public <U> ListEx<U> map(final ThrowingFunction<T, U> f) {
         final ListEx<U> result = new ListEx<>();
 
-        for (final T t : this) {
-            result.add(f.apply(t));
+        try {
+            for (final T t : this) {
+                result.add(f.apply(t));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         return result;
     }
 
-    public ListEx<T> filter(final Predicate<T> pred) {
+    public ListEx<T> filter(final ThrowingPredicate<T> pred) {
         final ListEx<T> result = new ListEx<>();
 
-        for (final T t : this) {
-            if (pred.test(t)) {
-                result.add(t);
+        try {
+            for (final T t : this) {
+                if (pred.test(t)) {
+                    result.add(t);
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         return result;
+    }
+
+    public Optional<T> find(final ThrowingPredicate<T> pred) {
+        try {
+            for (final T t : this) {
+                if (pred.test(t)) {
+                    return Optional.ofNullable(t);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return Optional.empty();
+    }
+
+    public <U> Function<U, U> foldl(final BiFunction<U, T, U> f) {
+        return u -> foldl(f, u);
+    }
+
+    public <U> U foldl(final BiFunction<U, T, U> f, final U initial) {
+        U u = initial;
+
+        for (final T t : this) {
+            u = f.apply(u, t);
+        }
+
+        return u;
+    }
+
+    public <U> Function<U, U> foldr(final BiFunction<T, U, U> f) {
+        return u -> foldr(f, u);
+    }
+
+
+    // TODO: More efficient implementation
+    public <U> U foldr(final BiFunction<T, U, U> f, final U initial) {
+        if (isEmpty()) {
+            return initial;
+        } else {
+            return f.apply(head(), tail().foldr(f, initial));
+        }
+    }
+
+    public T head() {
+        return firstUnsafe();
     }
 }

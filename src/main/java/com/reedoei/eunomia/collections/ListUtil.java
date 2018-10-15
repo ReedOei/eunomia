@@ -21,8 +21,21 @@ import java.util.stream.Stream;
 
 // TODO: Add collection casting functions!!!
 // TODO: Move and deprecate functions from Util.
-
+// TODO: Make sure everything from here is in ListEx and vice versa
 public class ListUtil {
+    public static List<List<String>> transpose(final List<List<String>> rows) {
+        final List<List<String>> result = new ArrayList<>();
+
+        final int len = rows.get(0).size();
+
+        for (int i = 0; i < len; i++) {
+            final int finalI = i;
+            result.add(rows.stream().map(s -> s.get(finalI)).collect(Collectors.toList()));
+        }
+
+        return result;
+    }
+
     public static <T> List<T> newList(final int n, final Class<T> clz) {
         return ensureSize(Collections.synchronizedList(new ArrayList<>()), n,
                 () -> new RuntimeThrower<>(clz::newInstance).run());

@@ -1,5 +1,7 @@
 package com.reedoei.eunomia.io.files;
 
+import com.reedoei.eunomia.collections.ListEx;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -30,6 +32,17 @@ public class FileUtil {
         }
 
         return found;
+    }
+
+    // List files and close the directory streams
+    private static ListEx<Path> listFiles(final Path path) throws IOException {
+        final ListEx<Path> result = new ListEx<>();
+
+        try (final Stream<Path> stream = Files.list(path)) {
+            result.addAll(stream.collect(Collectors.toList()));
+        }
+
+        return result;
     }
 
     /**

@@ -37,6 +37,14 @@ public class LatexTable {
     // Key is the row/column index when they show be inserted
     private final Map<Integer, List<String>> latexRows = new HashMap<>();
 
+    public List<String> rows() {
+        return rows;
+    }
+
+    public List<String> columns() {
+        return columns;
+    }
+
     public LatexTable(final List<String> rows) {
         this(new ArrayList<>(), rows);
     }

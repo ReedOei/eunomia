@@ -5,9 +5,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.junit.Assert.*;
 
 public class StreamUtilTest {
@@ -42,4 +44,11 @@ public class StreamUtilTest {
 
         assertEquals(45, total);
     }
+
+//    @Test
+//    public void testTakeWhile() {
+//        final List<Integer> collect = StreamUtil.takeWhile(i -> i < 10, Stream.iterate(0, v -> v + 1)).collect(Collectors.toList());
+//
+//        assertEquals(ListUtil.fromArray(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), collect);
+//    }
 }

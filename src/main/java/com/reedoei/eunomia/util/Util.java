@@ -1,9 +1,8 @@
 package com.reedoei.eunomia.util;
 
-import com.reedoei.eunomia.collections.ListUtil;
+import com.opencsv.CSVReader;
+import com.reedoei.eunomia.collections.ListEx;
 import com.reedoei.eunomia.collections.PairStream;
-import com.reedoei.eunomia.collections.SetUtil;
-import com.reedoei.eunomia.subject.classpath.Classpath;
 import org.apache.commons.io.FilenameUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -15,9 +14,12 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,7 +30,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -36,6 +37,26 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Util {
+    public static ListEx<ListEx<String>> csv(final Path path) throws Exception {
+        try (final FileInputStream fis = new FileInputStream(path.toAbsolutePath().toString());
+             final InputStreamReader isr = new InputStreamReader(fis);
+             final CSVReader reader = new CSVReader(isr)) {
+            return new ListEx<>(reader.readAll()).map(ListEx::fromArray);
+        }
+    }
+
+    public static <T> T until(final T t, final Function<T, T> f, final Predicate<T> pred) {
+        if (pred.test(t)) {
+            return t;
+        } else {
+            return until(f.apply(t), f, pred);
+        }
+    }
+
+    public static <T> T untilNull(final T t, final Function<T, T> f) {
+        return until(t, f, v -> f.apply(v) == null);
+    }
+
     public static <T, U, V> BiFunction<List<T>, List<U>, List<V>> zipWith(final BiFunction<T, U, V> f) {
         return (ts, us) -> zipWith(f, ts, us);
     }
