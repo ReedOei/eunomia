@@ -25,6 +25,9 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public class PairStream<T, U> {
@@ -77,8 +80,12 @@ public class PairStream<T, U> {
         return PairStream.zip(ks, vs);
     }
 
+    public static <T, U> PairStream<T,U> zip(final Iterator<T> ts, final Iterator<U> us) {
+        return zip(() -> ts, () -> us);
+    }
+
     public static <T,U> PairStream<T, U> zip(final Iterable<T> ts, final Iterable<U> us) {
-        return new PairStream<T, U>(new Iterator<Pair<T, U>>() {
+        return new PairStream<>(new Iterator<Pair<T, U>>() {
             private final Iterator<T> tIter = ts.iterator();
             private final Iterator<U> uIter = us.iterator();
 
@@ -94,11 +101,17 @@ public class PairStream<T, U> {
         });
     }
 
-    private PairStream(final Iterator<Pair<T, U>> it) {
+    public static <T,U,V> PairStream<U, V> fromStream(final Stream<T> stream,
+                                                      final Function<T, U> leftMap,
+                                                      final Function<T, V> rightMap) {
+        return new PairStream<>(stream.map(t -> ImmutablePair.of(leftMap.apply(t), rightMap.apply(t))));
+    }
+
+    public PairStream(final Iterator<Pair<T, U>> it) {
         stream = Streams.stream(it);
     }
 
-    private PairStream(final Stream<Pair<T, U>> stream) {
+    public PairStream(final Stream<Pair<T, U>> stream) {
         this.stream = stream;
     }
 
@@ -130,6 +143,18 @@ public class PairStream<T, U> {
 
     public <V> Stream<V> mapToStream(final BiFunction<T, U, V> f) {
         return stream.map(p -> f.apply(p.getLeft(), p.getRight()));
+    }
+
+    public IntStream mapToIntStream(final BiFunction<T, U, Integer> f) {
+        return mapToStream(f).mapToInt(Integer::intValue);
+    }
+
+    public DoubleStream mapToDoubleStream(final BiFunction<T, U, Double> f) {
+        return mapToStream(f).mapToDouble(Double::doubleValue);
+    }
+
+    public LongStream mapToLongStream(final BiFunction<T, U, Long> f) {
+        return mapToStream(f).mapToLong(Long::longValue);
     }
 
     public <V, W> PairStream<V, W> flatMap(final BiFunction<T, U, PairStream<V, W>> f) {
