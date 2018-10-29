@@ -1,12 +1,6 @@
 package com.reedoei.eunomia.collections;
 
-import com.google.common.collect.Streams;
-import com.reedoei.eunomia.functional.ThrowingPredicate;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
-import java.util.Iterator;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class StreamUtil {
@@ -25,6 +19,10 @@ public class StreamUtil {
         // Iterable is a functional interface, so because stream implements the right methods we can
         // do this.
         return stream::iterator;
+    }
+
+    public static <T> Stream<T> fromOpt(final Optional<T> opt) {
+        return opt.map(Stream::of).orElseGet(Stream::empty);
     }
 
 //    public static <T> Function<Stream<T>, Stream<T>> takeWhile(final ThrowingPredicate<T> pred) {

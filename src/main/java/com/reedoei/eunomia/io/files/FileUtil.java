@@ -1,5 +1,6 @@
 package com.reedoei.eunomia.io.files;
 
+import com.google.gson.Gson;
 import com.reedoei.eunomia.collections.ListEx;
 
 import java.io.IOException;
@@ -7,6 +8,9 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,7 +39,7 @@ public class FileUtil {
     }
 
     // List files and close the directory streams
-    private static ListEx<Path> listFiles(final Path path) throws IOException {
+    public static ListEx<Path> listFiles(final Path path) throws IOException {
         final ListEx<Path> result = new ListEx<>();
 
         try (final Stream<Path> stream = Files.list(path)) {
@@ -62,6 +66,18 @@ public class FileUtil {
 
     public static String readFile(final Path path) throws IOException {
         return new String(Files.readAllBytes(path), Charset.defaultCharset());
+    }
+
+    public static <T> Function<Path, Stream<? extends T>> safeReadJson(final Class<? extends T> clz) {
+        return p -> safeReadJson(clz, p);
+    }
+
+    public static <T> Function<Class<? extends T>, Stream<? extends T>> safeReadJson(final Path p) {
+        return clz -> safeReadJson(clz, p);
+    }
+
+    public static <T> Stream<? extends T> safeReadJson(final Class<? extends T> clz, final Path path) {
+        return safeReadFile(path).map(s -> new Gson().fromJson(s, clz)).filter(Objects::nonNull);
     }
 
     /**

@@ -140,17 +140,13 @@ public class ListEx<T> extends ArrayList<T> {
         return result;
     }
 
-    public static <T> ListEx<T> concat(final ListEx<T> a, final ListEx<T> b) {
-        if (a == null && b == null) {
-            return new ListEx<>();
-        } else if (a == null) {
-            return b;
-        } else if (b == null) {
-            return a;
-        } else {
-            a.addAll(b);
-            return a;
+    public ListEx<T> concat(final ListEx<T> other) {
+        final ListEx<T> result = new ListEx<>(this);
+        if (other != null) {
+            result.addAll(other);
         }
+
+        return result;
     }
 
     public static Function<String, ListEx<String>> reader() {
@@ -503,5 +499,98 @@ public class ListEx<T> extends ArrayList<T> {
 
     public T head() {
         return firstUnsafe();
+    }
+
+    public boolean any(final Predicate<T> pred) {
+        for (final T t : this) {
+            if (pred.test(t)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean all(final Predicate<T> pred) {
+        for (final T t : this) {
+            if (!pred.test(t)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public ListEx<ListEx<T>> inits() {
+        final ListEx<ListEx<T>> res = new ListEx<>();
+
+        final List<T> cp = new ArrayList<>(this);
+
+        res.add(new ListEx<>());
+
+        while (!cp.isEmpty()) {
+            res.add(new ListEx<>(cp));
+            cp.remove(cp.size() - 1);
+        }
+
+        return res;
+    }
+
+    public ListEx<ListEx<T>> tails() {
+        final ListEx<ListEx<T>> res = new ListEx<>();
+
+        final List<T> cp = new ArrayList<>(this);
+
+        while (!cp.isEmpty()) {
+            res.add(new ListEx<>(cp));
+            cp.remove(0);
+        }
+
+        res.add(new ListEx<>());
+
+        return res;
+    }
+
+    public boolean hasPrefix(final List<T> it) {
+        if (size() < it.size()) {
+            return false;
+        }
+
+        return PairStream.zip(this, it).allMatch((a, b) -> a != null && a.equals(b));
+    }
+
+    public boolean hasSuffix(final List<T> it) {
+        if (size() < it.size()) {
+            return false;
+        }
+
+        return reversed().hasPrefix(it);
+    }
+
+    public Optional<Integer> infixIndex(final List<T> it) {
+        if (size() < it.size()) {
+            return Optional.empty();
+        }
+
+        final ListEx<ListEx<T>> ts = tails();
+        for (int i = 0; i < ts.size(); i++) {
+            if (ts.get(i).hasPrefix(it)) {
+                return Optional.of(i);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    public boolean hasInfix(final List<T> it) {
+        return infixIndex(it).isPresent();
+    }
+
+    public ListEx<T> topHalf() {
+        return new ListEx<>(subList(0, size() / 2));
+    }
+
+    public ListEx<T> botHalf() {
+        return new ListEx<>(subList(size() / 2, size()));
     }
 }

@@ -129,11 +129,12 @@ public class Util {
         return appendAll(toAdd).apply(ts);
     }
 
+    @Deprecated // In 1.4.1
     public static <T> List<T> topHalf(final List<T> ts) {
         return new ArrayList<>(ts.subList(0, ts.size() / 2));
     }
 
-
+    @Deprecated // In 1.4.1
     public static <T> List<T> botHalf(final List<T> ts) {
         return new ArrayList<>(ts.subList(ts.size() / 2, ts.size()));
     }
